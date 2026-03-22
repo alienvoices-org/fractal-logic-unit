@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flu"
+version = "15.3.0"
+authors = [
+    {name = "Felix Mönnich"},
+    {name = "The Kinship Mesh Collective"},
+]
+description = "Phased Fractal Number Theory & Universal Fractal Logic Unit"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.21"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[project.optional-dependencies]
+dev  = ["pytest>=7", "pytest-cov", "hypothesis", "black", "mypy"]
+viz  = ["matplotlib"]
+qmc  = ["scipy"]
+
+[project.scripts]
+flu-lighthouse = "flu.applications.lighthouse:cli_main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts   = "-v --tb=short"
+
+[tool.mypy]
+python_version = "3.10"
+strict = false
+ignore_missing_imports = true

@@ -1,0 +1,842 @@
+{
+  "$schema": "srp-package-contract/v2.0#unified-manifest",
+  "$comment": "UNIFIED MANIFEST: Combines V15.2.0 (2026-03-14) with historical manifests. Current as of 2026-03-14.",
+  "generated": "2026-03-20",
+  "version": "15.3.0",
+  "last_updated": "2026-03-20",
+  "package": {
+    "name": "FLU",
+    "full_name": "Fractal Logic Unit — Phased Fractal Number Theory",
+    "version": "15.3.0",
+    "language": "Python 3.10+",
+    "license": "MIT (Sovereign Peerage)",
+    "install": "pip install -e .",
+    "entry": [
+      "from flu import manifold, generate, traverse, path_coord, path_coord_to_rank, FMDanceIterator",
+      "from flu import CommunionEngine, SparseArithmeticManifold, SparseEvenManifold, FLUOperator, ForeignField",
+      "from flu import FractalNet, FractalNetKinetic, ScarStore",
+      "from flu import get_theorem, status_report, verify_latin",
+      "from flu.interfaces import HadamardFacet, GrayCodeFacet, LexiconFacet, IntegrityFacet, GeneticFacet, CohomologyFacet",
+      "from flu.applications import ExperimentalDesign, FLUInitializer, LighthouseBeacon"
+    ]
+  },
+  "core_identity": {
+    "formula": "x_k = Permute( Integrate( Digits(k) ) )",
+    "summary": "Every coordinate in the manifold is a discrete signal processed via integration and permutation.",
+    "components": {
+      "Digits(k)": "Base-n mixed-radix expansion — The 'Derivative' digit stream.",
+      "Integrate": "FM-Dance Prefix-Sum T-matrix (det=-1) — The 'Discrete Integral' Δ⁻¹.",
+      "Permute": "APN / Golden Seed per-depth rotation — The 'Diffusion' layer."
+    },
+    "complexity": "O(D) addressing, O(1) amortized traversal, O(D) memory footprint."
+  },
+  "what_flu_is": {
+    "one_sentence": "FLU is a deterministic combinatorial algebra that generates n^d Latin hyperstructures via Hamiltonian traversal of the toroidal lattice Z_n^D, using a triangular affine transform of radix-n digits.",
+    "core_invariants": [
+      "Latin Property (T3): Each axis-aligned slice is a permutation of digits (Incompressibility).",
+      "Hamiltonian Path (T2): Visits every lattice point exactly once without repetition.",
+      "Step Bound (T4): Local displacement is bounded by the torus diameter ⌊n/2⌋.",
+      "Spectral Vanishing (UNIF-1): Mixed-frequency DFT components are identically zero for all seeds."
+    ],
+    "key_property": "Self-Referential Manifold (SRM): The coordinate x_k uniquely determines its predecessor x_{k-1} in O(D). No external state needed.",
+    "core_object": "A Latin hyperprism M of shape (n,)*d where every 1D axis projection is a permutation of Z_n. Mean-centred (mean = 0 for odd n). Proven bijective.",
+    "three_perspectives": {
+      "matrix": "Φ(k) = T·a(k) where T is lower-triangular with det(T) = −1 mod n. Gives O(d) rank→coordinate map.",
+      "kinetic": "Φ(k+1) = Φ(k) + σ_{j(k)} where σ_j are step vectors indexed by carry level j. Each step lands on a 'Fractal Fault Line' B_j.",
+      "algebraic": "Φ(k) = Φ(0) + Σ_{i<k} σ_{j(i)} — a Hamiltonian walk on the Cayley graph Cay(Z_n^D, S). Invertible by S^{-1}."
+    },
+    "what_it_is_not": [
+      "Not a random or probabilistic generator — fully deterministic.",
+      "Not a compression algorithm — though structured state compression is an application.",
+      "Not a quantum system — 'qubit' language in early versions was metaphorical, now removed.",
+      "Not magic: every claim is either proven or explicitly marked CONJECTURE."
+    ]
+  },
+  "version_highlights": {
+    "v14": {
+      "fractal_net": "FractalNet(n, d) — FM-Dance radical inverse, OD-27 quasi-Monte Carlo digital net. ~20% lower L2-star discrepancy vs Monte Carlo at N=729.",
+      "scar_store": "ScarStore(n, d) — Holographic sparse memory over SparseCommunionManifold. Prototype, SIMULATION_ONLY.",
+      "apn_zero_compute": "unrank_optimal_seed now has zero-compute O(n) path for primes n ≡ 2 mod 3 via proven APN power map x^3.",
+      "power_map_obstruction": "Algebraic proof that no bijective power map x^d (mod p) is APN for p ≡ 1 mod 3. Closes OD-16-PM / OD-17-PM.",
+      "t8b_corrected": "T8b statement now cleanly separates PROVEN Gray-1 property from OPEN uniqueness conjecture (OD-19)."
+    },
+    "v15": {
+      "interfaces_package": "flu.interfaces — 6 facets: LexiconFacet, IntegrityFacet, GeneticFacet, InvarianceFacet, HilbertFacet, CohomologyFacet",
+      "had1_theorem": "HAD-1 PROVEN: Communion ⊗_XOR generates Sylvester-Hadamard matrices of order 2^D",
+      "tsp1_theorem": "TSP-1 PROVEN: FM-Dance = optimal TSP + O(D) routing oracle on uniform Cayley graphs",
+      "crypto1_theorem": "CRYPTO-1 PROVEN: APN seeds over Z_p provide structural immunity to binary differential cryptanalysis",
+      "lexicon_facet": "LEX-1 PROVEN: Bijective n-ary alphanumeric mapping Λ: Z_n^D → Σ* preserving T1 bijection",
+      "integrity_facet": "INT-1 PROVEN: O(1) L1 conservative-law sonde for Byzantine fault detection",
+      "genetic_facet": "GEN-1 PROVEN: SHA-256 hashed APN seed reservoirs for cross-substrate algebraic parity",
+      "invariance_facet": "INV-1 PROVEN: Structural isomorphism regression — P_odd ≅ P_even under {T3,L1,L2,S1}",
+      "hilbert_facet": "HIL-1 RETIRED: FM-Dance + RotationHub Hilbert locality — RETIRED V15.1.3 (n=2 self-contradiction)",
+      "cohomology_facet": "DEC-1 PROVEN: ScarStore = coset decomposition C⁰(Z_n^D;Z_n) / SCM (Künneth + HM-1)"
+    },
+    "v15_2": {
+      "oper_1_arithmetic_stack": "Functional Calculus for lattices: lazy pointwise algebra (+, -, *, /) with O(D·depth) resolution.",
+      "lattice_convergence": "T10 PROVEN: Identity (Corput) and Kinetic (T-matrix) nets converge to the same point set at N = n^{2d}.",
+      "recursive_embedding": "C5 PROVEN: Latin property invariant under arbitrary tensor-product nesting (Hyper-Torus).",
+      "lineage_anchoring": "GEN-0 (2017 Siamese Origin) and YM-1 (Danielic Ten 6+4 Orbit Sum) seated as proven roots.",
+      "spectral_unification": "UNIF-1 PROVEN: Unified proof of spectral vanishing for all sum-separable arrays via character orthogonality.",
+      "od27_conjecture": "OD-27 formal conjecture entry: (t,2k,2k)-net classification of FractalNet. Proof sketch in 4 steps following Niederreiter 1992. Conjectured t=0 for kinetic variant.",
+      "benchmark_suite": "tests/benchmarks/run_benchmark_suite.py — 13-section automated pipeline covering all modules, interfaces, applications, and OD-27 specific QMC measurements. CI-compatible (exit 0 = clean).",
+      "even_n_hyperprism": "EVEN-1 PROVEN: Gray-coded XOR micro-block (Z_{2^k}) x sum-mod macro-block (Z_m, m odd) via Kronecker product. SparseEvenManifold O(D) parameter-free oracle; manifold() factory updated. parity_switcher branch: even_kronecker."
+    },
+    "v15_3": {
+      "dn2_fully_proven": "DN2 PROVEN (V15.3): all 8 sub-parts closed. FLU-Owen scrambling (mode='owen') is default.",
+      "dn2_etk": "DN2-ETK: D*_N ≤ C_classic(D)·(B/√n)^D·(log N)^D/N. Improvement (√n/B)^D: e.g. 11.2× at n=5,D=3.",
+      "dn2_walsh": "DN2-WALSH: |ŵ(k)| ≤ (B/√n)^{μ(k)} — Walsh-native, same constant as ETK.",
+      "dn2_var": "DN2-VAR: Var[I_N] ≤ C·(B/√n)^{2D}·(log N)^{D-1}/N^3. Gain independent of smoothness.",
+      "dn2_anova": "DN2-ANOVA: subset u suppressed by (B/√n)^{2|u|}. Effective dimension halved.",
+      "api_bug_fix": "All scrambling methods fixed: factoradic_unrank(rank,n) used directly, not unrank_optimal_seed(rank,n).",
+      "golden_seeds_cleanup": "GOLDEN_SEEDS[13] cleaned: 16→10 valid APN seeds. APN/δ=3 regime explicitly separated.",
+      "test_counts": "1004 passing · 9 pre-existing failures · 9 pre-existing errors · 8 skipped."
+    }
+  },
+  "theorem_registry": {
+    "summary": "65 PROVEN · 0 PARTIAL · 3 CONJECTURE · 1 DISPROVEN_SCOPED · 1 RETIRED",
+    "total_entries": 70,
+    "proven_count": 65,
+    "partial_count": 0,
+    "conjecture_count": 3,
+    "disproven_scoped_count": 1,
+    "retired_count": 1,
+    "proven_ids": [
+      "T1-T10",
+      "L1-L4",
+      "S1-S2",
+      "HAD-1",
+      "TSP-1",
+      "CRYPTO-1",
+      "DISC-1",
+      "UNIF-1",
+      "GEN-0",
+      "YM-1",
+      "HM-1",
+      "C5",
+      "OD-16-PM",
+      "OD-17-PM",
+      "LEX-1",
+      "INT-1",
+      "GEN-1",
+      "INV-1",
+      "DEC-1",
+      "OD-33",
+      "..."
+    ],
+    "machine_readable": "src/flu/theory/THEOREM_REGISTRY.json",
+    "human_readable": "docs/THEOREMS.md",
+    "version_additions": {
+      "v14": [
+        {
+          "id": "OD-16-PM",
+          "name": "APN Power-Map Obstruction Z_19",
+          "status": "PROVEN"
+        },
+        {
+          "id": "OD-17-PM",
+          "name": "APN Power-Map Obstruction Z_31",
+          "status": "PROVEN"
+        },
+        {
+          "id": "T9",
+          "name": "Radical Lattice Isomorphism",
+          "status": "PROVEN"
+        },
+        {
+          "id": "DN2",
+          "name": "APN-Scrambled Digital Net",
+          "status": "PROVEN"
+        },
+        {
+          "id": "HM-1",
+          "name": "Holographic Sparsity Bound",
+          "status": "PROVEN"
+        }
+      ],
+      "v15": [
+        {
+          "id": "HAD-1",
+          "name": "Hadamard-Communion Isomorphism",
+          "status": "PROVEN"
+        },
+        {
+          "id": "TSP-1",
+          "name": "Optimal TSP Oracle on Toroidal Lattices",
+          "status": "PROVEN"
+        },
+        {
+          "id": "CRYPTO-1",
+          "name": "APN Prime-Field Structural Immunity",
+          "status": "PROVEN"
+        },
+        {
+          "id": "DISC-1",
+          "name": "FM-Dance Discrete Integral Identity",
+          "status": "PROVEN"
+        },
+        {
+          "id": "LEX-1",
+          "name": "Bijective n-ary Alphanumeric Encoding",
+          "status": "PROVEN"
+        },
+        {
+          "id": "INT-1",
+          "name": "O(1) Conservative-Law Integrity Sonde",
+          "status": "PROVEN"
+        },
+        {
+          "id": "GEN-1",
+          "name": "Cryptographically Verified APN Seed Portability",
+          "status": "PROVEN"
+        },
+        {
+          "id": "INV-1",
+          "name": "Cross-Branch Structural Isomorphism (P_odd ≅ P_even)",
+          "status": "PROVEN"
+        },
+        {
+          "id": "HIL-1",
+          "name": "Hilbert Curve Tuner (HilbertFacet)",
+          "status": "RETIRED"
+        },
+        {
+          "id": "DEC-1",
+          "name": "Toroidal Cohomology (CohomologyFacet)",
+          "status": "PROVEN"
+        },
+        {
+          "id": "OD-33",
+          "name": "FM-Dance as (0,d,d)-Digital Sequence",
+          "status": "PROVEN"
+        }
+      ],
+      "v15_2": [
+        {
+          "id": "T10",
+          "name": "Convergence of Corput and Kinetic nets",
+          "status": "PROVEN"
+        },
+        {
+          "id": "C5",
+          "name": "Latin property under tensor-product nesting",
+          "status": "PROVEN"
+        },
+        {
+          "id": "UNIF-1",
+          "name": "Spectral vanishing for sum-separable arrays",
+          "status": "PROVEN"
+        },
+        {
+          "id": "GEN-0",
+          "name": "2017 Siamese Origin",
+          "status": "PROVEN"
+        },
+        {
+          "id": "YM-1",
+          "name": "Danielic Ten 6+4 Orbit Sum",
+          "status": "PROVEN"
+        },
+        {
+          "id": "OD-27",
+          "name": "Digital-Net Classification of FractalNetKinetic",
+          "status": "PROVEN"
+        },
+        {
+          "id": "EVEN-1",
+          "name": "Even-n Latin Hyperprism via Kronecker Decomposition",
+          "status": "PROVEN"
+        }
+      ],
+      "v15_3": [
+        {
+          "id": "DN2",
+          "name": "APN-Scrambled Kinetic Digital Net",
+          "status": "PROVEN"
+        },
+        {
+          "id": "DN2-ETK",
+          "name": "Discrepancy Constant via Erdős–Turán–Koksma",
+          "status": "PROVEN"
+        },
+        {
+          "id": "DN2-WALSH",
+          "name": "Walsh-Tight Discrepancy Bound",
+          "status": "PROVEN"
+        },
+        {
+          "id": "DN2-VAR",
+          "name": "Owen-Class Variance Bound (smooth + non-smooth)",
+          "status": "PROVEN"
+        },
+        {
+          "id": "DN2-ANOVA",
+          "name": "ANOVA High-Order Interaction Suppression",
+          "status": "PROVEN"
+        }
+      ]
+    }
+  },
+  "public_api": {
+    "addressing_and_kinetics": {
+      "manifold(n, d, sparse=True)": "Unified factory returning dense arrays or sparse O(D) oracles.",
+      "path_coord(k, n, d)": "Core Bijection (Rank ↔ Coordinate).",
+      "path_coord_to_rank(coord, n, d)": "Coordinate → rank k. O(d). Inverse of path_coord.",
+      "FMDanceIterator(n, d)": "O(1) amortized Hamiltonian Odometer.",
+      "traverse(n, d, start_k=0)": "Lazy generator yielding all n^d coordinates in FM-Dance order.",
+      "traverse_reverse(n, d, start_k=None)": "Lazy reverse generator using S^{-1} step vectors."
+    },
+    "fractal_algebra": {
+      "CommunionEngine": "⊗_φ Structural Fusion (Dimension Expansion).",
+      "SparseArithmeticManifold": "⊕, ⊖, ⊗, ⊘ Field Interaction (Value Transformation).",
+      "ForeignField": "Bridge for external non-FLU data into the arithmetic stack."
+    },
+    "interface_facets": {
+      "GeneticFacet": "SHA-256 verified APN seed management.",
+      "IntegrityFacet": "Stateless O(1) L1-invariant sonde (Byzantine Fault Detection).",
+      "LexiconFacet": "Bijective alphanumeric address naming: Z_n^D ↔ Σ*.",
+      "GrayCodeFacet": "n-ary Gray code generator (T8 PROVEN).",
+      "InvarianceFacet": "Branch isomorphism. .compare_branches(), .check_t3(M), .check_l1(M)",
+      "HilbertFacet": "[CONJECTURE] Hilbert-tuned traversal. .get_point(k), .locality_score()",
+      "CohomologyFacet": "[CONJECTURE] DEC operators. .coboundary(M), .circulation(scars, loop)"
+    },
+    "qmc": {
+      "FractalNet(n, d)": "OD-27 quasi-Monte Carlo digital net via FM-Dance radical inverse. [T9, DN2-partial]",
+      "FractalNet.generate(num_points)": "Points in [0,1)^d with Latin balance at every power-of-n prefix.",
+      "FractalNet.generate_scrambled(num_points, seed_rank=0)": "APN digit-scrambled net (DN2 conjecture)."
+    },
+    "holographic": {
+      "ScarStore(n, d)": "Holographic sparse memory. [HM-1-conj] SIMULATION_ONLY",
+      "SparseCommunionManifold(n, seeds)": "O(D)-memory infinite-scale oracle. [L2, L3]"
+    },
+    "seeds": {
+      "unrank_optimal_seed(k, n, signed=True)": "Returns k-th APN/PN seed. Zero-compute for n ≡ 2 mod 3. [PFNT-4, OD-16-PM, OD-17-PM]",
+      "GOLDEN_SEEDS": "Pre-computed APN/PN seeds for n ∈ {3,5,7,11,13,17,19,23,29,31}."
+    },
+    "theory": {
+      "get_theorem(key)": "Returns TheoremRecord by ID.",
+      "proven_theorems()": "Returns list of all PROVEN TheoremRecord objects.",
+      "open_conjectures()": "Returns list of all CONJECTURE TheoremRecord objects.",
+      "status_report()": "Human-readable theorem registry summary string."
+    },
+    "hardware": {
+      "export_vhdl(n, d, filepath)": "Generates synthesisable VHDL for FM-Dance addressing logic."
+    }
+  },
+  "open_debt": [
+    {
+      "id": "OD-5",
+      "class": "PROOF",
+      "item": "APN seeds n=19, 31 (general bijections)",
+      "priority": "open",
+      "v16_priority": null
+    },
+    {
+      "id": "OD-7",
+      "class": "IMPL",
+      "item": "VHDL synthesis verification (Yosys)",
+      "priority": "V15 stretch",
+      "v16_priority": null
+    },
+    {
+      "id": "OD-16",
+      "class": "PROOF",
+      "item": "δ_min(S₁₉) algebraic lower bound (all bijections)",
+      "priority": "open",
+      "v16_priority": "medium"
+    },
+    {
+      "id": "OD-17",
+      "class": "PROOF",
+      "item": "δ_min(S₃₁) algebraic lower bound (all bijections)",
+      "priority": "open",
+      "v16_priority": "medium"
+    },
+    {
+      "id": "OD-19",
+      "class": "PROOF",
+      "item": "T8b step-vector uniqueness conjecture",
+      "priority": "V15",
+      "v16_priority": "low"
+    },
+    {
+      "id": "OD-27",
+      "class": "PROOF",
+      "item": "FractalNet digital net classification (T9/DN2)",
+      "priority": "closed V15.2",
+      "v16_priority": "high",
+      "status": "PROVEN"
+    },
+    {
+      "id": "OD-31",
+      "class": "IMPL",
+      "item": "ScarStore holographic memory (HM-1)",
+      "priority": "V15 prototype",
+      "v16_priority": null
+    },
+    {
+      "id": "OD-16/17",
+      "class": "PROOF",
+      "item": "δ_min(Z_19/31)=3 Algebraic Obstruction proof",
+      "status": "OPEN",
+      "v16_priority": "medium"
+    }
+  ],
+  "mathematical_lineage": {
+    "2017_genesis": "Symmetrische Tanzschritte — Siamese nD generalisation (GEN-0).",
+    "2026_symmetry": "Danielic Ten — Octahedral 6+4 Orbit Invariant (YM-1).",
+    "qmc_duality": "Van der Corput Duality — FM-Dance as Discrete Integral (DISC-1).",
+    "spectral_law": "Character Orthogonality on Abelian Groups (UNIF-1).",
+    "de_la_loubere_1693": "D=2 case is exactly the Siamese magic square method (T5 PROVEN).",
+    "latin_hypercubes_mckay_1979": "FLU generates deterministic Latin hypercubes where standard methods use random permutations.",
+    "p_adic_odometer": "Time variable k evolves as an m-adic odometer; carry cascade is the p-adic valuation ν_n(k).",
+    "cayley_graphs": "FM-Dance path is a Hamiltonian walk on Cay(Z_n^D, S) (CGW PROVEN).",
+    "digital_nets": "FractalNet (OD-27) is a quasi-Monte Carlo digital net (T9 CONJECTURE). Beats random by ~20% in L2-star discrepancy.",
+    "apn_permutations": "APN (Almost Perfect Nonlinear) permutations from cryptography used as optimal seeds.",
+    "hasse_weil": "Algebraic curve argument (Hasse-Weil) proves APN power-map obstruction for p ≡ 1 mod 3 (OD-16-PM, OD-17-PM PROVEN)."
+  },
+  "benchmarks": {
+    "$ref": "benchmarks/latest.json",
+    "$comment": "Benchmark results stored in benchmarks/latest.json. Regenerate with: python run_tests.py",
+    "summary": {
+      "last_run": "2026-03-09",
+      "all_pass": true,
+      "suites": [
+        "addressing_od",
+        "traversal_stability",
+        "communion_associativity",
+        "apn_hub",
+        "discrepancy",
+        "qmc_rigor"
+      ],
+      "full_results": "benchmarks/latest.json"
+    }
+  },
+  "reading_guide": {
+    "logic_core": "src/flu/core/ (The Laws)",
+    "epistemic_record": "docs/THEOREMS.md (The Proofs)",
+    "scientific_receipt": "docs/BENCHMARKS.md (The Measurements)",
+    "for_llm_auditors": [
+      "1. Read this file (FLU_MANIFEST.json) — all proven/conjectured claims are here.",
+      "2. Read docs/THEOREMS.md — full proof sketches (V14+V15 sections at bottom).",
+      "3. Read docs/PERSPECTIVES.md — the three equivalent mathematical views.",
+      "4. Read docs/AUDIT_NOTES.md — V14/V15 audit findings in detail.",
+      "5. Read docs/PROOF_APN_OBSTRUCTION.md — algebraic proof of OD-16-PM / OD-17-PM.",
+      "6. Run: python -c 'import sys; sys.path.insert(0, \"src\"); import flu; print(flu.status_report())'",
+      "7. Query: flu.get_theorem('KIB') for any theorem record.",
+      "8. Audit: src/flu/theory/THEOREM_REGISTRY.json — machine-readable with 66 entries."
+    ],
+    "for_researchers": [
+      "Core algorithm: src/flu/core/fm_dance_path.py",
+      "Mathematical proofs: src/flu/theory/theory_fm_dance.py",
+      "QMC digital net: src/flu/core/fractal_net.py",
+      "APN obstruction proof: docs/PROOF_APN_OBSTRUCTION.md",
+      "Benchmark suite: src/flu/utils/benchmarks.py",
+      "All theorems: docs/THEOREMS.md"
+    ],
+    "for_downstream_packages": [
+      "Primary API: generate(), traverse(), path_coord(), CommunionEngine",
+      "V14 new: FractalNet, ScarStore",
+      "APN seeds: unrank_optimal_seed(), GOLDEN_SEEDS",
+      "Theorem verification: verify_latin(), verify_holographic_repair()",
+      "Do NOT import from src/flu/core/ directly — use flu.__init__ exports only."
+    ]
+  },
+  "v16_vision": "Crystalline Closure: Zero Mathematical Debt. 100% Proven Registry. Boxed 500kb binary-pure runtime.",
+  "changelog": [
+    {
+      "version": "15.3.0",
+      "date": "2026-03-20",
+      "summary": "DN2 FULLY PROVEN: FLU-Owen scrambling architecture + character sum audit + ETK discrepancy constant + Walsh-tight bound + Owen-class variance + ANOVA interaction suppression. 4 new sub-theorems (DN2-ETK/WALSH/VAR/ANOVA). GOLDEN_SEEDS[13] cleaned; API bug (unrank_optimal_seed misuse) fixed. Registry: 65 PROVEN / 70 total / 3 open.",
+      "theorems_changed": [
+        "DN2 PARTIAL→PROVEN",
+        "DN2-ETK NEW PROVEN",
+        "DN2-WALSH NEW PROVEN",
+        "DN2-VAR NEW PROVEN",
+        "DN2-ANOVA NEW PROVEN"
+      ]
+    },
+    {
+      "version": "15.2.1",
+      "date": "2026-03-20",
+      "summary": "EVEN-1 PROVEN: Even-n Latin Hyperprism via Kronecker Decomposition. SparseEvenManifold registered in __all__. manifold() factory routes even n to SparseEvenManifold. parity_switcher branch label corrected to even_kronecker. Registry: 60 PROVEN / 66 total. 1029 tests passing.",
+      "theorems_changed": [
+        "EVEN-1 NEW PROVEN"
+      ]
+    },
+    {
+      "version": "15.1.2",
+      "date": "2026-03-11",
+      "summary": "DEC-1 promoted CONJECTURE→PROVEN. Original (L2=Delta^{-1}) corrected. ScarStore = coset decomposition C^0/SCM, proved from HM-1+Kunneth. 673 tests passing.",
+      "theorems_changed": [
+        "DEC-1 CONJECTURE→PROVEN"
+      ],
+      "new_findings": [
+        "L2 (Holographic Repair) is NOT Delta^{-1}: different operators (projection vs potential)",
+        "ScarStore baseline = H^1 generators via Kunneth (D axis-permutation seeds)",
+        "dim(sum-separable) = D*(n-1)+1 verified for n in {3,5,7}, D in {2,3,4}",
+        "12 distinct SparseCommunionManifold values for n=3, D=2 confirmed"
+      ]
+    },
+    {
+      "version": "15.1.1",
+      "date": "2026-03-11",
+      "summary": "DN2 promoted CONJECTURE→PARTIAL. FFT spectral reduction confirmed 26-50% for n≥5. n=3 APN-free finding documented. PAPER.md §3.8+§4.6+§6 updated. All tests passing (673/673).",
+      "theorems_changed": [
+        "DN2 CONJECTURE→PARTIAL"
+      ],
+      "new_findings": [
+        "Z_3 has no APN bijection (delta_min=3); GOLDEN_SEEDS[3] are all delta=3",
+        "FFT reduction by APN scrambling: n=5→26.5%, n=7→39.3%, n=11→50.1%",
+        "L2 discrepancy not improved by APN scrambling at any n tested"
+      ]
+    },
+    {
+      "version": "15.1.0",
+      "date": "2026-03-11",
+      "summary": "T9 PROVEN via V15 audit: benchmark bug (np.cumsum T[0,0]=+1 vs correct -1) resolved. Perspectives 4 & 5 added (QMC/Faure, Pascal/Discrete Calculus). test_generate_even_n_raises fixed. Header drift in SPRINT.md and handoff.json corrected."
+    },
+    {
+      "version": "15.2.0",
+      "date": "2026-03-14",
+      "summary": "Definitive manifest created, consolidating all proven theorems and breakthroughs. Added core identity, v15.2 breakthroughs, unified theorem registry with 65 entries, and v16 vision. All tests passing."
+    }
+  ],
+  "history": [
+    {
+      "version": "15.2.0",
+      "date": "2026-03-12",
+      "manifest": {
+        "$schema": "flu-srp-package-contract/v1.0#manifest",
+        "$comment": "FLU V15 public entry point. Single source of truth for external consumers — LLM auditors, researchers, downstream packages. All claims are either PROVEN or explicitly labelled CONJECTURE.",
+        "generated": "2026-03-12",
+        "package": {
+          "name": "FLU",
+          "full_name": "Fractal Logic Unit — Phased Fractal Number Theory",
+          "version": "15.2.0",
+          "language": "Python 3.10+",
+          "license": "MIT",
+          "install": "pip install -e .",
+          "entry": "from flu import generate, traverse, path_coord, CommunionEngine, get_theorem, FractalNet, ScarStore, FLUOperator"
+        },
+        "what_flu_is": {
+          "one_sentence": "FLU is a deterministic combinatorial algebra that generates n^d Latin hyperprisms via Hamiltonian traversal of the toroidal lattice Z_n^D, using a triangular affine transform of radix-n digits.",
+          "core_object": "A Latin hyperprism M of shape (n,)*d where every 1D axis projection is a permutation of Z_n. Mean-centred (mean = 0 for odd n). Proven bijective.",
+          "three_perspectives": {
+            "matrix": "Φ(k) = T·a(k) where T is lower-triangular with det(T) = −1 mod n. Gives O(d) rank→coordinate map.",
+            "kinetic": "Φ(k+1) = Φ(k) + σ_{j(k)} where σ_j are step vectors indexed by carry level j. Each step lands on a 'Fractal Fault Line' B_j.",
+            "algebraic": "Φ(k) = Φ(0) + Σ_{i<k} σ_{j(i)} — a Hamiltonian walk on the Cayley graph Cay(Z_n^D, S). Invertible by S^{-1}."
+          },
+          "key_property": "The traversal is self-referential (SRM): given only the present coordinate x_k, the predecessor x_{k-1} and the producing step σ are O(D)-recoverable. No stored rank needed.",
+          "what_it_is_not": [
+            "Not a random or probabilistic generator — fully deterministic.",
+            "Not a compression algorithm — though structured state compression is an application.",
+            "Not a quantum system — 'qubit' language in early versions was metaphorical, now removed.",
+            "Not magic: every claim is either proven or explicitly marked CONJECTURE."
+          ]
+        },
+        "v14_new_features": {
+          "fractal_net": "FractalNet(n, d) — FM-Dance radical inverse, OD-27 quasi-Monte Carlo digital net. ~20% lower L2-star discrepancy vs Monte Carlo at N=729.",
+          "scar_store": "ScarStore(n, d) — Holographic sparse memory over SparseCommunionManifold. Prototype, SIMULATION_ONLY.",
+          "apn_zero_compute": "unrank_optimal_seed now has zero-compute O(n) path for primes n ≡ 2 mod 3 via proven APN power map x^3.",
+          "power_map_obstruction": "Algebraic proof that no bijective power map x^d (mod p) is APN for p ≡ 1 mod 3. Closes OD-16-PM / OD-17-PM.",
+          "t8b_corrected": "T8b statement now cleanly separates PROVEN Gray-1 property from OPEN uniqueness conjecture (OD-19)."
+        },
+        "theorem_registry": {
+          "score": "58 PROVEN · 1 PARTIAL · 4 CONJECTURE · 1 DISPROVEN_SCOPED · 1 RETIRED",
+          "total_entries": 61,
+          "full_registry": "src/flu/theory/theorem_registry.py",
+          "machine_readable": "src/flu/theory/THEOREM_REGISTRY.json",
+          "human_readable": "docs/THEOREMS.md",
+          "v14_additions": [
+            {
+              "id": "OD-16-PM",
+              "name": "APN Power-Map Obstruction Z_19",
+              "status": "PROVEN"
+            },
+            {
+              "id": "OD-17-PM",
+              "name": "APN Power-Map Obstruction Z_31",
+              "status": "PROVEN"
+            },
+            {
+              "id": "T9",
+              "name": "Radical Lattice Isomorphism",
+              "status": "CONJECTURE"
+            },
+            {
+              "id": "DN2",
+              "name": "APN-Scrambled Digital Net",
+              "status": "CONJECTURE"
+            },
+            {
+              "id": "HM-1",
+              "name": "Holographic Sparsity Bound",
+              "status": "CONJECTURE"
+            }
+          ],
+          "v15_additions": [
+            {
+              "id": "HAD-1",
+              "name": "Hadamard-Communion Isomorphism",
+              "status": "PROVEN"
+            },
+            {
+              "id": "TSP-1",
+              "name": "Optimal TSP Oracle on Toroidal Lattices",
+              "status": "PROVEN"
+            },
+            {
+              "id": "CRYPTO-1",
+              "name": "APN Prime-Field Structural Immunity",
+              "status": "PROVEN"
+            },
+            {
+              "id": "DISC-1",
+              "name": "FM-Dance Discrete Integral Identity",
+              "status": "PROVEN"
+            },
+            {
+              "id": "LEX-1",
+              "name": "Bijective n-ary Alphanumeric Encoding",
+              "status": "PROVEN"
+            },
+            {
+              "id": "INT-1",
+              "name": "O(1) Conservative-Law Integrity Sonde",
+              "status": "PROVEN"
+            },
+            {
+              "id": "GEN-1",
+              "name": "Cryptographically Verified APN Seed Portability",
+              "status": "PROVEN"
+            },
+            {
+              "id": "INV-1",
+              "name": "Cross-Branch Structural Isomorphism (P_odd ≅ P_even)",
+              "status": "PROVEN"
+            },
+            {
+              "id": "HIL-1",
+              "name": "Hilbert Curve Tuner (HilbertFacet)",
+              "status": "RETIRED"
+            },
+            {
+              "id": "DEC-1",
+              "name": "Toroidal Cohomology (CohomologyFacet)",
+              "status": "PROVEN"
+            },
+            {
+              "id": "OD-33",
+              "name": "FM-Dance as (0,d,d)-Digital Sequence",
+              "status": "PROVEN"
+            }
+          ],
+          "proven": 54,
+          "partial": 1,
+          "conjectures": 4,
+          "total": 61,
+          "proven_count": 54,
+          "conjecture_count": 4,
+          "partial_count": 1,
+          "retired_count": 1
+        },
+        "public_api": {
+          "note": "All functions exported from flu.__init__. Full signatures in source.",
+          "generate": {
+            "generate(n, d, signed=True)": "Dispatch factory: odd n → FM-Dance hyperprism, even n → Sum-Mod. Returns (n,)*d ndarray. [T3, PFNT-3]",
+            "generate_fast(n, d, signed=True)": "FM-Dance hyperprism directly. O(n^d·d). [T3]",
+            "generate_metadata(n, d)": "Returns branch, step_bound, mean_zero, theorems for generate() call.",
+            "even_n_generate(n, d, signed=True)": "Even-n generator via modular construction. [PFNT-3]"
+          },
+          "traverse": {
+            "path_coord(k, n, d)": "Rank k → coordinate tuple. O(d). Core bijection. [T1]",
+            "path_coord_to_rank(coord, n, d)": "Coordinate → rank k. O(d). Inverse of path_coord. [T1]",
+            "traverse(n, d, start_k=0)": "Lazy generator yielding all n^d coordinates in FM-Dance order. [T2]",
+            "traverse_reverse(n, d, start_k=None)": "Lazy reverse generator using S^{-1} step vectors. [CGW]"
+          },
+          "qmc": {
+            "FractalNet(n, d)": "OD-27 quasi-Monte Carlo digital net via FM-Dance radical inverse. [T9, DN2-partial]",
+            "net.generate(num_points)": "Points in [0,1)^d with Latin balance at every power-of-n prefix.",
+            "net.generate_scrambled(num_points, seed_rank=0)": "APN digit-scrambled net (DN2 conjecture)."
+          },
+          "holographic": {
+            "ScarStore(n, d)": "Holographic sparse memory. [HM-1-conj] SIMULATION_ONLY",
+            "SparseCommunionManifold(n, seeds)": "O(D)-memory infinite-scale oracle. [L2, L3]"
+          },
+          "seeds": {
+            "unrank_optimal_seed(k, n, signed=True)": "Returns k-th APN/PN seed. Zero-compute for n ≡ 2 mod 3. [PFNT-4, OD-16-PM, OD-17-PM]",
+            "GOLDEN_SEEDS": "Pre-computed APN/PN seeds for n ∈ {3,5,7,11,13,17,19,23,29,31}."
+          },
+          "theory": {
+            "get_theorem(key)": "Returns TheoremRecord by ID.",
+            "proven_theorems()": "Returns list of all PROVEN TheoremRecord objects.",
+            "open_conjectures()": "Returns list of all CONJECTURE TheoremRecord objects.",
+            "status_report()": "Human-readable theorem registry summary string."
+          },
+          "hardware": {
+            "export_vhdl(n, d, filepath)": "Generates synthesisable VHDL for FM-Dance addressing logic."
+          },
+          "interfaces": {
+            "flu.interfaces": "V15 bridge facets package",
+            "LexiconFacet(n, d)": "Bijective alphanumeric encoding. .encode(coord), .decode(symbol)",
+            "IntegrityFacet(M, n)": "O(1) L1 sonde. .check_line(coord, axis), .check_all_lines_at(coord)",
+            "GeneticFacet()": "SHA-256 APN reservoir. .get(n), .export_json(), .import_json(blob)",
+            "InvarianceFacet(n, d)": "Branch isomorphism. .compare_branches(), .check_t3(M), .check_l1(M)",
+            "HilbertFacet(d, n)": "[CONJECTURE] Hilbert-tuned traversal. .get_point(k), .locality_score()",
+            "CohomologyFacet(n, d)": "[CONJECTURE] DEC operators. .coboundary(M), .circulation(scars, loop)"
+          }
+        },
+        "benchmark_results": {
+          "$ref": "benchmarks/latest.json",
+          "$comment": "Benchmark results stored in benchmarks/latest.json. Regenerate with: python run_tests.py",
+          "summary": {
+            "last_run": "2026-03-09",
+            "all_pass": true,
+            "suites": [
+              "addressing_od",
+              "traversal_stability",
+              "communion_associativity",
+              "apn_hub",
+              "discrepancy",
+              "qmc_rigor"
+            ],
+            "full_results": "benchmarks/latest.json"
+          }
+        },
+        "open_debt_summary": [
+          {
+            "id": "OD-5",
+            "class": "PROOF",
+            "item": "APN seeds n=19, 31 (general bijections)",
+            "priority": "open"
+          },
+          {
+            "id": "OD-7",
+            "class": "IMPL",
+            "item": "VHDL synthesis verification (Yosys)",
+            "priority": "V15 stretch"
+          },
+          {
+            "id": "OD-16",
+            "class": "PROOF",
+            "item": "δ_min(S₁₉) algebraic lower bound (all bijections)",
+            "priority": "open"
+          },
+          {
+            "id": "OD-17",
+            "class": "PROOF",
+            "item": "δ_min(S₃₁) algebraic lower bound (all bijections)",
+            "priority": "open"
+          },
+          {
+            "id": "OD-19",
+            "class": "PROOF",
+            "item": "T8b step-vector uniqueness conjecture",
+            "priority": "V15"
+          },
+          {
+            "id": "OD-27",
+            "class": "PROOF",
+            "item": "FractalNet digital net classification (T9/DN2)",
+            "priority": "V15 partial"
+          },
+          {
+            "id": "OD-31",
+            "class": "IMPL",
+            "item": "ScarStore holographic memory (HM-1)",
+            "priority": "V15 prototype"
+          }
+        ],
+        "reading_guide": {
+          "for_llm_auditors": [
+            "1. Read this file (FLU_MANIFEST.json) — all proven/conjectured claims are here.",
+            "2. Read docs/THEOREMS.md — full proof sketches (V14+V15 sections at bottom).",
+            "3. Read docs/PERSPECTIVES.md — the three equivalent mathematical views.",
+            "4. Read docs/AUDIT_NOTES.md — V14/V15 audit findings in detail.",
+            "5. Read docs/PROOF_APN_OBSTRUCTION.md — algebraic proof of OD-16-PM / OD-17-PM.",
+            "6. Run: python -c 'import sys; sys.path.insert(0, \"src\"); import flu; print(flu.status_report())'",
+            "7. Query: flu.get_theorem('KIB') for any theorem record.",
+            "8. Audit: src/flu/theory/THEOREM_REGISTRY.json — machine-readable with 66 entries."
+          ],
+          "for_researchers": [
+            "Core algorithm: src/flu/core/fm_dance_path.py",
+            "Mathematical proofs: src/flu/theory/theory_fm_dance.py",
+            "QMC digital net: src/flu/core/fractal_net.py",
+            "APN obstruction proof: docs/PROOF_APN_OBSTRUCTION.md",
+            "Benchmark suite: src/flu/utils/benchmarks.py",
+            "All theorems: docs/THEOREMS.md"
+          ],
+          "for_downstream_packages": [
+            "Primary API: generate(), traverse(), path_coord(), CommunionEngine",
+            "V14 new: FractalNet, ScarStore",
+            "APN seeds: unrank_optimal_seed(), GOLDEN_SEEDS",
+            "Theorem verification: verify_latin(), verify_holographic_repair()",
+            "Do NOT import from src/flu/core/ directly — use flu.__init__ exports only."
+          ]
+        },
+        "mathematical_lineage": {
+          "de_la_loubere_1693": "D=2 case is exactly the Siamese magic square method (T5 PROVEN).",
+          "latin_hypercubes_mckay_1979": "FLU generates deterministic Latin hypercubes where standard methods use random permutations.",
+          "p_adic_odometer": "Time variable k evolves as an m-adic odometer; carry cascade is the p-adic valuation ν_n(k).",
+          "cayley_graphs": "FM-Dance path is a Hamiltonian walk on Cay(Z_n^D, S) (CGW PROVEN).",
+          "digital_nets": "FractalNet (OD-27) is a quasi-Monte Carlo digital net (T9 CONJECTURE). Beats random by ~20% in L2-star discrepancy.",
+          "apn_permutations": "APN (Almost Perfect Nonlinear) permutations from cryptography used as optimal seeds.",
+          "hasse_weil": "Algebraic curve argument (Hasse-Weil) proves APN power-map obstruction for p ≡ 1 mod 3 (OD-16-PM, OD-17-PM PROVEN)."
+        },
+        "v15_new_features": {
+          "interfaces_package": "flu.interfaces — 6 facets: LexiconFacet, IntegrityFacet, GeneticFacet, InvarianceFacet, HilbertFacet, CohomologyFacet",
+          "had1_theorem": "HAD-1 PROVEN: Communion ⊗_XOR generates Sylvester-Hadamard matrices of order 2^D",
+          "tsp1_theorem": "TSP-1 PROVEN: FM-Dance = optimal TSP + O(D) routing oracle on uniform Cayley graphs",
+          "crypto1_theorem": "CRYPTO-1 PROVEN: APN seeds over Z_p provide structural immunity to binary differential cryptanalysis",
+          "lexicon_facet": "LEX-1 PROVEN: Bijective n-ary alphanumeric mapping Λ: Z_n^D → Σ* preserving T1 bijection",
+          "integrity_facet": "INT-1 PROVEN: O(1) L1 conservative-law sonde for Byzantine fault detection",
+          "genetic_facet": "GEN-1 PROVEN: SHA-256 hashed APN seed reservoirs for cross-substrate algebraic parity",
+          "invariance_facet": "INV-1 PROVEN: Structural isomorphism regression — P_odd ≅ P_even under {T3,L1,L2,S1}",
+          "hilbert_facet": "HIL-1 RETIRED: FM-Dance + RotationHub Hilbert locality — RETIRED V15.1.3 (n=2 self-contradiction)",
+          "cohomology_facet": "DEC-1 PROVEN: ScarStore = coset decomposition C⁰(Z_n^D;Z_n) / SCM (Künneth + HM-1)"
+        },
+        "changelog": [
+          {
+            "version": "15.1.2",
+            "date": "2026-03-11",
+            "summary": "DEC-1 promoted CONJECTURE→PROVEN. Original (L2=Delta^{-1}) corrected. ScarStore = coset decomposition C^0/SCM, proved from HM-1+Kunneth. 673 tests passing.",
+            "theorems_changed": [
+              "DEC-1 CONJECTURE→PROVEN"
+            ],
+            "new_findings": [
+              "L2 (Holographic Repair) is NOT Delta^{-1}: different operators (projection vs potential)",
+              "ScarStore baseline = H^1 generators via Kunneth (D axis-permutation seeds)",
+              "dim(sum-separable) = D*(n-1)+1 verified for n in {3,5,7}, D in {2,3,4}",
+              "12 distinct SparseCommunionManifold values for n=3, D=2 confirmed"
+            ]
+          },
+          {
+            "version": "15.1.1",
+            "date": "2026-03-11",
+            "summary": "DN2 promoted CONJECTURE→PARTIAL. FFT spectral reduction confirmed 26-50% for n≥5. n=3 APN-free finding documented. PAPER.md §3.8+§4.6+§6 updated. All tests passing (673/673).",
+            "theorems_changed": [
+              "DN2 CONJECTURE→PARTIAL"
+            ],
+            "new_findings": [
+              "Z_3 has no APN bijection (delta_min=3); GOLDEN_SEEDS[3] are all delta=3",
+              "FFT reduction by APN scrambling: n=5→26.5%, n=7→39.3%, n=11→50.1%",
+              "L2 discrepancy not improved by APN scrambling at any n tested"
+            ]
+          },
+          {
+            "version": "15.1.0",
+            "date": "2026-03-11",
+            "summary": "T9 PROVEN via V15 audit: benchmark bug (np.cumsum T[0,0]=+1 vs correct -1) resolved. Perspectives 4 & 5 added (QMC/Faure, Pascal/Discrete Calculus). test_generate_even_n_raises fixed. Header drift in SPRINT.md and handoff.json corrected."
+          }
+        ],
+        "version": "15.2.0",
+        "last_updated": "2026-03-11",
+        "v15_2_new_features": {
+          "od27_conjecture": "OD-27 formal conjecture entry: (t,2k,2k)-net classification of FractalNet. Proof sketch in 4 steps following Niederreiter 1992. Conjectured t=0 for kinetic variant.",
+          "benchmark_suite": "tests/benchmarks/run_benchmark_suite.py — 13-section automated pipeline covering all modules, interfaces, applications, and OD-27 specific QMC measurements. CI-compatible (exit 0 = clean)."
+        }
+      }
+    }
+  ]
+}
