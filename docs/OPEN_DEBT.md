@@ -1,0 +1,245 @@
+# FLU — Open Debt Registry
+
+**Status as of V15.3 (2026-03-20). DN2 PROVEN (all sub-parts closed). Registry: 65 PROVEN · 70 total · 3 open.**
+
+---
+
+## Legend
+
+| Symbol | Meaning |
+|--------|---------|
+| 🔴 OPEN | Active conjecture — no proof known |
+| 🟡 PARTIAL | Empirical evidence only; algebraic proof incomplete |
+| 🔵 RESEARCH | Long-horizon research direction; not a blocker |
+
+---
+
+## Active Items
+
+| ID | Name | Status |
+|----|------|--------|
+| OD-16 | Delta-Min Conjecture Z_19 (all bijections) | 🔴 OPEN |
+| OD-17 | Delta-Min Conjecture Z_31 (all bijections) | 🔴 OPEN |
+| OD-19 | T8b — Triangularizable Family Uniqueness (GL(d,Zₙ) orbit) | 🔴 OPEN |
+| OD-34 | Kinship Curve — Hamiltonian continuity under RotationHub | 🔴 OPEN |
+| OD-35 | Distributive Law: (M₁⊕M₂)⊗M₃ = (M₁⊗M₃)⊕(M₂⊗M₃) | 🔵 RESEARCH |
+| OD-36 | APN Asymptotics: sparsity of APN bijections as n→∞ | 🔵 RESEARCH |
+| OPER-3 | Sparse Forward Differences — O(D) derivative operator on manifolds | 🟡 PARTIAL |
+| DOC-1 | PAPER.md: Section 3 theorem tables missing V15.3 additions | 🟡 PARTIAL |
+
+---
+
+## Recently Closed (V15.2–V15.3)
+
+| ID | Claim | Closed in | How |
+|----|-------|-----------|-----|
+| ✅ DN2 | APN-Scrambled Digital Net — full proof | **V15.3** | ETK + Walsh + Variance + ANOVA |
+| ✅ DN2-ETK | Discrepancy constant C_APN(D) = C_classic·(B/√n)^D | **V15.3** | ETK inequality + H-balancing |
+| ✅ DN2-WALSH | Walsh-native discrepancy bound via digit-weight decay | **V15.3** | Walsh |ŵ(k)| ≤ (B/√n)^{μ(k)} |
+| ✅ DN2-VAR | Owen-class variance bound, gain independent of smoothness | **V15.3** | Walsh variance framework |
+| ✅ DN2-ANOVA | High-order interaction suppression, effective dim reduced | **V15.3** | Sobol' ANOVA decomposition |
+| ✅ EVEN-1 | Even-n Latin Hyperprism via Kronecker Decomposition | V15.2.1 | Three-part algebraic + 83 tests |
+| ✅ OD-27 | FractalNetKinetic (t,mD,D)-net with t=m(D-1) | V15.2 | T-Rank Lemma + depth decoupling |
+| ✅ UNIF-1 | Spectral Unification of Sum-Separable Arrays | V15.1.4 | DFT linearity + char. orthogonality |
+| ✅ T9 | FM-Dance Digital Sequence (generator matrices C_m = T) | V15.1 | Discrete integral identity |
+| ✅ DEC-1 | ScarStore = coset decomposition C⁰(Z_n^D;Z_n)/SCM | V15.1.2 | Künneth + HM-1 |
+
+---
+
+## 1. Mathematical Debt
+
+### OD-16 — Delta-Min Conjecture for Z_19
+
+**Status:** 🔴 OPEN
+
+**Statement:** No APN bijection (δ=2) exists over Z_19. Formally: δ_min(Z_19) = 3
+for all bijections f: Z_19 → Z_19.
+
+**Evidence:**
+- OD-16-PM (PROVEN): all bijective power maps have δ ≥ 4 (Hasse-Weil).
+- V14 search: extended polynomial families (binomials, trinomials, Dickson) — best δ=4.
+- Random search: 8,000,000 trials, best δ=3 (~3.2% rate). No δ=2 found.
+- GOLDEN_SEEDS[19] contains 8 best-available δ=3 seeds (documented as non-APN).
+
+**What the V15.3 audit established:** The δ=3 seeds for n=19 form a separate weaker
+result (DN2-δ3 proposition) with B_max = 2.463√19. The core DN2 theorem explicitly
+excludes n=19. The question of whether any APN bijection exists remains fully open.
+
+**Closure path:** GPU batch DDT (50M+ trials); algebraic obstruction via representation
+theory of S_19; character sum analysis of all bijection families over Z_19.
+
+---
+
+### OD-17 — Delta-Min Conjecture for Z_31
+
+**Status:** 🔴 OPEN
+
+**Statement:** δ_min(Z_31) = 3 for all bijections over Z_31.
+
+**Evidence:**
+- OD-17-PM (PROVEN): all bijective power maps have δ ≥ 4.
+- Random search: 3,300,000 trials, best δ=3 (~3.1% rate).
+- GOLDEN_SEEDS[31] contains 8 best-available δ=3 seeds.
+
+**Closure path:** Same as OD-16.
+
+---
+
+### OD-19 — T8b: Triangularizable Family Uniqueness
+
+**Status:** 🔴 OPEN
+
+**Statement (refined V15):** Every bijection on Z_nᴰ achieving L∞-Gray-1 arises from
+a triangularizable generator matrix — i.e., is GL(d,Z_n)-equivalent to the FM-Dance
+prefix matrix T.
+
+**Closure path:** Write x_k = Σ_{i<k} σ_{j(i)}. Show bijectivity forces a triangular
+linear system with unique solution σ_j = T·e_j up to GL-orbit. Digit Carry Lemma (T8b)
+provides the skeleton; uniqueness proof needs GL(d,Z_n) classification argument.
+
+---
+
+### OD-34 — Hamiltonian Continuity of the Kinship Curve
+
+**Status:** 🔴 OPEN
+
+**Statement:** Applying hyperoctahedral group actions Ω_j at carry levels j (the
+`RotationHub`) preserves the Hamiltonian property (T2).
+
+**Closure path:** Prove Ω_j acts as a symmetry of the local n^j sub-block, ensuring
+the exit coordinate of block B_k matches the entry of B_{k+1}.
+
+---
+
+### DN1 — Lo Shu Fractal Digital Net Conjecture
+
+**Status:** 🔵 CONJECTURE (registered, not a V16 blocker)
+
+**Statement:** The recursive Lo Shu fractal embedding f_k: Z_3^{2k} → [0,1)^{2k} forms
+a (t,2k,2k)-net in base 3 with t ≤ t_0 for some constant t_0 independent of k.
+
+**Note:** OD-27 (PROVEN) handles the general FractalNetKinetic case. DN1 is the
+specific Lo Shu fractal variant, where digit propagation across Lo Shu blocks is the
+key open difficulty.
+
+**Closure path:** Niederreiter digital net theory; Faure/Pascal angle on the T matrix.
+
+---
+
+## 2. QMC: DN2 Summary and What Remains
+
+### DN2 — APN-Scrambled Digital Net
+
+**Status:** ✅ PROVEN (V15.3). All eight sub-parts closed.
+
+| Sub-part | Claim | Status |
+|----------|-------|--------|
+| DN2-P1 | Latin preservation | ✅ PROVEN |
+| DN2-P2 | Net t-value preservation | ✅ PROVEN |
+| DN2-P3 | FFT spectral reduction (Owen > coordinated) | ✅ CONFIRMED |
+| DN2-L1 | Latin Permutation Invariance | ✅ PROVEN |
+| DN2-L2 | Block boundary L2 invariance | ✅ PROVEN |
+| DN2-ETK | C_APN(D) = C_classic(D)·(B/√n)^D | ✅ PROVEN |
+| DN2-WALSH | Walsh-tight discrepancy | ✅ PROVEN |
+| DN2-VAR | Owen-class variance (smooth + non-smooth) | ✅ PROVEN |
+| DN2-ANOVA | ANOVA high-order suppression | ✅ PROVEN |
+
+**Key results:**
+- Discrepancy improvement: **(√n/B)^D** — e.g. 11.2× at n=5, D=3.
+- Variance improvement: **(B/√n)^{2D}** — independent of function smoothness.
+- Effective dimension reduction: approximately halved (E[dim] ≈ D·(1/2 − log_n B)).
+- FLU-Owen (independent APN per (depth, dimension)) strictly beats coordinated scrambling.
+
+**Architecture fixed (V15.2+):** `generate_scrambled(mode="owen")` is the new default.
+The old coordinated mode is retained as `mode="coordinated"` for backward compat.
+
+**Data quality resolved (V15.2+):** GOLDEN_SEEDS[13] cleaned (10 valid APN seeds, 6
+removed); scope split between APN regime (δ=2) and δ=3 regime (n=19, n=31).
+
+**What the DN2-δ3 weaker result says:** For n=19/31 with best-available δ=3 seeds,
+improvement factors are weaker: ~1.3× discrepancy at D=3. If OD-16/17 are ever
+disproven (APN bijection found), the stronger DN2 result would apply immediately.
+
+---
+
+## 3. Arithmetic & Calculus
+
+### OPER-3 — Sparse Forward Differences (The Derivative)
+
+**Status:** 🟡 PARTIAL
+
+**Requirement:** Define `M.delta(axis)` as an O(D) operator returning field of
+differences: Δ_j M[x] = M[x + e_j] − M[x].
+
+**Closure path:** Implement as a specialized `SparseArithmeticManifold` node querying
+two related coordinates in the operator tree.
+
+---
+
+## 4. Long-Horizon Research
+
+### OD-35 — Distributive Law
+
+**Statement (candidate):** (M₁ ⊕ M₂) ⊗ M₃ = (M₁ ⊗ M₃) ⊕ (M₂ ⊗ M₃).
+Close path: `InvarianceFacet` entropy measurement on both sides.
+
+### OD-36 — APN Asymptotics
+
+**Statement (candidate):** Characterise the sparsity of APN bijections as n → ∞.
+The empirical rate ~3.2% for n=19, n=31 (δ=3 best) suggests a density argument.
+Connection to algebraic geometry over finite fields (Weil bounds, character sums).
+
+### NEW-1 — Generator Matrix Parameterisation Theorem
+
+**Statement (candidate):** Every linear digital sequence over Z_n^D can be expressed
+as σ(M·a(k)) for M ∈ GL(d, Z_n) and bijection σ: Z_n → Z_n. Discrepancy class, Latin
+property, and spectral behaviour fully determined by (M, σ).
+Subsumes T9 (M=T), FMD-NET (M=I), DN2 (σ=APN), Faure (M=P^m).
+**Status:** 🔵 RESEARCH.
+
+### NEW-3 — Min-entropy Hamiltonian Latin Uniqueness (OD-19 corollary)
+
+**Status:** 🔵 RESEARCH. T4 PROVEN; uniqueness waits on OD-19 (OPEN).
+
+### NEW-4 — Modular Pascal Fractal Dimension
+
+**Statement (candidate):** Hausdorff dimension of the FM-Dance "Sierpiński Strata"
+equals the dimension of the Pascal triangle mod n.
+**Status:** 🔵 RESEARCH. BPT provides the carry distribution; fractal geometry
+connection to Pascal mod n is the gap.
+
+---
+
+## 5. Documentation Debt
+
+### DOC-1 — PAPER.md: Section 3 theorem tables incomplete
+
+**Status:** 🟡 PARTIAL
+
+Section 3 theorem tables (3.1–3.7) were not updated to include V15.2/V15.3 additions.
+Missing from the tables: DN2 (now PROVEN), DN2-ETK, DN2-WALSH, DN2-VAR, DN2-ANOVA,
+UNIF-1, DISC-1, FMD-NET, OD-32-ITER, SRM, C4, T7, LEX-1, INT-1, GEN-1, INV-1.
+Section 4.7 (ScarStore) still refers to HM-1 as "conjecture" in prose.
+**Fix:** Extend Section 3 with sub-section 3.8 covering V14/V15/V15.3 additions;
+update §4.6 (FractalNet) with Owen scrambling results and DN2 proof summary.
+
+---
+
+## 6. Closed Debt Archive
+
+| Batch | Closed / Retired | Resolution |
+|-------|------------------|------------|
+| V15.3 | DN2, DN2-ETK, DN2-WALSH, DN2-VAR, DN2-ANOVA | DN2 fully proven: ETK+Walsh discrepancy, Owen-class variance, ANOVA suppression. |
+| V15.2+ | EVEN-1 | Even-n Latin Hyperprism via Kronecker Decomposition. |
+| V15.2 | OD-27 | FractalNetKinetic t-value proven t=m(D-1), not t=0. |
+| V15.1.4 | UNIF-1 | Spectral Unification; S2 PN-condition lifted. |
+| V15.1.3 | HIL-1 | **RETIRED** — n=2 self-contradiction. |
+| V15.1.2 | DEC-1 | ScarStore = coset decomposition (Künneth + HM-1). |
+| V15.1 | T9 | FM-Dance as linear digital sequence (T-matrix identity). |
+| V15 | OD-33 | FM-Dance proven as (0,d,d)-digital sequence. |
+| V14 | OD-16-PM, OD-17-PM | Power-map APN obstruction (Hasse-Weil). |
+| V14 | OD-32, HM-1 | O(1) iterator amortised; holographic sparsity. |
+| V13 | OD-18–21, OD-24–25 | T8/FM-1/C3 proven; T8b, C3W-STRONG, S2-GAUSS, C2-SCOPED. |
+| V12 | OD-15 | S2 proven via DFT linearity. TORUS_DIAM closes BFRW-1/C3W-APN. |
+| V11 | OD-1–4 | GOLDEN_SEEDS n=7 corrected; C4/L2 promoted. |
+| Legacy | C2 | **DISPROVEN_SCOPED**. Axial nullification false. |

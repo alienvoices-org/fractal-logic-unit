@@ -1,0 +1,198 @@
+{
+  "$schema": "https://flu-project.dev/schemas/srp-package-contract/v1.0.json",
+  "$comment": "Generalized SRP (Single-Responsibility Package) contract, derived from FLU V12 architecture. All FLU-family packages must conform to this schema.",
+  "contract_version": "1.0.0",
+  "derived_from": "FLU V15 — Fractal Logic Unit / Phased Fractal Number Theory",
+  "last_updated": "2026-03-07",
+
+  "philosophy": {
+    "core_principle": "Every package in the FLU family solves ONE mathematical problem rigorously. It does not grow by accretion — it grows by crystallisation.",
+    "epistemic_discipline": "Every claim is either PROVEN (with proof), CONJECTURE (with empirical support), or DESIGN_INTENT (with rationale). There are no unmarked assumptions.",
+    "separation_of_concerns": "Mathematics is never polluted by application logic. Theory layer has no imports from applications layer.",
+    "single_source_of_truth": "Every mathematical claim appears in exactly one canonical location (the theorem registry). All documentation, tests, and code reference that location.",
+    "honest_benchmarks": "No benchmark claims a result that was not actually measured. Every claim includes the conditions under which it holds and the conditions under which it does not."
+  },
+
+  "required_structure": {
+    "source": {
+      "path": "src/{package_name}/",
+      "layers": {
+        "core": {
+          "purpose": "Algorithms and data transformations. No theory imports.",
+          "naming": "Noun or verb describing the operation (fm_dance, factoradic, lo_shu).",
+          "constraints": ["No imports from theory/", "No imports from applications/", "All public functions documented with complexity claims"]
+        },
+        "theory": {
+          "purpose": "Formal theorem statements, proofs, verification functions.",
+          "naming": "theory_{domain}.py for domain theories, theorem_registry.py for the central registry.",
+          "constraints": ["theorem_registry.py MUST exist", "All theorems MUST have status: PROVEN | CONJECTURE | DESIGN_INTENT", "Verification functions MUST be runnable and deterministic"]
+        },
+        "container": {
+          "purpose": "Algebraic container operations — composition, combination, identity.",
+          "optional": true,
+          "note": "Required if the package defines composable container objects."
+        },
+        "utils": {
+          "purpose": "Benchmarks, formatters, validators, CLI entry points.",
+          "constraints": ["benchmarks.py MUST document honest criteria (not aspirational)", "All complexity claims MUST have a corresponding benchmark function"]
+        },
+        "applications": {
+          "purpose": "Domain-specific use of the core. Imports from core and theory; NOT vice versa.",
+          "optional": true
+        }
+      }
+    },
+    "tests": {
+      "path": "tests/",
+      "required": {
+        "run_all.py": "Runs all tests. Final line reports N/N passing.",
+        "test_core/": "Tests for correctness of core algorithms.",
+        "test_theory/": "Tests that verify theorem conditions computationally.",
+        "benchmarks/": "Runnable benchmark scripts (not just assertions, but measurements)."
+      },
+      "standards": {
+        "minimum_coverage": "All public functions in core/ have at least one test.",
+        "theorem_linkage": "Each theorem test references the theorem ID in its docstring.",
+        "no_hidden_failures": "Tests never catch exceptions silently. Failures must propagate."
+      }
+    },
+    "docs": {
+      "path": "docs/",
+      "required_files": {
+        "README.md": "Package overview, badges (theorem score, test score), quick-start.",
+        "THEOREMS.md": "Human-readable theorem registry with full proof sketches.",
+        "BENCHMARKS.md": "Live benchmark results. Proposed vs delivered is documented honestly.",
+        "OPEN_DEBT.md": "Every known defect, proof gap, and data gap with resolution path.",
+        "CHANGELOG.md": "All theorem status changes and breaking API changes.",
+        "PERSPECTIVES.md": "Optional. For packages with multiple equivalent mathematical views."
+      },
+      "optional_files": {
+        "ARCHITECTURE.md": "Module map, dependency rules, naming conventions.",
+        "ROADMAP_Vn.md": "Next sprint plan with acceptance criteria.",
+        "PACKAGE_CONTRACT.json": "This file (the schema itself).",
+        "FLU_MANIFEST.json": "Machine-readable public entry point (see manifest schema below)."
+      }
+    },
+    "root": {
+      "required_files": {
+        "README.md": "Top-level README. Badges: tests, theorems. 5-line summary.",
+        "pyproject.toml": "Standard Python packaging metadata.",
+        "FLU_MANIFEST.json": "Machine-readable package manifest (see manifest schema)."
+      }
+    }
+  },
+
+  "theorem_registry_spec": {
+    "location": "src/{package_name}/theory/theorem_registry.py",
+    "required_fields_per_theorem": {
+      "name": "Human-readable name: '{ID} -- {Short Description}'",
+      "status": "Enum: PROVEN | CONJECTURE | DESIGN_INTENT | FALSE",
+      "statement": "Precise mathematical claim. No hand-waving.",
+      "proof": "For PROVEN: complete proof sketch. For CONJECTURE: empirical evidence and open questions.",
+      "conditions": "List of conditions under which the theorem holds.",
+      "references": "List of code refs, doc refs, literature refs."
+    },
+    "status_definitions": {
+      "PROVEN": "Complete mathematical argument exists AND computationally verified for stated domain.",
+      "CONJECTURE": "Empirically supported across tested domain. Formal proof incomplete.",
+      "DESIGN_INTENT": "Design property, not a mathematical theorem. Verified by construction.",
+      "FALSE": "Disproven. Kept as named negative result."
+    },
+    "badge_format": "{N_PROVEN} PROVEN · {N_CONJECTURE} CONJECTURE · {N_FALSE} FALSE",
+    "machine_readable_export": "THEOREM_REGISTRY.json — auto-generated from Python registry (see tools/generate_registry_json.py)"
+  },
+
+  "benchmark_spec": {
+    "location": "src/{package_name}/utils/benchmarks.py",
+    "required_fields_per_benchmark": {
+      "validates": "The theorem ID(s) or complexity claim being validated.",
+      "honest_criteria": "The ACTUAL pass/fail threshold, not an aspirational one.",
+      "proposed_vs_delivered": "If the benchmark differs from an earlier proposal, explain why honestly.",
+      "conditions": "Hardware, Python version, parameter range where the claim holds.",
+      "pass_or_fail": "Returns a boolean result, not just a measurement."
+    },
+    "prohibited": [
+      "Aspirational benchmarks that have never been run.",
+      "Benchmarks that only print numbers without a pass/fail criterion.",
+      "Benchmarks that silently cap their parameters to make claims easier to satisfy.",
+      "Phantom benchmarks measuring functions that do not exist in the codebase."
+    ]
+  },
+
+  "versioning_spec": {
+    "format": "MAJOR.MINOR.PATCH",
+    "major_triggers": ["Breaking public API change", "Theorem status downgrade (PROVEN → CONJECTURE)"],
+    "minor_triggers": ["New theorem", "New public function", "GOLDEN_SEEDS extension", "New benchmark"],
+    "patch_triggers": ["Bug fix", "Documentation update", "Test addition"],
+    "theorem_badge_in_readme": true,
+    "test_badge_in_readme": true,
+    "changelog_entry_required_for": ["Any theorem status change", "Any API removal or signature change"]
+  },
+
+  "epistemic_discipline": {
+    "the_only_three_categories": ["PROVEN", "CONJECTURE", "DESIGN_INTENT"],
+    "no_unmarked_assumptions": "Every assumption that is not self-evident must be stated explicitly.",
+    "no_speculative_naming_without_implementation": "A function or class cannot be named after a concept that has no implementation. Names are not claims.",
+    "conjecture_downgrade_policy": "If a PROVEN theorem is found to have a gap, it is immediately downgraded to CONJECTURE and logged in OPEN_DEBT.md.",
+    "honest_benchmarks_policy": "The proposed criterion and the delivered criterion are both stated. If they differ, the reason is given.",
+    "open_debt_is_not_shame": "OPEN_DEBT.md is a sign of maturity, not failure. Every research package has open debt. The discipline is in tracking it."
+  },
+
+  "public_api_spec": {
+    "exported_from": "src/{package_name}/__init__.py",
+    "all_public_symbols_must_have": ["docstring", "type annotations", "complexity claim if applicable"],
+    "theorem_linkage_in_docstring": "Functions that implement or verify a theorem must reference the theorem ID in their docstring.",
+    "no_internal_leakage": "Private implementation details (prefixed _) are never re-exported in __init__.py."
+  },
+
+  "machine_readable_files": {
+    "FLU_MANIFEST.json": {
+      "purpose": "Public entry point for LLMs, auditors, and external packages.",
+      "location": "package root",
+      "schema_ref": "flu-srp-package-contract/v1.0#manifest",
+      "should_contain": [
+        "package identity and version",
+        "one-paragraph mathematical description",
+        "all theorems (compact: id, status, one-line statement)",
+        "all public functions grouped by role",
+        "benchmark summary",
+        "open debt summary",
+        "how-to-use examples for common tasks"
+      ],
+      "must_not_contain": [
+        "internal implementation details",
+        "private function signatures",
+        "benchmark code",
+        "proof details (link to THEOREMS.md instead)"
+      ]
+    },
+    "THEOREM_REGISTRY.json": {
+      "purpose": "Machine-queryable theorem database with dependency graph.",
+      "location": "src/{package_name}/theory/",
+      "generation": "Auto-generated by tools/generate_registry_json.py — never edited by hand.",
+      "schema_ref": "flu-srp-package-contract/v1.0#theorem-registry",
+      "should_contain": [
+        "all theorem records with full proof sketches",
+        "dependency graph (depends_on, depended_on_by)",
+        "code references",
+        "conditions",
+        "status and change history"
+      ]
+    }
+  },
+
+  "compliance_checklist": [
+    { "id": "C-01", "item": "src/{pkg}/theory/theorem_registry.py exists", "required": true },
+    { "id": "C-02", "item": "All theorems have status PROVEN|CONJECTURE|DESIGN_INTENT|FALSE", "required": true },
+    { "id": "C-03", "item": "tests/run_all.py passes with N/N", "required": true },
+    { "id": "C-04", "item": "docs/OPEN_DEBT.md exists and is non-empty", "required": true },
+    { "id": "C-05", "item": "docs/BENCHMARKS.md has at least one benchmark with honest criterion", "required": true },
+    { "id": "C-06", "item": "FLU_MANIFEST.json exists at package root", "required": true },
+    { "id": "C-07", "item": "README.md has theorem badge and test badge", "required": true },
+    { "id": "C-08", "item": "No theory/ imports from applications/", "required": true },
+    { "id": "C-09", "item": "All public functions have docstrings", "required": true },
+    { "id": "C-10", "item": "THEOREM_REGISTRY.json is current (matches Python registry)", "recommended": true },
+    { "id": "C-11", "item": "docs/PERSPECTIVES.md exists if multiple equivalent views exist", "recommended": true },
+    { "id": "C-12", "item": "Each benchmark returns a boolean pass/fail result", "required": true }
+  ]
+}
