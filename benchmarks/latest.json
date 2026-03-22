@@ -1,1 +1,213 @@
-
+{
+  "addressing": {
+    "benchmark": "Addressing O(d)",
+    "n": 3,
+    "d_values": [
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      128,
+      256
+    ],
+    "times_ns": [
+      451.44,
+      637.995,
+      1021.065,
+      1533.635,
+      2691.81,
+      5157.895,
+      9730.4,
+      22396.09
+    ],
+    "linear_fit_r2": 0.9946786904945784,
+    "complexity_ok": true,
+    "status": "O(d) VALIDATED",
+    "claim": "T1 Bijection / O(d) addressing"
+  },
+  "traversal": {
+    "benchmark": "Traversal O(1) amortised",
+    "n": 3,
+    "d": 4,
+    "n_steps": 80,
+    "steps_per_second": 1324612.9646493916,
+    "ns_per_step": 754.9375,
+    "amortised_ok": true,
+    "status": "O(1) VALIDATED",
+    "claim": "T2 Hamiltonian / O(1) amortised traversal"
+  },
+  "spectral": {
+    "benchmark": "Spectral Variance (S2 measured invariant)",
+    "n": 5,
+    "results": [
+      {
+        "d": 2,
+        "mixed_variance": 8.23241951850243e-33,
+        "s2_prime_bound": 4.000000000000001,
+        "within_bound": true,
+        "mixed_flat": true
+      },
+      {
+        "d": 3,
+        "mixed_variance": 5.6047416767583305e-31,
+        "s2_prime_bound": 20.000000000000004,
+        "within_bound": true,
+        "mixed_flat": true
+      }
+    ],
+    "all_within_s2prime_bound": true,
+    "status": "S2-PRIME BOUND SATISFIED",
+    "claim": "S2-Prime Bounded Spectral Dispersion (PROVEN)"
+  },
+  "avalanche": {
+    "benchmark": "Avalanche / Byzantine Stress Test",
+    "n": 5,
+    "d": 3,
+    "capacity_limit": 0.2,
+    "per_rate": [
+      {
+        "erasure_rate": 0.05,
+        "n_erased": 6,
+        "success_rate": 1.0,
+        "within_capacity": true,
+        "repair_ok": true
+      },
+      {
+        "erasure_rate": 0.1,
+        "n_erased": 12,
+        "success_rate": 1.0,
+        "within_capacity": true,
+        "repair_ok": true
+      },
+      {
+        "erasure_rate": 0.2,
+        "n_erased": 25,
+        "success_rate": 1.0,
+        "within_capacity": false,
+        "repair_ok": null
+      },
+      {
+        "erasure_rate": 0.4,
+        "n_erased": 50,
+        "success_rate": 1.0,
+        "within_capacity": false,
+        "repair_ok": null
+      }
+    ],
+    "claim": "L2 Holographic Repair + L3 Byzantine Capacity",
+    "status": "VALIDATED"
+  },
+  "summary": {
+    "all_ok": true,
+    "addressing_ok": true,
+    "traversal_ok": true,
+    "spectral_ok": true,
+    "byzantine_ok": true
+  },
+  "version": "15.1.4",
+  "generated": "2026-03-11",
+  "test_summary": {
+    "passed": 681,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 82,
+    "total": 763,
+    "all_pass": true
+  },
+  "theorem_registry": {
+    "proven": 53,
+    "partial": 1,
+    "conjecture": 3,
+    "disproven_scoped": 1,
+    "retired": 1,
+    "total": 59
+  },
+  "discrepancy_comparison": {
+    "n": 3,
+    "d": 4,
+    "method": "warnock_l2_star",
+    "rows": [
+      {
+        "N": 81,
+        "fractalnet": 0.01067,
+        "fractalnet_kinetic": 0.01067,
+        "apn_scrambled": 0.01067,
+        "monte_carlo": 0.188033,
+        "sobol": 0.185575,
+        "halton": 0.186763
+      },
+      {
+        "N": 243,
+        "fractalnet": 0.116098,
+        "fractalnet_kinetic": 0.173974,
+        "apn_scrambled": 0.116098,
+        "monte_carlo": 0.187895,
+        "sobol": 0.18834,
+        "halton": 0.188122
+      },
+      {
+        "N": 729,
+        "fractalnet": 0.15066,
+        "fractalnet_kinetic": 0.176429,
+        "apn_scrambled": 0.15066,
+        "monte_carlo": 0.187634,
+        "sobol": 0.188437,
+        "halton": 0.188729
+      },
+      {
+        "N": 2187,
+        "fractalnet": 0.169817,
+        "fractalnet_kinetic": 0.179417,
+        "apn_scrambled": 0.169817,
+        "monte_carlo": 0.189311,
+        "sobol": 0.188624,
+        "halton": 0.18864
+      },
+      {
+        "N": 6561,
+        "fractalnet": 0.180822,
+        "fractalnet_kinetic": 0.180822,
+        "apn_scrambled": 0.187282,
+        "monte_carlo": 0.188704,
+        "sobol": 0.188632,
+        "halton": 0.188636
+      }
+    ]
+  },
+  "dn2_benchmark": [
+    {
+      "n": 3,
+      "fft_plain": 15.0,
+      "fft_scrambled": 15.0,
+      "fft_reduction_pct": 0.0,
+      "l2_plain": 0.279777,
+      "l2_scrambled": 0.296513
+    },
+    {
+      "n": 5,
+      "fft_plain": 46.0,
+      "fft_scrambled": 49.0,
+      "fft_reduction_pct": -6.5,
+      "l2_plain": 0.315114,
+      "l2_scrambled": 0.353048
+    },
+    {
+      "n": 7,
+      "fft_plain": 90.0,
+      "fft_scrambled": 91.0,
+      "fft_reduction_pct": -1.1,
+      "l2_plain": 0.325069,
+      "l2_scrambled": 0.326908
+    },
+    {
+      "n": 11,
+      "fft_plain": 226.0,
+      "fft_scrambled": 228.0,
+      "fft_reduction_pct": -0.9,
+      "l2_plain": 0.335595,
+      "l2_scrambled": 0.336809
+    }
+  ]
+}

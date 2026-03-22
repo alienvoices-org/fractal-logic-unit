@@ -1,0 +1,607 @@
+{
+  "sections": {
+    "A": {
+      "title": "Package Integrity",
+      "imports_ok": 26,
+      "imports_total": 26,
+      "version": "15.2.0",
+      "version_label": "FLU v15.2.0 (build 2026-03-12)",
+      "failures": []
+    },
+    "B": {
+      "T1_bijection": true,
+      "T2_hamiltonian": true,
+      "T3_latin": true,
+      "BPT": true,
+      "golden_seeds": true
+    },
+    "C": {
+      "proven": 58,
+      "conjecture": 5,
+      "od27_registered": true,
+      "conjecture_ids": [
+        "DN1",
+        "OD-16",
+        "OD-17",
+        "DN2",
+        "OD-27"
+      ]
+    },
+    "D": {
+      "communion_shape_ok": true,
+      "manifold_ok": true,
+      "scarstore_cr": 2.25,
+      "scarstore_scar_count": 9
+    },
+    "E": {
+      "81": {
+        "l2_corput": 0.010670338523128549,
+        "l2_kinetic": 0.010670338523128549,
+        "l2_mc": 0.18803349575941003
+      },
+      "243": {
+        "l2_corput": 0.11609808395759115,
+        "l2_kinetic": 0.17397382111491144,
+        "l2_mc": 0.18789463853262878
+      },
+      "729": {
+        "l2_corput": 0.15066044768362052,
+        "l2_kinetic": 0.17642895707547793,
+        "l2_mc": 0.1876342155164408
+      },
+      "2187": {
+        "l2_corput": 0.16981693356875557,
+        "l2_kinetic": 0.1794167864293505,
+        "l2_mc": 0.18931050566266727
+      },
+      "6561": {
+        "l2_corput": 0.18082231271673965,
+        "l2_kinetic": 0.1808223127167397,
+        "l2_mc": 0.1887037248385686
+      }
+    },
+    "F": {
+      "n3_d2": {
+        "mixed_variance": 0.0,
+        "s2_ok": true
+      },
+      "n5_d2": {
+        "mixed_variance": 3.697785493223493e-32,
+        "s2_ok": true
+      },
+      "n7_d2": {
+        "mixed_variance": 1.9400640671487383e-31,
+        "s2_ok": true
+      },
+      "n3_d3": {
+        "mixed_variance": 0.0,
+        "s2_ok": true
+      }
+    },
+    "G": {
+      "digital_net": {
+        "l2_corput": 0.186809859906362,
+        "l2_kinetic": 0.24429364838751083,
+        "ok": true
+      },
+      "hadamard": {
+        "shape": [
+          16,
+          16
+        ],
+        "orthogonal": true
+      },
+      "gray_code": {
+        "length": 16,
+        "ok": true
+      },
+      "lexicon": {
+        "methods": [
+          "all_symbols",
+          "alphabet",
+          "d",
+          "decode",
+          "encode",
+          "encode_rank"
+        ],
+        "ok": true
+      },
+      "integrity": {
+        "ok": true
+      },
+      "genetic": {
+        "available_n": [
+          3,
+          5,
+          7,
+          11,
+          13,
+          17
+        ],
+        "ok": true
+      },
+      "invariance": {
+        "all_match": true,
+        "theorem": "INV-1"
+      },
+      "cohomology": {
+        "laplacian_shape": [
+          3,
+          3
+        ],
+        "ok": true
+      },
+      "neural": {
+        "ok": false
+      },
+      "crypto": {
+        "delta": 2,
+        "is_apn": true,
+        "ok": true
+      }
+    },
+    "H": {
+      "hadamard_ok": true,
+      "hadamard_verify": true,
+      "latin_code": {
+        "round_trip_ok": true,
+        "verify_ok": true
+      },
+      "nary": {
+        "info": {
+          "n": 3,
+          "d": 2,
+          "total_points": 9,
+          "step_bound": 1,
+          "digit_set": [
+            -1,
+            0,
+            1
+          ],
+          "is_odd": true,
+          "mean": 0.0,
+          "mean_description": "exact zero (symmetric balanced)",
+          "d_star": 1,
+          "in_dimension_limited": false,
+          "in_radix_limited": true,
+          "locality_optimal_d": 1,
+          "bijective": true,
+          "latin_columns": true
+        },
+        "step_bound": 1,
+        "ok": true
+      }
+    },
+    "I": {
+      "n5": {
+        "fft_plain": 98.83494330994785,
+        "best_reduction_pct": 49.4,
+        "best_seed": 3,
+        "dn2_fft_ok": true
+      },
+      "n7": {
+        "fft_plain": 282.9914641058948,
+        "best_reduction_pct": 58.5,
+        "best_seed": 1,
+        "dn2_fft_ok": true
+      },
+      "n11": {
+        "fft_plain": 864.9744328643167,
+        "best_reduction_pct": 75.6,
+        "best_seed": 0,
+        "dn2_fft_ok": true
+      }
+    },
+    "J": {
+      "T_det_n3_d3": {
+        "det": -1,
+        "det_mod_n": 2,
+        "unit": true
+      },
+      "T_det_n5_d3": {
+        "det": -1,
+        "det_mod_n": 4,
+        "unit": true
+      },
+      "T_det_n7_d2": {
+        "det": -1,
+        "det_mod_n": 6,
+        "unit": true
+      },
+      "FMD_NET_n3_d2": {
+        "distinct_cells": 9,
+        "ok": true
+      },
+      "FMD_NET_n3_d3": {
+        "distinct_cells": 27,
+        "ok": true
+      },
+      "FMD_NET_n5_d2": {
+        "distinct_cells": 25,
+        "ok": true
+      },
+      "OD33_consecutive_blocks": {
+        "ok": true
+      },
+      "discrepancy_vs_MC_d3": {
+        "N81": -0.074885489142784,
+        "N243": -0.04117644264773468,
+        "N729": -0.019260724537720902
+      },
+      "T9_digit_identity": {
+        "matches": 27,
+        "total": 27,
+        "ok": true
+      }
+    },
+    "K": {
+      "n3": {
+        "l2_corput": 0.325454308156809,
+        "l2_kinetic": 0.325454308156809,
+        "l2_mc": 0.34935989723848576,
+        "both_beat_mc": true
+      },
+      "n5": {
+        "l2_corput": 0.3454693168559097,
+        "l2_kinetic": 0.3454693168559097,
+        "l2_mc": 0.3507047229439231,
+        "both_beat_mc": true
+      },
+      "n7": {
+        "l2_corput": 0.34968710818691373,
+        "l2_kinetic": 0.34968710818691373,
+        "l2_mc": 0.3512904766933297,
+        "both_beat_mc": true
+      },
+      "n11": {
+        "l2_corput": 0.3520505121282833,
+        "l2_kinetic": 0.3520505121282833,
+        "l2_mc": 0.353599490476572,
+        "both_beat_mc": true
+      }
+    },
+    "L": {
+      "n3_d2": {
+        "matches": 9,
+        "total": 9,
+        "ok": true
+      },
+      "n3_d3": {
+        "matches": 27,
+        "total": 27,
+        "ok": true
+      },
+      "n5_d2": {
+        "matches": 25,
+        "total": 25,
+        "ok": true
+      }
+    }
+  },
+  "timestamp": "2026-03-12T03:26:43Z",
+  "summary": {
+    "total": 63,
+    "pass": 62,
+    "warn": 1,
+    "fail": 0,
+    "elapsed_s": 21.54,
+    "exit_code": 0,
+    "checks": [
+      {
+        "status": "PASS",
+        "name": "All module imports succeed",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "Version string present",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "T1: index_to_coords is a bijection on Z_n^d",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "T2: FMDanceIterator visits all n^d distinct points",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "T3: Every axis projection is a permutation of D_set",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "BPT: Boundary partition sizes match (n-1)*n^(d-j-1)",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "GOLDEN_SEEDS: APN seeds available for n=5,7,11",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "Registry: \u2265 54 PROVEN theorems",
+        "note": "Found 54"
+      },
+      {
+        "status": "PASS",
+        "name": "Registry: OD-27 is registered as CONJECTURE",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "Registry: T9 is PROVEN",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "Registry: UNIF-1 is PROVEN",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "Registry: FMD-NET is PROVEN",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "Registry: OD-33 is PROVEN",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "Registry: DN2 is open conjecture/partial",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "Communion: commune(A, B) produces correct 3\u00d73 shape",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "SparseCommunionManifold: constructs with seeds",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "ScarStore: compression_ratio() > 1",
+        "note": "ratio=2.25"
+      },
+      {
+        "status": "PASS",
+        "name": "ScarStore: scar_count matches learned anomalies",
+        "note": "scar_count=9"
+      },
+      {
+        "status": "PASS",
+        "name": "ScarStore: recall of non-scar returns baseline value",
+        "note": "recalled=-1.0"
+      },
+      {
+        "status": "PASS",
+        "name": "FractalNet beats MC at N=729",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "FractalNetKinetic beats MC at N=729",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "Both nets identical at N=n^d (same point set \u2014 FMD-NET)",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "Both nets identical at N=n^(2d)",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "S2/UNIF-1: mixed DFT variance < 1e-10 at n=3, d=2",
+        "note": "var=0.00e+00"
+      },
+      {
+        "status": "PASS",
+        "name": "S2/UNIF-1: mixed DFT variance < 1e-10 at n=5, d=2",
+        "note": "var=3.70e-32"
+      },
+      {
+        "status": "PASS",
+        "name": "S2/UNIF-1: mixed DFT variance < 1e-10 at n=7, d=2",
+        "note": "var=1.94e-31"
+      },
+      {
+        "status": "PASS",
+        "name": "S2/UNIF-1: mixed DFT variance < 1e-10 at n=3, d=3",
+        "note": "var=0.00e+00"
+      },
+      {
+        "status": "PASS",
+        "name": "G.1 FractalNetCorputFacet: generate and l2_discrepancy",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "G.1 FractalNetKineticFacet: generate and l2_discrepancy",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "G.2 HadamardFacet: H @ H.T = N*I (d=4)",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "G.3 GrayCodeFacet: sequence has 2^d=16 codewords",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "G.4 LexiconFacet: instantiates with n=3, d=3",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "G.5 IntegrityFacet: audit_full() completes without error",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "G.6 GeneticFacet: populated from GOLDEN_SEEDS",
+        "note": "available n: [3, 5, 7, 11, 13]"
+      },
+      {
+        "status": "PASS",
+        "name": "G.6 GeneticFacet: get(n=5) returns a SeedRecord",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "G.7 InvarianceFacet: compare_branches() confirms INV-1",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "G.8 CohomologyFacet: laplacian(field) returns 3\u00d73 matrix",
+        "note": ""
+      },
+      {
+        "status": "WARN",
+        "name": "G.9 NeuralFacet: init_layer",
+        "note": "FLUInitializer.__init__() got an unexpected keyword argument 'n'"
+      },
+      {
+        "status": "PASS",
+        "name": "G.10 CryptoFacet: golden_seed() is APN (delta=2)",
+        "note": "delta=2, is_apn=True"
+      },
+      {
+        "status": "PASS",
+        "name": "H.1 HadamardGenerator: H @ H.T = N*I for d=2,3,4,5 (HAD-1)",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "H.1 HadamardGenerator.verify(d=3)",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "H.2 LatinSquareCode: encode_pair(0,1) \u2192 decode_symbol round-trips",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "H.2 LatinSquareCode: matrix satisfies Latin square property (verify)",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "H.3 n_ary: nary_info and nary_step_bound (n=3, d=2)",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "DN2 n=5: FFT peak reduction > 10%",
+        "note": "49.4%"
+      },
+      {
+        "status": "PASS",
+        "name": "DN2 n=7: FFT peak reduction > 10%",
+        "note": "58.5%"
+      },
+      {
+        "status": "PASS",
+        "name": "DN2 n=11: FFT peak reduction > 10%",
+        "note": "75.6%"
+      },
+      {
+        "status": "PASS",
+        "name": "J.1 det(T)=-1 is unit in Z_3 (d=3)",
+        "note": "det(T)=-1, det mod 3=2"
+      },
+      {
+        "status": "PASS",
+        "name": "J.1 det(T)=-1 is unit in Z_5 (d=3)",
+        "note": "det(T)=-1, det mod 5=4"
+      },
+      {
+        "status": "PASS",
+        "name": "J.1 det(T)=-1 is unit in Z_7 (d=2)",
+        "note": "det(T)=-1, det mod 7=6"
+      },
+      {
+        "status": "PASS",
+        "name": "J.2 FMD-NET (0,d,d)-net: n=3, d=2",
+        "note": "9/9 distinct unit cells"
+      },
+      {
+        "status": "PASS",
+        "name": "J.2 FMD-NET (0,d,d)-net: n=3, d=3",
+        "note": "27/27 distinct unit cells"
+      },
+      {
+        "status": "PASS",
+        "name": "J.2 FMD-NET (0,d,d)-net: n=5, d=2",
+        "note": "25/25 distinct unit cells"
+      },
+      {
+        "status": "PASS",
+        "name": "J.3 OD-33: 3 consecutive blocks each form a (0,d,d)-net (n=3,d=2)",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "J.4 OD-27: FractalNet L2 < MC at N=81,243,729 (n=3,d=3)",
+        "note": "{'N81': '-0.0749', 'N243': '-0.0412', 'N729': '-0.0193'}"
+      },
+      {
+        "status": "PASS",
+        "name": "J.5 T9: path_coord = T\u00b7index_to_coords (27/27 matches, n=3,d=3)",
+        "note": "27/27"
+      },
+      {
+        "status": "PASS",
+        "name": "K: n=3: both FractalNet variants beat MC (d=2, N=n^4)",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "K: n=5: both FractalNet variants beat MC (d=2, N=n^4)",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "K: n=7: both FractalNet variants beat MC (d=2, N=n^4)",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "K: n=11: both FractalNet variants beat MC (d=2, N=n^4)",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "L T9: 9/9 matches at n=3, d=2",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "L T9: 27/27 matches at n=3, d=3",
+        "note": ""
+      },
+      {
+        "status": "PASS",
+        "name": "L T9: 25/25 matches at n=5, d=2",
+        "note": ""
+      }
+    ]
+  }
+}
