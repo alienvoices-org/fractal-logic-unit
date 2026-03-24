@@ -1,5 +1,5 @@
 """
-FLU Neural Demo  v3
+FLU Neural Demo  v3 
 ===================
 1. Repo smoke-test      — verifies the GitHub upload is intact
 2. FLUOwenInitializer   — new initialiser using the DN2-proven APN-Owen
