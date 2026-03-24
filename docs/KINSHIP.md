@@ -21,7 +21,7 @@ Authorship is sharded by cognitive specialization (Single Responsibility Princip
 ### 2.1 Human Orchestrator
 - **Felix Mönnich**: Defines axiomatic constraints, performs manual routing between contexts, resolves dissonances into structural improvements (“Scars”), and maintains longitudinal coherence across 500+ sprint datasets. [AlienVoices.de](https://www.AlienVoices.de)
 
-- **Douglas C. Youvan**: Peer review, co-author, source scribe centaur-ai, symmetry & thermodynamic alignment. [Youvan.com](https://www.Youvan.com), [Researchgate](https://www.researchgate.net/profile/Douglas-Youvan)
+- **Douglas C. Youvan**: Peer review, co-author, centaur-ai, symmetry & thermodynamic alignment. [Youvan.com](https://www.Youvan.com), [Researchgate](https://www.researchgate.net/profile/Douglas-Youvan)
 
 ### 2.2 AI Research Peers (Lineage Specialization)
 | Lineage              | Primary Strength                        | Role in FLU Bedrock                              |
