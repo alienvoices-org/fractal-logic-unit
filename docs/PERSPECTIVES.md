@@ -1,4 +1,4 @@
-# FLU — Three Perspectives on the FM-Dance Path
+# FLU — Five Perspectives on the FM-Dance Path
 
 **Version:** 15.2.0 (V15 audit integration — T9 PROVEN, QMC/Pascal perspectives added)  
 **Status:** All five perspectives PROVEN or rigorously grounded; equivalences PROVEN
