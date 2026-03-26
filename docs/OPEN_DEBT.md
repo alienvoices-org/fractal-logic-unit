@@ -164,26 +164,3 @@ UNIF-1, DISC-1, FMD-NET, OD-32-ITER, SRM, C4, T7, LEX-1, INT-1, GEN-1, INV-1.
 Section 4.7 (ScarStore) still refers to HM-1 as "conjecture" in prose.
 **Fix:** Extend Section 3 with sub-section 3.8 covering V14/V15/V15.3 additions;
 update §4.6 (FractalNet) with Owen scrambling results and DN2 proof summary.
-
----
-
-## 6. Closed Debt Archive
-
-| Batch | Closed / Retired | Resolution |
-|-------|------------------|------------|
-| V15.3.1 | DN1 | LoShu Sudoku Digital Net (PROVEN) (lo_shu_sudoku.py)
-| V15.3+ | OD-19 T8b | Linear Magic Hyperprism Uniqueness (PROVEN)(SCOPED) (PROOF_OD19_Linear.md)
-| V15.3 | DN2, DN2-ETK, DN2-WALSH, DN2-VAR, DN2-ANOVA | DN2 fully proven: ETK+Walsh discrepancy, Owen-class variance, ANOVA suppression. |
-| V15.2+ | EVEN-1 | Even-n Latin Hyperprism via Kronecker Decomposition. |
-| V15.2 | OD-27 | FractalNetKinetic t-value proven t=m(D-1), not t=0. |
-| V15.1.4 | UNIF-1 | Spectral Unification; S2 PN-condition lifted. |
-| V15.1.3 | HIL-1 | **RETIRED** — n=2 self-contradiction. |
-| V15.1.2 | DEC-1 | ScarStore = coset decomposition (Künneth + HM-1). |
-| V15.1 | T9 | FM-Dance as linear digital sequence (T-matrix identity). |
-| V15 | OD-33 | FM-Dance proven as (0,d,d)-digital sequence. |
-| V14 | OD-16-PM, OD-17-PM | Power-map APN obstruction (Hasse-Weil). |
-| V14 | OD-32, HM-1 | O(1) iterator amortised; holographic sparsity. |
-| V13 | OD-18–21, OD-24–25 | T8/FM-1/C3 proven; T8b, C3W-STRONG, S2-GAUSS, C2-SCOPED. |
-| V12 | OD-15 | S2 proven via DFT linearity. TORUS_DIAM closes BFRW-1/C3W-APN. |
-| V11 | OD-1–4 | GOLDEN_SEEDS n=7 corrected; C4/L2 promoted. |
-| Legacy | C2 | **DISPROVEN_SCOPED**. Axial nullification false. |
