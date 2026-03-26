@@ -206,7 +206,7 @@ Full detail: `docs/OPEN_DEBT.md`
 ## Running Tests
 
 ```bash
-python run_tests.py               # all 277 tests, no pytest required
+python run_tests.py               # all tests, no pytest required
 python tests/benchmarks/bench_qmc_rigor.py    # 7-test QMC rigor suite
 python tests/benchmarks/bench_discrepancy.py  # discrepancy vs random/Sobol
 python tests/benchmarks/bench_apn_hub.py      # APN Golden Seeds benchmark
