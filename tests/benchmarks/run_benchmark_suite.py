@@ -290,7 +290,7 @@ check("Registry: T9 is PROVEN", get_theorem("T9") is not None and get_theorem("T
 check("Registry: UNIF-1 is PROVEN", get_theorem("UNIF-1") is not None and get_theorem("UNIF-1").is_proven())
 check("Registry: FMD-NET is PROVEN", get_theorem("FMD-NET") is not None and get_theorem("FMD-NET").is_proven())
 check("Registry: OD-33 is PROVEN", get_theorem("OD-33") is not None and get_theorem("OD-33").is_proven())
-check("Registry: DN2 is PROVEN", get_theorem("DN2") is not None and (get_theorem("DN2").is_proven())
+check("Registry: DN2 is PROVEN", get_theorem("DN2") is not None and get_theorem("DN2").is_proven())
 
 _conj_ids = [t.name.split(" -- ")[0] for t in _conjectures]
 info(f"Open conjectures: {_conj_ids}")
