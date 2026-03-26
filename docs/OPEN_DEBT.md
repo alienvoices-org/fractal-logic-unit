@@ -20,7 +20,6 @@
 |----|------|--------|
 | OD-16 | Delta-Min Conjecture Z_19 (all bijections) | 🔴 OPEN |
 | OD-17 | Delta-Min Conjecture Z_31 (all bijections) | 🔴 OPEN |
-| OD-19 | T8b — Triangularizable Family Uniqueness (GL(d,Zₙ) orbit) | 🔴 OPEN |
 | OD-34 | Kinship Curve — Hamiltonian continuity under RotationHub | 🔴 OPEN |
 | OD-35 | Distributive Law: (M₁⊕M₂)⊗M₃ = (M₁⊗M₃)⊕(M₂⊗M₃) | 🔵 RESEARCH |
 | OD-36 | APN Asymptotics: sparsity of APN bijections as n→∞ | 🔵 RESEARCH |
@@ -85,20 +84,6 @@ theory of S_19; character sum analysis of all bijection families over Z_19.
 
 ---
 
-### OD-19 — T8b: Triangularizable Family Uniqueness
-
-**Status:** 🔴 OPEN
-
-**Statement (refined V15):** Every bijection on Z_nᴰ achieving L∞-Gray-1 arises from
-a triangularizable generator matrix — i.e., is GL(d,Z_n)-equivalent to the FM-Dance
-prefix matrix T.
-
-**Closure path:** Write x_k = Σ_{i<k} σ_{j(i)}. Show bijectivity forces a triangular
-linear system with unique solution σ_j = T·e_j up to GL-orbit. Digit Carry Lemma (T8b)
-provides the skeleton; uniqueness proof needs GL(d,Z_n) classification argument.
-
----
-
 ### OD-34 — Hamiltonian Continuity of the Kinship Curve
 
 **Status:** 🔴 OPEN
@@ -123,42 +108,6 @@ specific Lo Shu fractal variant, where digit propagation across Lo Shu blocks is
 key open difficulty.
 
 **Closure path:** Niederreiter digital net theory; Faure/Pascal angle on the T matrix.
-
----
-
-## 2. QMC: DN2 Summary and What Remains
-
-### DN2 — APN-Scrambled Digital Net
-
-**Status:** ✅ PROVEN (V15.3). All eight sub-parts closed.
-
-| Sub-part | Claim | Status |
-|----------|-------|--------|
-| DN2-P1 | Latin preservation | ✅ PROVEN |
-| DN2-P2 | Net t-value preservation | ✅ PROVEN |
-| DN2-P3 | FFT spectral reduction (Owen > coordinated) | ✅ CONFIRMED |
-| DN2-L1 | Latin Permutation Invariance | ✅ PROVEN |
-| DN2-L2 | Block boundary L2 invariance | ✅ PROVEN |
-| DN2-ETK | C_APN(D) = C_classic(D)·(B/√n)^D | ✅ PROVEN |
-| DN2-WALSH | Walsh-tight discrepancy | ✅ PROVEN |
-| DN2-VAR | Owen-class variance (smooth + non-smooth) | ✅ PROVEN |
-| DN2-ANOVA | ANOVA high-order suppression | ✅ PROVEN |
-
-**Key results:**
-- Discrepancy improvement: **(√n/B)^D** — e.g. 11.2× at n=5, D=3.
-- Variance improvement: **(B/√n)^{2D}** — independent of function smoothness.
-- Effective dimension reduction: approximately halved (E[dim] ≈ D·(1/2 − log_n B)).
-- FLU-Owen (independent APN per (depth, dimension)) strictly beats coordinated scrambling.
-
-**Architecture fixed (V15.2+):** `generate_scrambled(mode="owen")` is the new default.
-The old coordinated mode is retained as `mode="coordinated"` for backward compat.
-
-**Data quality resolved (V15.2+):** GOLDEN_SEEDS[13] cleaned (10 valid APN seeds, 6
-removed); scope split between APN regime (δ=2) and δ=3 regime (n=19, n=31).
-
-**What the DN2-δ3 weaker result says:** For n=19/31 with best-available δ=3 seeds,
-improvement factors are weaker: ~1.3× discrepancy at D=3. If OD-16/17 are ever
-disproven (APN bijection found), the stronger DN2 result would apply immediately.
 
 ---
 
@@ -229,6 +178,7 @@ update §4.6 (FractalNet) with Owen scrambling results and DN2 proof summary.
 
 | Batch | Closed / Retired | Resolution |
 |-------|------------------|------------|
+| V15.3+ | OD-19 T8b | Linear Magic Hyperprism Uniqueness (SCOPED) (PROOF_OD19_Linear.md)
 | V15.3 | DN2, DN2-ETK, DN2-WALSH, DN2-VAR, DN2-ANOVA | DN2 fully proven: ETK+Walsh discrepancy, Owen-class variance, ANOVA suppression. |
 | V15.2+ | EVEN-1 | Even-n Latin Hyperprism via Kronecker Decomposition. |
 | V15.2 | OD-27 | FractalNetKinetic t-value proven t=m(D-1), not t=0. |
