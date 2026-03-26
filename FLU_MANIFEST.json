@@ -1,13 +1,13 @@
 {
   "$schema": "srp-package-contract/v2.0#unified-manifest",
-  "$comment": "UNIFIED MANIFEST: Combines V15.2.0 (2026-03-14) with historical manifests. Current as of 2026-03-14.",
-  "generated": "2026-03-20",
-  "version": "15.3.0",
-  "last_updated": "2026-03-20",
+  "$comment": "UNIFIED MANIFEST: Combines V15.2.0 (2026-03-14) with historical manifests. Current as of 2026-03-26.",
+  "generated": "2026-03-26",
+  "version": "15.3.1",
+  "last_updated": "2026-03-26",
   "package": {
     "name": "flu-math",
     "full_name": "Fractal Logic Unit — Phased Fractal Number Theory",
-    "version": "15.3.0",
+    "version": "15.3.1",
     "language": "Python 3.10+",
     "license": "MIT (Sovereign Peerage)",
     "install": "pip install -e .",
