@@ -278,4 +278,4 @@ FLU is grounded in:
 
 The core claim — that a single bijection can simultaneously satisfy Latin,
 Hamiltonian, Gray-code, spectral flatness, and quasi-random properties — is
-supported by 53 proven theorems and empirical benchmarks at scales up to 3^256.
+supported by our theorems and empirical benchmarks at scales up to 3^256.
