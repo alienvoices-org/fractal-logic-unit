@@ -68,9 +68,9 @@ def test_empirical_proofs_have_computational_language():
 # ── Proven theorems ───────────────────────────────────────────────────────────
 
 def test_proven_count_v15():
-    """V15.3: 65 PROVEN theorems (DN2 + 4 sub-theorems added)."""
-    assert len(proven_theorems()) == 65, \
-        f"Expected 65 PROVEN, got {len(proven_theorems())}"
+    """V15.3.1: 69 PROVEN theorems (DN1+GL+OA + OD-19-LINEAR added)."""
+    assert len(proven_theorems()) == 69, \
+        f"Expected 69 PROVEN, got {len(proven_theorems())}"
    
 def test_core_theorems_are_proven():
     for key in ["T1","T2","T3","T4","T5","T6","T7","T8",
@@ -112,11 +112,11 @@ def test_even1_registered_and_proven():
 # ── Open conjectures ──────────────────────────────────────────────────────────
 
 def test_open_conjectures_count_v15():
-    """V15.3: 3 open items (all CONJECTURE).
-    DN2 now PROVEN (V15.3); DN1, OD-16, OD-17 remain open."""
+    """V15.3.1: 2 open items (all CONJECTURE).
+    DN1 now PROVEN (V15.3.1); OD-16, OD-17 remain open."""
     conjs = open_conjectures()
-    assert len(conjs) == 3, \
-        f"Expected 3 open items (CONJECTURE), got {len(conjs)}: {[c.name for c in conjs]}"
+    assert len(conjs) == 2, \
+        f"Expected 2 open items (CONJECTURE), got {len(conjs)}: {[c.name for c in conjs]}"
 
 def test_open_conjectures_have_correct_status():
     for rec in open_conjectures():
@@ -136,13 +136,25 @@ def test_od16_od17_are_open():
 
 def test_dn1_registered():
     t = get_theorem("DN1")
-    assert t is not None and t.status == "CONJECTURE"
+    assert t is not None and t.status == "PROVEN"
 
-def test_dn1_references_od26_and_fm1():
+def test_dn1_gl_oa_registered():
+    """V15.3.1: DN1-GL and DN1-OA sub-theorems must be registered and PROVEN."""
+    for key in ["DN1-GL", "DN1-OA"]:
+        t = get_theorem(key)
+        assert t is not None and t.status == "PROVEN", \
+            f"{key} not registered or not PROVEN"
+
+def test_od19_linear_registered():
+    """V15.3.1: OD-19-LINEAR must be registered and PROVEN."""
+    t = get_theorem("OD-19-LINEAR")
+    assert t is not None and t.status == "PROVEN"
+
+def test_dn1_references_fm1():
     t = get_theorem("DN1")
     joined = " ".join(t.references)
-    assert "OD-26" in joined
     assert "FM-1" in joined
+    assert "DN1-GL" in joined
 
 def test_hil1_and_dec1_registered():
     hil = get_theorem("HIL-1")
@@ -167,9 +179,9 @@ def test_disproven_results_correct_status():
 # ── Registry totals ───────────────────────────────────────────────────────────
 
 def test_registry_total_count_v15():
-    """V15.3: 70 total theorems (DN2 + 4 sub-theorems added)."""
-    assert len(REGISTRY) == 70, \
-        f"Expected 70, got {len(REGISTRY)}"
+    """V15.3.1: 73 total theorems (DN1+GL+OA+OD-19-LINEAR added)."""
+    assert len(REGISTRY) == 73, \
+        f"Expected 73, got {len(REGISTRY)}"
 
 # ── get_theorem helpers ───────────────────────────────────────────────────────
 
@@ -336,13 +348,12 @@ def test_unif1_computational_vanishing():
                 )
 
 
-def test_registry_total_59_proven():
-    """V15.3: exactly 65 PROVEN theorems (DN2 + 4 sub-theorems added)."""
+def test_registry_total_count_proven():
+    """V15.3.1: exactly 69 PROVEN theorems (DN1+GL+OA + OD-19-LINEAR added)."""
     proved = proven_theorems()
-    assert len(proved) == 65, f"Expected 65 PROVEN, got {len(proved)}"
+    assert len(proved) == 69, f"Expected 69 PROVEN, got {len(proved)}"
 
-def test_registry_total_65():
-    """V15.3: total 70 entries in the registry (DN2 + 4 sub-theorems added)."""
+def test_registry_total_count():
+    """V15.3.1: total 73 entries in the registry (DN1+GL+OA + OD-19-LINEAR added)."""
     from flu.theory.theorem_registry import REGISTRY
-    assert len(REGISTRY) == 70, f"Expected 70 total in V15.3, got {len(REGISTRY)}"
-
+    assert len(REGISTRY) == 73, f"Expected 73 total in V15.3.1, got {len(REGISTRY)}"
