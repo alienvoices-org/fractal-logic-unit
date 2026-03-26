@@ -13,9 +13,8 @@ Coverage:
   - HAD-1 theorem registration
   - TSP-1 theorem registration
   - CRYPTO-1 theorem registration
-  - Registry total 61 theorems, 54 PROVEN
 
-V15.1.3 current.
+V15.3 current.
 """
 
 import sys
@@ -356,19 +355,19 @@ class TestV15BridgeTheorems(unittest.TestCase):
     def test_proven_count_is_59(self):
         from flu.theory.theorem_registry import proven_theorems
         pt = proven_theorems()
-        self.assertEqual(len(pt), 65,
-            f"Expected 65 PROVEN in V15.3 (DN2+4 sub-theorems added), got {len(pt)}")
+        self.assertEqual(len(pt), 69,
+            f"Expected 69 PROVEN in V15.3.1 (DN1+GL+OA+OD-19-LINEAR added), got {len(pt)}")
 
     def test_total_count_is_65(self):
         from flu.theory.theorem_registry import REGISTRY
-        self.assertEqual(len(REGISTRY), 70,
-            f"Expected 70 total in V15.3 (DN2+4 sub-theorems added), got {len(REGISTRY)}")
+        self.assertEqual(len(REGISTRY), 73,
+            f"Expected 73 total in V15.3.1 (DN1+GL+OA+OD-19-LINEAR added), got {len(REGISTRY)}")
 
     def test_conjecture_count_unchanged(self):
         from flu.theory.theorem_registry import open_conjectures
         conjs = open_conjectures()
-        self.assertEqual(len(conjs), 3,
-            f"Open items should be 3 (DN1, OD-16, OD-17; DN2 now PROVEN), got {len(conjs)}: {[c.name for c in conjs]}") 
+        self.assertEqual(len(conjs), 2,
+            f"Open items should be 2 (OD-16, OD-17; DN1 now PROVEN), got {len(conjs)}: {[c.name for c in conjs]}")
 
     def test_had1_references_corrected_construction(self):
         """HAD-1 (corrected V15) must reference the bit-masked construction, not just PC-2."""
