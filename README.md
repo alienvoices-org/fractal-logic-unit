@@ -1,6 +1,6 @@
 # FLU — Phased Fractal Number Theory / Universal Fractal Logic Unit
 
-**Version:** 15.3.0 · **License:** MIT · **Python:** 3.10+  
+**Version:** 15.3.1 · **License:** MIT · **Python:** 3.10+  
 **Authors:** Felix Mönnich & The Kinship Mesh Collective
 
 ---
@@ -17,8 +17,8 @@ underpins Latin hypercubes, Gray-code odometers, APN cryptographic seeds,
 VHDL hardware counters, neural weight initialisers, experimental designs, and
 a quasi-Monte Carlo digital net.
 
-The library carries a **self-verifying theorem registry** of 70 entries
-(65 PROVEN, 3 CONJECTURE, 1 DISPROVEN_SCOPED, 1 RETIRED), all cross-linked to the
+The library carries a **self-verifying theorem registry** of 73 entries
+(69 PROVEN, 2 CONJECTURE, 1 DISPROVEN_SCOPED, 1 RETIRED), all cross-linked to the
 code that tests them.  Every claim is tagged with a proof tier; nothing is
 asserted without evidence.
 
@@ -27,24 +27,42 @@ asserted without evidence.
 ## Quick Start
 
 ```python
-from flu import (
-    FractalNet,               # OD-27 quasi-Monte Carlo digital net
-    SparseCommunionManifold,  # O(1)-memory infinite-scale oracle
-    ScarStore,                # holographic sparse memory (OD-31 prototype)
+Quick Start
+-----------
+from flu import FractalNet, ScarStore
+from flu.container.sparse import (
+    SparseCommunionManifold,
+    SparseEvenManifold,
+    SparseForeignFieldManifold
 )
-from flu.core.factoradic import unrank_optimal_seed, GOLDEN_SEEDS
+from flu.core.factoradic import get_golden_seeds, unrank_optimal_seed
 from flu.applications import ExperimentalDesign, FLUInitializer
 from flu.theory.theorem_registry import status_report
 
-# Quasi-Monte Carlo points — beats random by ~20% in L2-star discrepancy
+# 1. Quasi-Monte Carlo points — beats random by ~20% in L2-star discrepancy
 net = FractalNet(n=3, d=4)
-pts = net.generate(729)          # shape (729, 4), values in [0, 1)
+pts = net.generate(729)          # shape (729, 4), values in[0, 1)
 
-# Holographic manifold — evaluates 3^64 universe in O(64) without storing it
-M = SparseCommunionManifold(n=3, d=64)
-val = M[(1, -1, 0, 1, ...)]     # coordinate lookup, O(D) time
+# 2. Sparse Communion Manifold (Odd n) + Lazy Arithmetics
+# Dimension D is derived from the length of the seed list
+seeds = get_golden_seeds(n=3, d=64)
+M1 = SparseCommunionManifold(n=3, seeds=seeds)
+M2 = SparseCommunionManifold(n=3, seeds=seeds[::-1])
 
-# APN Golden Seed — proven δ=2 (Almost Perfect Nonlinear)
+# ArithmeticMixin allows lazy operator calculus across 3^64 cells without RAM allocation
+M_combined = (M1 + M2) * -1
+val = M_combined.at_rank(123456789)  # Evaluated pointwise in O(D * depth) time
+
+# 3. Sparse Even Manifold (Even n)
+# Resolves the parity collapse using sum-mod Kronecker decomposition
+M_even = SparseEvenManifold(n=4, d=64)
+val_even = M_even.at_rank(123456789)
+
+# 4. Sparse Foreign Field Manifold
+# Projects an external field or sub-manifold into the sparse lattice coordinate system
+M_foreign = SparseForeignFieldManifold(n=3, d=64, field_fn=lambda coords: sum(coords))
+
+# 5. APN Golden Seed — proven δ=2 (Almost Perfect Nonlinear)
 seed = unrank_optimal_seed(k=0, n=5)   # zero-compute for n ≡ 2 (mod 3)
 
 # Theorem registry
@@ -55,8 +73,9 @@ No external dependencies beyond NumPy.  All tests run without pytest:
 
 ```bash
 python run_tests.py
-# PASSED 1004  FAILED 9   ERRORS 9   SKIPPED 8    TOTAL 1029
+# PASSED 721  FAILED 0   ERRORS 0   SKIPPED 8    TOTAL 729
 ```
+*Note on Test Counts:* Depending on your Python environment and the installation of optional dependencies (e.g., torch, jax, pandas, matplotlib), the total number of executed tests will vary. Skipped tests will be noted in the output. All core mathematical proofs run exclusively on the Python standard library and NumPy.
 
 ---
 
@@ -64,48 +83,56 @@ python run_tests.py
 
 ```
 src/flu/
-├── core/
-│   ├── fm_dance.py          # T1-T6: bijection, Latin, Hamiltonian, step bound
-│   ├── fm_dance_path.py     # Kinetic theorems, path utilities
-│   ├── factoradic.py        # Lehmer codes, Golden Seeds, APN search
-│   ├── fractal_net.py       # FractalNet — OD-27 digital net (NEW, V14 audit)
-│   ├── lo_shu.py            # LoShuHyperCell, 72-perspective automorphisms
-│   ├── hypercell.py         # FLUHyperCell
-│   ├── fractal_3_6.py       # FractalHyperCell_3_6
-│   ├── n_ary.py             # N-ary generalisation
-│   ├── parity_switcher.py   # Parity-switched Latin arrays
-│   ├── vhdl_gen.py          # VHDL hardware export (divider-free odometer)
-│   └── even_n.py            # Even-n support
+├── applications/
+│   ├── codes.py             # Error-correcting codes
+│   ├── design.py            # ExperimentalDesign (Latin Hypercube Sampling)
+│   ├── hadamard.py          # Generate hadamard
+│   ├── lighthouse.py        # SIMULATION_ONLY cryptographic beacon
+│   ├── neural.py            # FLUInitializer, DynamicFLUNetwork
+│   └── quantum.py           # SIMULATION_ONLY quantum primitives
 ├── container/
-│   ├── manifold.py          # Full CommunionManifold
-│   ├── sparse.py            # SparseCommunionManifold + ScarStore [HM-1]
 │   ├── communion.py         # ⊗_φ fusion operator
 │   ├── contract.py          # Contraction utilities
-│   └── export.py            # PyTorch/JAX buffer export
+│   ├── export.py            # PyTorch/JAX buffer export
+│   ├── manifold.py          # Full CommunionManifold
+│   └── sparse.py            # Sparse Manifold communion and arithmetics + ScarStore [HM-1]
+├── core/
+│   ├── even_n.py            # Even-n support
+│   ├── factoradic.py        # Lehmer codes, Golden Seeds, APN search
+│   ├── fm_dance.py          # T1-T6: bijection, Latin, Hamiltonian, step bound
+│   ├── fm_dance_path.py     # Kinetic theorems, path utilities
+│   ├── fractal_3_6.py       # FractalHyperCell_3_6
+│   ├── fractal_net.py       # FractalNet — OD-27 digital net (NEW, V14 audit)
+│   ├── hypercell.py         # FLUHyperCell
+│   ├── lo_shu.py            # LoShuHyperCell, 72-perspective automorphisms
+│   ├── lo_shu_sudoku.py     # LoShu-Sudoku-HyperCell (DN1, V15.3)
+│   ├── n_ary.py             # N-ary generalisation
+│   ├── operators.py         # Operators and hook for sparse arithmetics and custom operators
+│   ├── parity_switcher.py   # Parity-switched Latin arrays
+│   └── vhdl_gen.py          # VHDL hardware export (divider-free odometer)
 ├── interfaces/
-│   ├── lexicon.py           # LexiconFacet — LEX-1 PROVEN
-│   ├── integrity.py         # IntegrityFacet — INT-1 PROVEN
-│   ├── genetic.py           # GeneticFacet — GEN-1 PROVEN
-│   ├── invariance.py        # InvarianceFacet — INV-1 PROVEN
-│   ├── hilbert.py           # HilbertFacet — HIL-1 RETIRED (V15.1.3)
+│   ├── base.py              # base class interface facets
 │   ├── cohomology.py        # CohomologyFacet — DEC-1 PROVEN
-│   ├── gray_code.py         # GrayCodeFacet — T8 PROVEN
 │   ├── crypto.py            # CryptoFacet — CRYPTO-1 PROVEN
-│   └── hadamard.py          # HadamardFacet — HAD-1 PROVEN
-├── applications/
-│   ├── design.py            # ExperimentalDesign (Latin Hypercube Sampling)
-│   ├── neural.py            # FLUInitializer, DynamicFLUNetwork
-│   ├── codes.py             # Error-correcting codes
-│   ├── quantum.py           # SIMULATION_ONLY quantum primitives
-│   └── lighthouse.py        # SIMULATION_ONLY cryptographic beacon
+│   ├── curves.py            # SpaceFillingCurveFacet — Open R&D HIL-1 follow up (DESIGN_INTENT V16)
+│   ├── design.py            # DesignFacet — Latin Hypercube Experimental Design Bridge (DESIGN_INTENT V16)
+│   ├── digital_net.py       # Digital Net Facets — FractalNetCorputFacet and FractalNetKineticFacet - OD-27 PROVEN
+│   ├── genetic.py           # GeneticFacet — Permutation Seed Portability - GEN-1 PROVEN
+│   ├── gray_code.py         # GrayCodeFacet — FM-Dance as n-ary Gray Code Generator - T8 PROVEN
+│   ├── hadamard.py          # HadamardFacet — Sylvester-Hadamard Matrix Generator via Communion - HAD-1 PROVEN
+│   ├── hilbert.py           # HilbertFacet — HIL-1 RETIRED (V15.1.3)
+│   ├── integrity.py         # IntegrityFacet — Local Conservative-Law Auditor / Sonde - INT-1 PROVEN
+│   ├── invariance.py        # InvarianceFacet — Structural Isomorphism Regression - INV-1 PROVEN
+│   ├── lexicon.py           # LexiconFacet — Bijective n-ary Alphanumeric Mapping - LEX-1 PROVEN
+│   └── neural.py            # NeuralFacet — Bias-Free Neural Weight Initialisation Bridge (DESIGN_INTENT V16)
 ├── theory/
 │   ├── theorem_registry.py  # 59-entry self-verifying theorem registry
-│   ├── theory_fm_dance.py   # T1-T9, DN1-DN2, HM-1, OD-16-PM, OD-17-PM
 │   ├── theory.py            # PhasedFractalNumberTheory (PFNT axioms)
-│   ├── theory_latin.py      # L1, L2, L3 Latin theorems
-│   ├── theory_spectral.py   # S1, S2, S2-Prime spectral theorems
+│   |── theory_communion_algebra.py
 │   ├── theory_container.py  # Permutation lattice algebra
-│   └── theory_communion_algebra.py
+│   ├── theory_fm_dance.py   # T1-T9, DN1-DN2, HM-1, OD-16-PM, OD-17-PM
+│   ├── theory_latin.py      # L1, L2, L3 Latin theorems
+│   └── theory_spectral.py   # S1, S2, S2-Prime spectral theorems
 └── utils/
     ├── benchmarks.py        # full_benchmark_report
     ├── math_helpers.py      # is_odd, factorial, digit helpers
@@ -144,16 +171,28 @@ seed = unrank_optimal_seed(0, n=5)   # δ=2 (APN), zero-compute for n ≡ 2 mod 
 # See docs/PROOF_APN_OBSTRUCTION.md
 ```
 
-### 4. Sparse Holographic Manifold
+### 4. Sparse Manifold & Pointwise Calculus
 ```python
-M = SparseCommunionManifold(n=3, d=64)   # models 3^64 ≈ 10^30 cells
-val = M[(0, 1, -1, ...)]                  # O(D) evaluation, O(D) RAM
+from flu.container.sparse import SparseCommunionManifold, SparseEvenManifold
+from flu.core.factoradic import get_golden_seeds
+
+# Odd n (Communion) requires permutations (seeds)
+seeds = get_golden_seeds(n=3, d=64)
+M_odd = SparseCommunionManifold(n=3, seeds=seeds)   # models 3^64 ≈ 10^30 cells
+
+# Even n (Sum-Mod) requires only dimension
+M_even = SparseEvenManifold(n=4, d=64)              # models 4^64 cells
+
+# Pointwise Calculus (OPER-1)
+# Manifolds inherit ArithmeticMixin, allowing O(1) memory expression trees
+M_calc = (M_odd * 2) + 5
+val = M_calc.at_rank(123456789)                     # O(D) evaluation time
 
 store = ScarStore(n=3, d=4)
 store.learn((1, -1, 0, 0), 99.0)         # record anomaly
 store.recall((1, -1, 0, 0))              # 99.0 (scar)
-store.recall((0, 0, 0, 0))              # baseline value
-store.compression_ratio()               # n^D / (D + |scars|)
+store.recall((0, 0, 0, 0))               # baseline value
+store.compression_ratio()                # n^D / (D + |scars|)
 ```
 
 ### 5. Applications
@@ -182,11 +221,12 @@ vhdl = generate_vhdl(n=3, d=4)   # divider-free n-ary Gray-code counter
 python -c "from flu.theory.theorem_registry import status_report; print(status_report())"
 ```
 
-Current state (V15.0.0):
-- **65 PROVEN** — T1–T10, L1–L4, S1–S2-Gauss–S2-Prime, UNIF-1, C3/C3W/C3W-STRONG/C3W-APN/C4, SA-1, N-ARY-1, PFNT-1–5, FM-1, BFRW-1, TORUS_DIAM, OD-16-PM, OD-17-PM, OD-27, OD-32-ITER, OD-33, FMD-NET, DISC-1, HM-1, CGW/BPT/KIB/SRM/T7, HAD-1, TSP-1, CRYPTO-1, LEX-1, INT-1, GEN-1, INV-1, T9, T8b, DEC-1, EVEN-1, YM-1, GEN-0, **DN2, DN2-ETK, DN2-WALSH, DN2-VAR, DN2-ANOVA**
-- **3 CONJECTURES** — DN1 (Lo Shu net), OD-16 (δ-min Z₁₉ all bijections), OD-17 (δ-min Z₃₁ all bijections)
-- **1 RETIRED** — HIL-1 (self-contradictory primary case n=2; n=2 forbidden by implementation)
-- **1 DISPROVEN** — C2 (axial DFT nullification, scoped)
+Current state (V15.3.1):
+69 PROVEN — T1–T10, L1–L4, S1–S2-Gauss–S2-Prime, UNIF-1, C3/C3W/C3W-STRONG/C3W-APN/C4, SA-1, N-ARY-1, PFNT-1–5, FM-1, BFRW-1, TORUS_DIAM, OD-16-PM, OD-17-PM, OD-27, OD-32-ITER, OD-33, FMD-NET, DISC-1, HM-1, CGW/BPT/KIB/SRM/T7, HAD-1, TSP-1, CRYPTO-1, LEX-1, INT-1, GEN-1, INV-1, T9, T8b, DEC-1, EVEN-1, YM-1, GEN-0, DN2, DN2-ETK, DN2-WALSH, DN2-VAR, DN2-ANOVA, OPER-1, OPER-2, DN1, DN1-GL, DN1-OA, OD-19-LINEAR
+
+2 CONJECTURES — OD-16 (δ-min Z₁₉ all bijections), OD-17 (δ-min Z₃₁ all bijections)
+1 RETIRED — HIL-1 (self-contradictory primary case n=2; n=2 forbidden by implementation)
+1 DISPROVEN — C2 (axial DFT nullification, scoped)
 
 ---
 
