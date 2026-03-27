@@ -69,11 +69,15 @@ seed = unrank_optimal_seed(k=0, n=5)   # zero-compute for n ≡ 2 (mod 3)
 print(status_report())
 ```
 
-No external dependencies beyond NumPy.  All tests run without pytest:
+No external dependencies beyond NumPy.  All tests run without pytest and are part of github CI workflow:
 
 ```bash
 python run_tests.py
-# PASSED 721  FAILED 0   ERRORS 0   SKIPPED 8    TOTAL 729
+FLU V15 Test Suite — 33 test files
+========================================================================
+  PASSED   769   FAILED    0   ERRORS    0   SKIPPED  101   TOTAL  870   (3.0s)
+========================================================================
+  ✓  All 769 tests passed.
 ```
 *Note on Test Counts:* Depending on your Python environment and the installation of optional dependencies (e.g., torch, jax, pandas, matplotlib), the total number of executed tests will vary. Skipped tests will be noted in the output. All core mathematical proofs run exclusively on the Python standard library and NumPy.
 
