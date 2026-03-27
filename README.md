@@ -1,6 +1,6 @@
 # FLU — Phased Fractal Number Theory / Universal Fractal Logic Unit
 
-**Version:** 15.3.1 · **License:** MIT · **Python:** 3.10+  
+**Version:** 15.3.2 · **License:** MIT · **Python:** 3.10+  
 **Authors:** Felix Mönnich & The Kinship Mesh Collective
 
 ---
