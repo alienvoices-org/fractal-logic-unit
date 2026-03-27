@@ -56,16 +56,6 @@
 The debt DOC-1 can never be completed. It is eternal task to prevent documentation drift and improve it. 
 Specific Issues can be added here:
 
-| V15.3.1 | DN1 | LoShu Sudoku Digital Net (PROVEN) (lo_shu_sudoku.py)
-| V15.3+ | OD-19 T8b | Linear Magic Hyperprism Uniqueness (PROVEN)(SCOPED) (PROOF_OD19_Linear.md)
-
-Section 3 theorem tables (3.1–3.7) were not updated to include V15.2/V15.3 additions.
-Missing from the tables: DN2 (now PROVEN), DN2-ETK, DN2-WALSH, DN2-VAR, DN2-ANOVA,
-UNIF-1, DISC-1, FMD-NET, OD-32-ITER, SRM, C4, T7, LEX-1, INT-1, GEN-1, INV-1.
-Section 4.7 (ScarStore) still refers to HM-1 as "conjecture" in prose.
-**Fix:** Extend Section 3 with sub-section 3.8 covering V14/V15/V15.3 additions;
-update §4.6 (FractalNet) with Owen scrambling results and DN2 proof summary.
-
 ---
 
 ## 2. Mathematical Debt
