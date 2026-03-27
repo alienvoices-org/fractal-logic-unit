@@ -2,8 +2,8 @@
   "$schema": "srp-package-contract/v2.0#unified-manifest",
   "$comment": "CLEAN MANIFEST: V15.3.1 / New Theorems and Debt (2026-03-27).",
   "generated": "2026-03-27",
-  "version": "15.3.1",
-  "last_updated": "2026-03-27",
+  "version": "15.3.2",
+  "last_updated": "2026-03-28",
   "package": {
     "name": "flu-math",
     "full_name": "Fractal Logic Unit — Phased Fractal Number Theory",
@@ -108,16 +108,78 @@
     "conjecture_count": 2,
     "disproven_scoped_count": 1,
     "retired_count": 1,
-    "proven_ids":[
-      "BFRW-1", "BPT", "C2-SCOPED", "C3", "C3W", "C3W-APN", "C3W-STRONG", "C4", "C5", "CGW", 
-      "CRYPTO-1", "DEC-1", "DISC-1", "DN1", "DN1-GL", "DN1-OA", "DN2", "DN2-ANOVA", "DN2-ETK", "DN2-VAR", 
-      "DN2-WALSH", "EVEN-1", "FM-1", "FMD-NET", "GEN-0", "GEN-1", "HAD-1", "HM-1", "INT-1", "INV-1", 
-      "KIB", "L1", "L2", "L3", "L4", "LEX-1", "N-ARY-1", "OD-16-PM", "OD-17-PM", "OD-19-LINEAR", 
-      "OD-27", "OD-32-ITER", "OD-33", "PFNT-1", "PFNT-2", "PFNT-3", "PFNT-4", "PFNT-5", "S1", "S2", 
-      "S2-GAUSS", "S2-Prime", "SA-1", "SRM", "T1", "T10", "T2", "T3", "T4", "T5", "T6", "T7", 
-      "T8", "T8b", "T9", "TORUS_DIAM", "TSP-1", "UNIF-1", "YM-1"
+    "proven_ids": [
+      "BFRW-1",
+      "BPT",
+      "C2-SCOPED",
+      "C3",
+      "C3W",
+      "C3W-APN",
+      "C3W-STRONG",
+      "C4",
+      "C5",
+      "CGW",
+      "CRYPTO-1",
+      "DEC-1",
+      "DISC-1",
+      "DN1",
+      "DN1-GL",
+      "DN1-OA",
+      "DN2",
+      "DN2-ANOVA",
+      "DN2-ETK",
+      "DN2-VAR",
+      "DN2-WALSH",
+      "EVEN-1",
+      "FM-1",
+      "FMD-NET",
+      "GEN-0",
+      "GEN-1",
+      "HAD-1",
+      "HM-1",
+      "INT-1",
+      "INV-1",
+      "KIB",
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "LEX-1",
+      "N-ARY-1",
+      "OD-16-PM",
+      "OD-17-PM",
+      "OD-19-LINEAR",
+      "OD-27",
+      "OD-32-ITER",
+      "OD-33",
+      "PFNT-1",
+      "PFNT-2",
+      "PFNT-3",
+      "PFNT-4",
+      "PFNT-5",
+      "S1",
+      "S2",
+      "S2-GAUSS",
+      "S2-Prime",
+      "SA-1",
+      "SRM",
+      "T1",
+      "T10",
+      "T2",
+      "T3",
+      "T4",
+      "T5",
+      "T6",
+      "T7",
+      "T8",
+      "T8b",
+      "T9",
+      "TORUS_DIAM",
+      "TSP-1",
+      "UNIF-1",
+      "YM-1"
     ],
-    "disproven_scoped_ids":[
+    "disproven_scoped_ids": [
       "C2"
     ],
     "retired_ids": [
@@ -274,12 +336,28 @@
           "status": "PROVEN"
         }
       ],
-      "v15_3_1":[
-        { "id": "DN1", "name": "LoShu Sudoku Digital Net", "status": "PROVEN" },
-        { "id": "DN1-GL", "name": "Graeco-Latin Sudoku Layering", "status": "PROVEN" },
-        { "id": "DN1-OA", "name": "Orthogonal Array Strength-4", "status": "PROVEN" },
-        { "id": "OD-19-LINEAR", "name": "Linear Magic Hyperprism Uniqueness", "status": "PROVEN" }
-      ]      
+      "v15_3_1": [
+        {
+          "id": "DN1",
+          "name": "LoShu Sudoku Digital Net",
+          "status": "PROVEN"
+        },
+        {
+          "id": "DN1-GL",
+          "name": "Graeco-Latin Sudoku Layering",
+          "status": "PROVEN"
+        },
+        {
+          "id": "DN1-OA",
+          "name": "Orthogonal Array Strength-4",
+          "status": "PROVEN"
+        },
+        {
+          "id": "OD-19-LINEAR",
+          "name": "Linear Magic Hyperprism Uniqueness",
+          "status": "PROVEN"
+        }
+      ]
     }
   },
   "public_api": {
@@ -294,7 +372,10 @@
     "fractal_algebra": {
       "CommunionEngine": "⊗_φ Structural Fusion (Dimension Expansion).",
       "SparseArithmeticManifold": "⊕, ⊖, ⊗, ⊘ Field Interaction (Value Transformation).",
-      "ForeignField": "Bridge for external non-FLU data into the arithmetic stack."
+      "ForeignField": "Bridge for external non-FLU data into the arithmetic stack.",
+      "LoShuSudokuHyperCell": "3^4 Graeco-Latin hypercell — OA(81,4,3,4) macro addresses. DN1 PROVEN. Use make_hypercell() or LoShuSudokuHyperCell() directly.",
+      "SudokuMacroAdapter": "Adapter giving LoShuSudokuHyperCell the FLUHyperCell interface for use as macro layer in FractalHyperCell_3_6(generator='sudoku').",
+      "FractalHyperCell_3_6": "3^6 Recursive Fractal Embedding: macro(3^4) x Lo Shu micro(3^2). generator='sudoku' (default, V15.3.1+, OA(81,4,3,4)) or generator='product' (legacy FM-Dance). Factory: make_sudoku() / make_product()."
     },
     "interface_facets": {
       "GeneticFacet": "SHA-256 verified APN seed management.",
@@ -328,24 +409,91 @@
       "export_vhdl(n, d, filepath)": "Generates synthesisable VHDL for FM-Dance addressing logic."
     }
   },
-  "closed_debt":[
-    { "id": "DN1", "item": "LoShu Sudoku Digital Net", "closed_in": "V15.3.1" },
-    { "id": "OD-19", "item": "Linear Magic Hyperprism Uniqueness (OD-19-LINEAR)", "closed_in": "V15.3.1" },
-    { "id": "DN2", "item": "APN-Scrambled Digital Net (ETK, Walsh, Var, ANOVA)", "closed_in": "V15.3" },
-    { "id": "EVEN-1", "item": "Even-n Latin Hyperprism via Kronecker Decomposition", "closed_in": "V15.2.1" },
-    { "id": "OD-27", "item": "FractalNetKinetic t-value classification", "closed_in": "V15.2" },
-    { "id": "UNIF-1", "item": "Spectral Unification of Sum-Separable Arrays", "closed_in": "V15.1.4" },
-    { "id": "T9", "item": "FM-Dance Digital Sequence / Discrete Integral Identity", "closed_in": "V15.1" },
-    { "id": "DEC-1", "item": "ScarStore Coset Decomposition", "closed_in": "V15.1.2" }
+  "closed_debt": [
+    {
+      "id": "DN1",
+      "item": "LoShu Sudoku Digital Net",
+      "closed_in": "V15.3.1"
+    },
+    {
+      "id": "OD-19",
+      "item": "Linear Magic Hyperprism Uniqueness (OD-19-LINEAR)",
+      "closed_in": "V15.3.1"
+    },
+    {
+      "id": "DN2",
+      "item": "APN-Scrambled Digital Net (ETK, Walsh, Var, ANOVA)",
+      "closed_in": "V15.3"
+    },
+    {
+      "id": "EVEN-1",
+      "item": "Even-n Latin Hyperprism via Kronecker Decomposition",
+      "closed_in": "V15.2.1"
+    },
+    {
+      "id": "OD-27",
+      "item": "FractalNetKinetic t-value classification",
+      "closed_in": "V15.2"
+    },
+    {
+      "id": "UNIF-1",
+      "item": "Spectral Unification of Sum-Separable Arrays",
+      "closed_in": "V15.1.4"
+    },
+    {
+      "id": "T9",
+      "item": "FM-Dance Digital Sequence / Discrete Integral Identity",
+      "closed_in": "V15.1"
+    },
+    {
+      "id": "DEC-1",
+      "item": "ScarStore Coset Decomposition",
+      "closed_in": "V15.1.2"
+    }
   ],
-  "open_debt":[
-    { "id": "DOC-1", "class": "DOCS", "item": "Eternal documentation debt (Closure forbidden)", "status": "PARTIAL" },
-    { "id": "OD-16", "class": "PROOF", "item": "δ_min(Z_19) algebraic lower bound (all bijections)", "status": "OPEN" },
-    { "id": "OD-17", "class": "PROOF", "item": "δ_min(Z_31) algebraic lower bound (all bijections)", "status": "OPEN" },
-    { "id": "OD-34", "class": "PROOF", "item": "Kinship Curve — Hamiltonian continuity under RotationHub", "status": "OPEN" },
-    { "id": "OPER-3", "class": "IMPL", "item": "Sparse Forward Differences — O(D) derivative operator", "status": "PARTIAL" },
-    { "id": "OD-35", "class": "RESEARCH", "item": "Distributive Law: (M₁⊕M₂)⊗M₃ = (M₁⊗M₃)⊕(M₂⊗M₃)", "status": "RESEARCH" },
-    { "id": "OD-36", "class": "RESEARCH", "item": "APN Asymptotics: sparsity of APN bijections as n→∞", "status": "RESEARCH" }
+  "open_debt": [
+    {
+      "id": "DOC-1",
+      "class": "DOCS",
+      "item": "Eternal documentation debt (Closure forbidden)",
+      "status": "PARTIAL"
+    },
+    {
+      "id": "OD-16",
+      "class": "PROOF",
+      "item": "δ_min(Z_19) algebraic lower bound (all bijections)",
+      "status": "OPEN"
+    },
+    {
+      "id": "OD-17",
+      "class": "PROOF",
+      "item": "δ_min(Z_31) algebraic lower bound (all bijections)",
+      "status": "OPEN"
+    },
+    {
+      "id": "OD-34",
+      "class": "PROOF",
+      "item": "Kinship Curve — Hamiltonian continuity under RotationHub",
+      "status": "OPEN"
+    },
+    {
+      "id": "OPER-3",
+      "class": "IMPL",
+      "item": "Sparse Forward Differences — O(D) derivative operator",
+      "status": "PARTIAL"
+    },
+    {
+      "id": "OD-35",
+      "class": "RESEARCH",
+      "item": "Distributive Law: (M₁⊕M₂)⊗M₃ = (M₁⊗M₃)⊕(M₂⊗M₃)",
+      "status": "RESEARCH"
+    },
+    {
+      "id": "OD-36",
+      "class": "RESEARCH",
+      "item": "APN Asymptotics: sparsity of APN bijections as n→∞",
+      "status": "RESEARCH"
+    }
   ],
   "mathematical_lineage": {
     "2017_genesis": "Symmetrische Tanzschritte — Siamese nD generalisation (GEN-0).",
@@ -408,18 +556,34 @@
     ]
   },
   "v16_vision": "Crystalline Closure: Zero Mathematical Debt. 100% Proven Registry. Boxed 500kb binary-pure runtime.",
-  "changelog":[
-    {    
+  "changelog": [
+    {
+      "version": "15.3.2",
+      "date": "2026-03-28",
+      "summary": "FractalHyperCell_3_6 extended: Sudoku generator (default) uses LoShuSudokuHyperCell with OA(81,4,3,4) macro addresses (DN1-OA). SudokuMacroAdapter added. Legacy product generator preserved via generator='product' or explicit macro=FLUHyperCell(). New exports: LoShuSudokuHyperCell, SudokuMacroAdapter, make_sudoku_hypercell. 47 new tests. 769 total tests, 0 failures.",
+      "tests": "769 PASSED / 0 FAILED",
+      "new_files": [
+        "src/flu/core/lo_shu_sudoku.py",
+        "tests/test_core/test_lo_shu_sudoku.py",
+        "tests/test_core/test_fractal_3_6_generators.py"
+      ]
+    },
+    {
       "version": "15.3.1",
       "date": "2026-03-26",
       "summary": "DN1 PROVEN: LoShu Sudoku Graeco-Latin embedding yields OA(81, 4, 3, 4). OD-19-LINEAR PROVEN: Linear digit uniqueness proved for 246 orbits (D=3). Registry updated: 69 PROVEN / 73 total / 2 open.",
-      "theorems_changed":["DN1 CONJECTURE→PROVEN", "DN1-GL NEW PROVEN", "DN1-OA NEW PROVEN", "OD-19-LINEAR NEW PROVEN"]
+      "theorems_changed": [
+        "DN1 CONJECTURE→PROVEN",
+        "DN1-GL NEW PROVEN",
+        "DN1-OA NEW PROVEN",
+        "OD-19-LINEAR NEW PROVEN"
+      ]
     },
     {
       "version": "15.3.0",
       "date": "2026-03-20",
       "summary": "DN2 FULLY PROVEN: FLU-Owen scrambling architecture + character sum audit + ETK discrepancy constant + Walsh-tight bound + Owen-class variance + ANOVA interaction suppression. 4 new sub-theorems (DN2-ETK/WALSH/VAR/ANOVA). GOLDEN_SEEDS[13] cleaned; API bug (unrank_optimal_seed misuse) fixed. Registry: 65 PROVEN / 70 total / 3 open.",
-      "theorems_changed":[
+      "theorems_changed": [
         "DN2 PARTIAL→PROVEN",
         "DN2-ETK NEW PROVEN",
         "DN2-WALSH NEW PROVEN",
@@ -447,7 +611,7 @@
       "theorems_changed": [
         "DEC-1 CONJECTURE→PROVEN"
       ],
-      "new_findings":[
+      "new_findings": [
         "L2 (Holographic Repair) is NOT Delta^{-1}: different operators (projection vs potential)",
         "ScarStore baseline = H^1 generators via Kunneth (D axis-permutation seeds)",
         "dim(sum-separable) = D*(n-1)+1 verified for n in {3,5,7}, D in {2,3,4}",
@@ -458,10 +622,10 @@
       "version": "15.1.1",
       "date": "2026-03-11",
       "summary": "DN2 promoted CONJECTURE→PARTIAL. FFT spectral reduction confirmed 26-50% for n≥5. n=3 APN-free finding documented. PAPER.md §3.8+§4.6+§6 updated. All tests passing (673/673).",
-      "theorems_changed":[
+      "theorems_changed": [
         "DN2 CONJECTURE→PARTIAL"
       ],
-      "new_findings":[
+      "new_findings": [
         "Z_3 has no APN bijection (delta_min=3); GOLDEN_SEEDS[3] are all delta=3",
         "FFT reduction by APN scrambling: n=5→26.5%, n=7→39.3%, n=11→50.1%",
         "L2 discrepancy not improved by APN scrambling at any n tested"
