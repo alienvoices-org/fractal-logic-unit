@@ -185,9 +185,17 @@ verify_digital_net_property():
 **Theorem (DN1, PROVEN).** The Lo Shu Sudoku Graeco-Latin embedding at level k=1
 gives n⁴ points in [0,1)⁴ via:
 
-$$\text{cell}(r,c) \;\mapsto\; \left(\frac{\text{row}(d_1)+\tfrac{n-1}{2}}{n},\; \frac{\text{col}(d_1)+\tfrac{n-1}{2}}{n},\; \frac{\text{row}(d_2)+\tfrac{n-1}{2}}{n},\; \frac{\text{col}(d_2)+\tfrac{n-1}{2}}{n}\right)$$
-
-where row(v), col(v) give the 0-indexed position of value v in the magic square L.
+$$
+\text{cell}(r,c) \;\mapsto\; 
+\left(
+\frac{\alpha_1 + \tfrac{n-1}{2}}{n},\;
+\frac{\alpha_2 + \tfrac{n-1}{2}}{n},\;
+\frac{\alpha_3 + \tfrac{n-1}{2}}{n},\;
+\frac{\alpha_4 + \tfrac{n-1}{2}}{n}
+\right)
+\qquad\text{where}\qquad
+(\alpha_1,\alpha_2,\alpha_3,\alpha_4) = \text{addr}_4(r,c).
+$$
 
 This point set satisfies:
 - **OA(n⁴, 4, n, 4)**: every 4-tuple from {0, 1/n, …, (n-1)/n}⁴ appears exactly once.
@@ -603,4 +611,4 @@ DN1-REC — Recursive OA Strength Doubling
 
 ---
 
-*End of PROOF_DN1_LO_SHU_SUDOKU.md — FLU V15.3.1*
+*End of PROOF_DN1_LO_SHU_SUDOKU.md — FLU V15.3.2*
