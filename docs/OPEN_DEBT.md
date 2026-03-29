@@ -1,6 +1,6 @@
 # FLU — Open Debt Registry
 
-**Status as of V15.3.2 (2026-03-28). DN1 PROVEN. Registry: 69 PROVEN · 73 total · 2 open.**
+**Status as of V15.3.2 (2026-03-28). DN1 PROVEN. Registry: 61 PROVEN · 75 total · 2 open.**
 
 ---
 
@@ -19,7 +19,6 @@
 | ID | Name | Status |
 |----|------|--------|
 | DOC-1 | Eternal documentation debt (Closure forbidden). Update README's, PAPER.md & THEOREMS.md etc. | 🟡 PARTIAL |
-| DN1-GEN | DN1 Generalization has brought up 2 new sub-theorems DN1-GEN and DN1-REC, see PROOF_DN1*| 🔴 OPEN |
 | OD-16 | Delta-Min Conjecture Z_19 (all bijections) | 🔴 OPEN |
 | OD-17 | Delta-Min Conjecture Z_31 (all bijections) | 🔴 OPEN |
 | OD-34 | Kinship Curve — Hamiltonian continuity under RotationHub | 🔴 OPEN |
@@ -29,7 +28,7 @@
 
 ---
 
-## Recently Closed (V15.2–V15.3.1)
+## Recently Closed (V15.2–V15.3.2)
 
 | ID | Claim | Closed in | How |
 |----|-------|-----------|-----|
@@ -61,14 +60,7 @@ Specific Issues can be added here:
 
 ## 2. Theorem Registry Integration Debt
 
-### DN1-GEN - DN1 Generalization
-
-**Status:** 🔴 OPEN
-
-DN1 Generalization as brought up 2 new sub-theorems DN1-GEN and DN1-REC, both are present in PROOF_DN1_LO_SHU_SUDOKU.md and THEOREMS.md, but must still be integrated into the python registry.
-
 ---
-
 
 ## 3. Mathematical Debt
 
