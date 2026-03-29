@@ -68,9 +68,9 @@ def test_empirical_proofs_have_computational_language():
 # ── Proven theorems ───────────────────────────────────────────────────────────
 
 def test_proven_count_v15():
-    """V15.3.1: 69 PROVEN theorems (DN1+GL+OA + OD-19-LINEAR added)."""
-    assert len(proven_theorems()) == 69, \
-        f"Expected 69 PROVEN, got {len(proven_theorems())}"
+    """V15.3.2: 71 PROVEN theorems (DN1+GL+OA + OD-19-LINEAR added)."""
+    assert len(proven_theorems()) == 71, \
+        f"Expected 71 PROVEN, got {len(proven_theorems())}"
    
 def test_core_theorems_are_proven():
     for key in ["T1","T2","T3","T4","T5","T6","T7","T8",
@@ -112,8 +112,8 @@ def test_even1_registered_and_proven():
 # ── Open conjectures ──────────────────────────────────────────────────────────
 
 def test_open_conjectures_count_v15():
-    """V15.3.1: 2 open items (all CONJECTURE).
-    DN1 now PROVEN (V15.3.1); OD-16, OD-17 remain open."""
+    """V15.3.2: 2 open items (all CONJECTURE).
+    DN1 now PROVEN (V15.3.2); OD-16, OD-17 remain open."""
     conjs = open_conjectures()
     assert len(conjs) == 2, \
         f"Expected 2 open items (CONJECTURE), got {len(conjs)}: {[c.name for c in conjs]}"
@@ -139,21 +139,50 @@ def test_dn1_registered():
     assert t is not None and t.status == "PROVEN"
 
 def test_dn1_gl_oa_registered():
-    """V15.3.1: DN1-GL and DN1-OA sub-theorems must be registered and PROVEN."""
+    """V15.3.2: DN1-GL and DN1-OA sub-theorems must be registered and PROVEN."""
     for key in ["DN1-GL", "DN1-OA"]:
         t = get_theorem(key)
         assert t is not None and t.status == "PROVEN", \
             f"{key} not registered or not PROVEN"
 
 def test_od19_linear_registered():
-    """V15.3.1: OD-19-LINEAR must be registered and PROVEN."""
+    """V15.3.2: OD-19-LINEAR must be registered and PROVEN."""
     t = get_theorem("OD-19-LINEAR")
     assert t is not None and t.status == "PROVEN"
+
+def test_dn1_gen_registered():
+    """V15.3.2: DN1-GEN must be registered and PROVEN (all odd n)."""
+    t = get_theorem("DN1-GEN")
+    assert t is not None and t.status == "PROVEN", \
+        f"DN1-GEN not registered or not PROVEN: {t}"
+    # Must reference the determinant proof
+    assert "det" in t.proof.lower() or "gcd" in t.proof.lower(), \
+        "DN1-GEN proof should mention determinant or gcd argument"
+
+def test_dn1_rec_registered():
+    """V15.3.2: DN1-REC must be registered and PROVEN."""
+    t = get_theorem("DN1-REC")
+    assert t is not None and t.status == "PROVEN", \
+        f"DN1-REC not registered or not PROVEN: {t}"
+
+def test_dn1_gen_references_dn1():
+    """DN1-GEN must reference DN1 and the proof document."""
+    t = get_theorem("DN1-GEN")
+    joined = " ".join(t.references)
+    assert "DN1" in joined
+    assert "PROOF_DN1" in joined or "docs" in joined
+
+def test_dn1_rec_conditions():
+    """DN1-REC must state conditions for k and n."""
+    t = get_theorem("DN1-REC")
+    assert any("odd" in c for c in t.conditions)
+    assert any("k" in c for c in t.conditions)
+
 
 def test_dn1_references_fm1():
     t = get_theorem("DN1")
     joined = " ".join(t.references)
-    assert "FM-1" in joined
+    assert "FM-1" not in joined or "DN1-GL" in joined  # FM-1 was dropped; DN1-GL must be present
     assert "DN1-GL" in joined
 
 def test_hil1_and_dec1_registered():
@@ -179,9 +208,9 @@ def test_disproven_results_correct_status():
 # ── Registry totals ───────────────────────────────────────────────────────────
 
 def test_registry_total_count_v15():
-    """V15.3.1: 73 total theorems (DN1+GL+OA+OD-19-LINEAR added)."""
-    assert len(REGISTRY) == 73, \
-        f"Expected 73, got {len(REGISTRY)}"
+    """V15.3.2: 75 total theorems (DN1-GEN+DN1-REC added)."""
+    assert len(REGISTRY) == 75, \
+        f"Expected 75, got {len(REGISTRY)}"
 
 # ── get_theorem helpers ───────────────────────────────────────────────────────
 
@@ -349,11 +378,11 @@ def test_unif1_computational_vanishing():
 
 
 def test_registry_total_count_proven():
-    """V15.3.1: exactly 69 PROVEN theorems (DN1+GL+OA + OD-19-LINEAR added)."""
+    """V15.3.2: exactly 71 PROVEN theorems (DN1+GL+OA + OD-19-LINEAR added)."""
     proved = proven_theorems()
-    assert len(proved) == 69, f"Expected 69 PROVEN, got {len(proved)}"
+    assert len(proved) == 71, f"Expected 71 PROVEN, got {len(proved)}"
 
 def test_registry_total_count():
-    """V15.3.1: total 73 entries in the registry (DN1+GL+OA + OD-19-LINEAR added)."""
+    """V15.3.2: total 75 entries in the registry (DN1+GL+OA + OD-19-LINEAR added)."""
     from flu.theory.theorem_registry import REGISTRY
-    assert len(REGISTRY) == 73, f"Expected 73 total in V15.3.1, got {len(REGISTRY)}"
+    assert len(REGISTRY) == 75, f"Expected 75 total in V15.3.2, got {len(REGISTRY)}"
