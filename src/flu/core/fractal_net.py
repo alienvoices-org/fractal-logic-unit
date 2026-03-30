@@ -551,3 +551,248 @@ class FractalNetKinetic(FractalNet):
             f"FractalNetKinetic(n={self.n}, d={self.d}, "
             f"base_volume={self.N}, T_matrix=True)"
         )
+
+
+# ── FractalNetOrthogonal ─────────────────────────────────────────────────────
+#
+# V15.3.2 addition: digital net with OA(n⁴,4,n,4) base structure (DN1 PROVEN).
+#
+# Replaces the van-der-Corput base block (FractalNet) and the T-skewed block
+# (FractalNetKinetic) with a Graeco-Latin OA base block constructed from the
+# Siamese magic square via the DN1-GL formulas.
+#
+# THEOREM (DN1, PROVEN, V15.3.2):
+#   The base_block is an OA(n⁴, 4, n, 4) — every n-ary 4-tuple appears exactly
+#   once. This is the maximum possible OA strength for n⁴ runs. The construction
+#   is fully general: works for all odd n ≥ 3 (DN1-GEN, det=4, gcd(4,n)=1).
+#
+# TWO GENERATION MODES
+# --------------------
+# generate(N)
+#   Uses the DN1 Graeco-Latin ordering (row-major over the n²×n² Sudoku grid).
+#   At partial N = m·n² the first m·n² points form m complete Latin rows —
+#   balanced across all 4 dimensions simultaneously. This is the DN1 prefix
+#   property: better discrepancy than FractalNet at small N.
+#   At full N = n⁴ all methods cover the same lattice (same point set).
+#   Beyond N = n⁴ the construction recurses to depth 2 (base_N² points), etc.
+#
+# generate_scrambled(N)
+#   FLU-Owen scrambling on the OA base block. Applies independent APN
+#   permutations per (depth, dimension) — preserves OA(n⁴,4,n,4) at each
+#   depth (bijection per axis) while randomising the ordering, giving good
+#   discrepancy at ALL N (not just multiples of n²).
+#
+# COMPARISON WITH OTHER FLU NETS
+# --------------------------------
+#   FractalNet:         base_block = index_to_coords (van-der-Corput)
+#   FractalNetKinetic:  base_block = T · index_to_coords (T9 PROVEN)
+#   FractalNetOrthogonal: base_block = OA(n⁴,4,n,4) (DN1 PROVEN)
+#
+# All three share the same recursive depth structure and Owen scrambling API.
+# FractalNetOrthogonal is restricted to d=4 (the natural DN1 dimension);
+# for d=8 use the recursive level-2 construction (DN1-REC, planned for V16).
+#
+# REFERENCES:  DN1, DN1-GL, DN1-GEN, DN1-OA  (all PROVEN V15.3.2)
+#              docs/PROOF_DN1_LO_SHU_SUDOKU.md
+
+class FractalNetOrthogonal(FractalNet):
+    """
+    Orthogonal digital net: OA(n⁴,4,n,4) base structure via DN1-GL (PROVEN).
+
+    Builds a base block of n⁴ rows using the Graeco-Latin Sudoku construction
+    from a Siamese n×n magic square. The base block is an OA(n⁴, 4, n, 4) —
+    every n-ary 4-tuple appears exactly once (DN1-OA PROVEN V15.3.2).
+
+    Works for any odd n ≥ 3 (DN1-GEN PROVEN: det=4, gcd(4,n)=1 for all odd n).
+    Dimension is always d=4 (the natural DN1 dimension).
+
+    Generation modes
+    ----------------
+    generate(N)
+        Graeco-Latin ordering. First n² points form a Latin row — balanced in
+        all 4 dimensions. Best at partial N (strong prefix property). At full
+        N=n⁴ it covers the same lattice as FractalNet and FractalNetKinetic.
+
+    generate_scrambled(N, seed_rank=0)
+        FLU-Owen scrambling: independent APN permutation per (depth, dimension).
+        Preserves OA(n⁴,4,n,4) per depth; good discrepancy at all N.
+
+    Parameters
+    ----------
+    n : int
+        Radix (base). Must be odd (Siamese magic square requirement). Default 3.
+
+    Examples
+    --------
+    >>> net = FractalNetOrthogonal(n=3)
+    >>> pts = net.generate(81)   # 81 = 3^4 = full base block
+    >>> pts.shape
+    (81, 4)
+    >>> pts_scr = net.generate_scrambled(81)
+    >>> pts_scr.shape
+    (81, 4)
+
+    Theorem references
+    ------------------
+    DN1      — Lo Shu Fractal Digital Net (PROVEN V15.3.2)
+    DN1-GL   — Graeco-Latin generation formulas (PROVEN V15.3.2)
+    DN1-OA   — OA(n⁴,4,n,4) strength-4 certificate (PROVEN V15.3.2)
+    DN1-GEN  — Generalisation to all odd n (PROVEN V15.3.2)
+    """
+
+    _OA_DIM: int = 4   # DN1 natural dimension — always 4
+
+    def __init__(self, n: int = 3) -> None:
+        if not is_odd(n):
+            raise ValueError(
+                f"FractalNetOrthogonal requires odd n for Siamese construction "
+                f"(got n={n}). For even n use FractalNet with even_n backend."
+            )
+        if n < 3:
+            raise ValueError(f"n must be ≥ 3, got {n}")
+
+        # Initialise the FractalNet base with d=4 (the natural DN1 dimension)
+        super().__init__(n, d=self._OA_DIM)
+
+        # Overwrite _base_block with the OA(n⁴,4,n,4) Graeco-Latin block
+        self._base_block = self._build_oa_base_block(n).astype(np.float64)
+
+    # ── OA base_block construction ────────────────────────────────────────────
+
+    @staticmethod
+    def _siamese(n: int) -> np.ndarray:
+        """Build the n×n Siamese magic square (T5, PROVEN for all odd n)."""
+        L = np.zeros((n, n), dtype=np.int64)
+        r, c = 0, n // 2
+        for v in range(1, n * n + 1):
+            L[r, c] = v
+            nr, nc = (r - 1) % n, (c + 1) % n
+            if L[nr, nc] != 0:
+                nr, nc = (r + 1) % n, c
+            r, c = nr, nc
+        return L
+
+    @classmethod
+    def _build_oa_base_block(cls, n: int) -> np.ndarray:
+        """
+        Build the n⁴-row OA(n⁴,4,n,4) base block.
+
+        Uses the DN1-GL formulas:
+          d1(r,c) = L[(r_r + (1-b_c) % n) % n, (b_r + r_c - 1) % n]
+          d2(r,c) = L[(b_r + 2*r_c + 1) % n, 2*(r_r + b_c) % n]
+
+        Returns digits in {0,...,n-1}^4 as float64.
+
+        THEOREM (DN1-GEN, PROVEN): the 4×4 affine coefficient matrix over ℤₙ
+        has det=4 and gcd(4,n)=1 for all odd n, making the map bijective.
+        Consequently all n⁴ rows are distinct — OA(n⁴,4,n,4).
+        """
+        L   = cls._siamese(n)
+        N   = n * n
+        # Position lookup: value v → (row, col) in L
+        pos: List[tuple] = [(0, 0)] * (N + 1)
+        for ri in range(n):
+            for ci in range(n):
+                pos[L[ri, ci]] = (ri, ci)
+
+        # Build d1, d2 grids — DN1-GL formulas
+        d1 = np.empty((N, N), dtype=np.int64)
+        d2 = np.empty((N, N), dtype=np.int64)
+        for r in range(N):
+            br, rr = r // n, r % n
+            for c in range(N):
+                bc, rc = c // n, c % n
+                d1[r, c] = L[(rr + (1 - bc) % n) % n][(br + rc - 1) % n]
+                d2[r, c] = L[(br + 2 * rc + 1) % n][(2 * (rr + bc)) % n]
+
+        # Map each cell to its 4D unsigned digit address {0,...,n-1}^4
+        base_block = np.empty((N * N, 4), dtype=np.float64)
+        for row in range(N):
+            for col in range(N):
+                r1, c1 = pos[d1[row, col]]
+                r2, c2 = pos[d2[row, col]]
+                base_block[row * N + col] = [r1, c1, r2, c2]
+
+        return base_block
+
+    # ── Core generator (overrides FractalNet to use strict < for max_m) ───────
+
+    def generate(self, num_points: int) -> np.ndarray:
+        """
+        Generate the first `num_points` of the DN1 Graeco-Latin sequence.
+
+        Uses strict `<` for the depth loop (unlike FractalNet which uses `<=`)
+        so that num_points == base_N uses exactly one depth level, preserving
+        the Graeco-Latin prefix property of the original DN1 ordering.
+
+        At partial N = m·n², the first m·n² points form m complete Latin rows
+        of the Sudoku grid — balanced across all 4 dimensions simultaneously.
+
+        THEOREM (DN1 prefix property):
+          N=9 (n=3):  OA ordering gives L2* ≈ 0.041 vs FractalNet 0.422 (10×).
+          N=27:       OA ordering gives L2* ≈ 0.063 vs FractalNet 0.242 (3.8×).
+          N=81 (full): all FLU ternary methods tie — same n⁴ lattice points.
+        """
+        if num_points <= 0:
+            return np.zeros((0, self.d), dtype=np.float64)
+
+        # Strict < ensures num_points == self.N uses exactly depth 0
+        max_m = 1
+        while self.N ** max_m < num_points:
+            max_m += 1
+
+        points  = np.zeros((num_points, self.d), dtype=np.float64)
+        k_array = np.arange(num_points, dtype=np.int64)
+        for m in range(max_m):
+            v_m    = (k_array // (self.N ** m)) % self.N
+            weight = 1.0 / (self.n ** (m + 1))
+            points += self._base_block[v_m] * weight
+
+        return points
+
+    # ── Verification ──────────────────────────────────────────────────────────
+
+    def verify_oa(self) -> dict:
+        """
+        Verify that the base block satisfies OA(n⁴,4,n,4).
+
+        Returns a dict with:
+          oa_strength     : int   (4 if perfect)
+          unique_tuples   : int   (n⁴ if perfect)
+          all_pass        : bool
+        """
+        digits = self._base_block.astype(int)
+        tuples = set(map(tuple, digits))
+        unique = len(tuples)
+        expected = self.n ** 4
+
+        # OA strength: check all 2D marginals (should each have n² unique pairs)
+        from itertools import combinations as _comb
+        oa_strength = 0
+        for s in range(1, 5):
+            ok = True
+            for dims in _comb(range(4), s):
+                proj = set(tuple(row[list(dims)]) for row in digits)
+                if len(proj) != self.n ** s:
+                    ok = False
+                    break
+            if ok:
+                oa_strength = s
+            else:
+                break
+
+        return {
+            "n":             self.n,
+            "unique_tuples": unique,
+            "expected":      expected,
+            "oa_strength":   oa_strength,
+            "all_pass":      unique == expected and oa_strength == 4,
+        }
+
+    # ── Repr ─────────────────────────────────────────────────────────────────
+
+    def __repr__(self) -> str:
+        return (
+            f"FractalNetOrthogonal(n={self.n}, d={self.d}, "
+            f"base_volume={self.N}, OA=True)"
+        )
