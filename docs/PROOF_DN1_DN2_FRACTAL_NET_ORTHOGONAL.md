@@ -755,6 +755,7 @@ Thus, for a Walsh frequency with digit depth μ(h), the coefficient satisfies:
 |P_hat_N(h)| ≤ (B / √n)^{μ(h)},
 ```
 by the multiplicative structure of digit-wise scrambling and the APN character sum bound (DN2-WALSH, PROOF_DN2_APN_SCRAMBLING.md §4).
+After FLU‑Owen scrambling, the bound holds in expectation over the random permutations; the result is sufficient for all subsequent discrepancy and variance estimates.
 
 **Mechanism separation.**
 - The μ(h)=0 annihilation is a deterministic consequence of DN1:
@@ -974,7 +975,7 @@ in the sense that: (1) strictly more Walsh frequencies are annihilated exactly; 
 | Asymptotic rate      | O((log N)^d / N)                | O((log N)^{4k}/N) (scrambled) |
 | Discrepancy constant | C_Sobol(d)                      | C_Sobol · (B/√n)^{4k} better  |
 | Low-order ANOVA      | No guarantee                    | **Exact for V_n, |u|≤4k**     |
-| Prefix N=n^k (k≤4)  | No guarantee at non-2^m N       | D*_N = O(N^{-1/k})            |
+| Prefix N=n^k (k≤4)   | No guarantee at non-2^m N       | D*_N = O(N^{-1/k})            |
 | Sequence type        | Infinite                        | Finite blocks (n^{4kM})       |
 | Hardware (GPU/TPU)   | C backend, scalar               | Pure integer modular, vectorizable |
 
@@ -1001,6 +1002,8 @@ while Sobol provides no comparable guarantee unless N = 2^m.
 | 81  | 0.011    | 0.011      | 0.011             | 0.188  | tied (same lattice)|
 
 All three FLU ternary methods cover the same lattice {0,1/3,2/3}^4 at full N=81; they are different orderings of the same 81 points. The OA (Sudoku row-major) ordering achieves 10.2× better discrepancy at N=9 because the first 9 points form a complete Latin row — balanced in all 4 dimensions simultaneously.
+Sobol’s discrepancy at arbitrary N does not stay constant; it decays, but the rate is not guaranteed for non‑power‑of‑2 N. The phrasing “O(1)” is misleading.
+Sobol does not provide a proven rate for such N; its discrepancy may still decay but with unknown exponent and constant.
 
 ---
 
@@ -1092,7 +1095,7 @@ n=4, d=8: 65536/65536 unique 8-tuples OA(4^8, 8, 4, 8)   ✓
 
 ## 10.5 ALU-Direct & Memory-Free Regeneration (DNO-ALU)
 
-The DN1-REC construction reaches the **physical minimum complexity** of the mathematical task (OA(n^{4k},4k,n,4k) with trivial dual net).  
+The DN1-REC construction reaches a **physical minimum complexity** of the mathematical task (OA(n^{4k},4k,n,4k) with trivial dual net).  
 
 No precomputed tables, no direction numbers, no static RAM, and no cache lines are required. The entire point set is generated on demand from a single 64-bit (or arbitrary-precision) rank `k` via pure modular arithmetic on a **4×4 generator matrix** that contains only **8 non-zero entries** in the odd-n case.
 
@@ -1204,8 +1207,7 @@ DNO-ALU — ALU‑Direct, Memory‑Free Regeneration (PROVEN V15.3.2)
               except for modular reduction. On any modern CPU, GPU, or FPGA,
               generating a point on‑the‑fly is faster than fetching it from L1 cache
               for any array size > n⁴. The hardware implementation collapses to < 50
-              logic gates per 4D block, making it the smallest known digital net
-              generator.
+              logic gates per 4D block, creating an extremely compact digital net generator.
   Proof:      The construction is given by the explicit formulas in §2.1–2.2, which
               involve only a constant number of modular operations per 4D block.
               The operation count per block is bounded by a small constant (≤ 8).
