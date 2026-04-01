@@ -701,7 +701,7 @@ constant (B/√n)^{4k} better than classical. DN2 suppresses the truncation-domi
 ```
 |P_hat_N(h)| = 1                           if h = 0                          [normalisation]
 |P_hat_N(h)| = 0                           if μ(h) = 0 and h ≠ 0             [DN1: exact cutoff]
-|P_hat_N(h)| ≤ (B/sqrt(n))^{μ(h)}         if μ(h) ≥ 1                        [DN2: exponential decay]
+|P_hat_N(h)| ≤ (B/sqrt(n))^{μ(h)}          if μ(h) ≥ 1                        [DN2: exponential decay]
 ```
 
 where μ(h) is the Walsh digit depth, defined as the highest index of a non-zero base-n digit of h.
@@ -766,15 +766,15 @@ in the Walsh spectrum. □
 
 **Spectral geometry.** Walsh space layered by μ(h):
 ```
-ν=0 layer:  exact zero (deterministic, DN1 structural annihilation)
-ν=1 layer:  |P_hat| ≤ B/√n
-ν=2 layer:  |P_hat| ≤ (B/√n)²
-ν=k layer:  |P_hat| ≤ (B/√n)^k   (exponentially small)
+μ=0 layer:  exact zero (deterministic, DN1 structural annihilation)
+μ=1 layer:  |P_hat| ≤ B/√n
+μ=2 layer:  |P_hat| ≤ (B/√n)²
+μ=k layer:  |P_hat| ≤ (B/√n)^k   (exponentially small)
 ```
 
 This two-phase structure — deterministic spectral hole plus exponential decay — is strictly stronger than:
 
-- Classical Owen alone: no structural zero at ν=0; only stochastic decay  
+- Classical Owen alone: no structural zero at μ=0; only stochastic decay  
 - Sobol alone: nontrivial dual lattice D* ≠ {0}; only structured decay  
 - Either alone: combined DN1+DN2 achieves both annihilation and decay simultaneously
 
