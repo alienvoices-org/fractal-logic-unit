@@ -39,7 +39,7 @@ New sub-theorems DNO-P1 through DNO-FULL, DNO-COEFF-EVEN and DNO-INV (28 in tota
 | DNO-P2       | OA(n⁴,4,n,4) preserved per depth         | **PROVEN** §3 |
 | DNO-ETK      | Discrepancy bound via ETK                 | **PROVEN** §5 |
 | DNO-WALSH    | Walsh-tight discrepancy bound             | **PROVEN** §6 |
-| DNO-ANOVA    | Grid-constant ANOVA exactness (|u| ≤ 4)  | **PROVEN** §7 |
+| DNO-ANOVA    | Grid-constant ANOVA exactness (u ≤ 4)  | **PROVEN** §7 |
 | DNO-VAR      | Combined DN1+DN2 variance bound           | **PROVEN** §8 |
 | DNO-COEFF    | Exact integration: V_n + Walsh-annihilated| **PROVEN** §7 |
 | DNO-REC-MATRIX| DN1-REC = A⊕...⊕A ∈ GL(4k,Z_n)         | **PROVEN** §2.4|
