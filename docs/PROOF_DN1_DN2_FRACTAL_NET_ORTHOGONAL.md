@@ -6,6 +6,7 @@
 **Proof type:** algebraic_and_computational
 **Authors:** Felix Mönnich & The Kinship Mesh Collective
 **Depends on:** DN1, DN1-GL, DN1-OA, DN1-GEN, DN2-P1, DN2-P2, DN2-ETK, DN2-WALSH, DN2-VAR, DN2-ANOVA, T3, T9, OD-27
+
 **Class:** `flu.core.fractal_net.FractalNetOrthogonal` , `flu.container.sparse.SparseOrthogonalManifold`
 
 ---
