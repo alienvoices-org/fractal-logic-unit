@@ -23,7 +23,7 @@ We give a complete, self-contained proof of the DNO theorem family, characterisi
 
 **Structural result (DN1-OA, DNO-REC-MATRIX).** The base block {A·u : u ∈ Z_n^4} is an OA(n⁴, 4, n, 4) — every n-ary 4-tuple appears exactly once. This is the maximum possible OA strength for n⁴ runs. The recursive extension {A^(k)·u : u ∈ Z_n^(4k)} is an OA(n^(4k), 4k, n, 4k) — maximum strength at every recursive depth.
 
-**Spectral result (DNO-DUAL, DNO-SPECTRAL).** The dual net is D* = {0} — trivial — at every depth M. After FLU-Owen APN scrambling with character sum bound B (B ≤ 2 for APN-regime seeds, B = 1 for power-map seeds), the Walsh spectrum satisfies a hard cutoff at digit weight zero (exact annihilation, DN1 effect) plus exponential decay (B/√n)^{μ(h)} at positive digit weight (DN2 effect). This two-phase structure — deterministic spectral hole plus stochastic exponential damping — does not appear in classical digital net theory.
+**Spectral result (DNO-DUAL, DNO-SPECTRAL).** The dual net is D* = {0} — trivial — at every depth M. After FLU-Owen APN scrambling with character sum bound B (B ≤ 2 for APN-regime seeds, B = 1 for power-map seeds), the Walsh spectrum satisfies a hard cutoff at digit weight zero (exact annihilation, DN1 effect) plus exponential decay (B/√n)^{μ(h)} at positive digit weight (DN2 effect). This two-phase structure — deterministic spectral hole plus stochastic exponential damping — does not appear in classical digital net theory. 
 
 **Integration result (DNO-COEFF, DNO-ANOVA).** The net integrates exactly: (a) all functions in V_n (constant on n-ary grid cells) via OA bijectivity; (b) all functions with Walsh support in the μ(h)=0 annihilated subspace via spectral annihilation. General L² functions are not integrated exactly — the net is a Riemann sum over the n-ary grid, not a general quadrature rule.
 
@@ -260,7 +260,38 @@ The signed output x_tilde = (Au mod n) - (n-1)/2 lies in {-(n-1)/2,...,(n-1)/2}^
 
 This centering separates the algebra (OA bijectivity, dual net, Walsh analysis — all on unsigned Z_n^4) from the geometry (points in [0,1)^d). Proof arguments in subsequent sections operate on unsigned representatives; centering is applied only at the final normalisation step.
 
----
+### 2.6  Algebraic Foundations
+
+**Invertibility over ℤ_n:**
+
+A matrix A ∈ M_d(ℤ_n) is invertible (i.e. A ∈ GL(d, ℤ_n)) if and only if:
+
+    gcd(det(A), n) = 1.
+
+Equivalently, det(A) is a unit in ℤ_n.
+
+**Dual Net:**
+
+Let A ∈ GL(d, ℤ_n) define a digital construction:
+
+    x = A u / n  (mod 1),   u ∈ ℤ_n^d.
+
+The dual net is defined as:
+
+    D* = { h ∈ ℤ^d : A^T h ≡ 0 (mod n) }.
+
+This characterizes all frequencies that survive in exponential sums.
+
+**Character Orthogonality over ℤ_n:**
+
+For k ∈ ℤ_n^d:
+
+    Σ_{u ∈ ℤ_n^d} exp(2πi k·u / n)
+        = n^d    if k ≡ 0
+        = 0      otherwise.
+
+This identity is the basis of all spectral results below.
+
 
 ## 3  Orthogonal Array Theory
 
