@@ -1002,7 +1002,6 @@ while Sobol provides no comparable guarantee unless N = 2^m.
 | 81  | 0.011    | 0.011      | 0.011             | 0.188  | tied (same lattice)|
 
 All three FLU ternary methods cover the same lattice {0,1/3,2/3}^4 at full N=81; they are different orderings of the same 81 points. The OA (Sudoku row-major) ordering achieves 10.2× better discrepancy at N=9 because the first 9 points form a complete Latin row — balanced in all 4 dimensions simultaneously.
-Sobol’s discrepancy at arbitrary N does not stay constant; it decays, but the rate is not guaranteed for non‑power‑of‑2 N. The phrasing “O(1)” is misleading.
 Sobol does not provide a proven rate for such N; its discrepancy may still decay but with unknown exponent and constant.
 
 ---
