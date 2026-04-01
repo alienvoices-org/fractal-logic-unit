@@ -297,9 +297,29 @@ This centering separates the algebra (OA bijectivity, dual net, Walsh analysis �
 
 ### 3.1  Maximum OA Strength from Bijectivity (DNO-OPT)
 
+**Definition.** Invertibility over Z_n:
+
+A matrix A ∈ M(d, Z_n) is invertible (A ∈ GL(d, Z_n)) if and only if:
+
+    gcd(det(A), n) = 1,
+
+i.e. det(A) is a unit in Z_n.
+
 **Theorem DNO-OPT (PROVEN).** For any A ∈ GL(d, Z_n), the point set P = {Au : u ∈ Z_n^d} is an OA(n^d, d, n, d) — every d-tuple in Z_n^d appears exactly once.
 
-**Proof.** A bijective on Z_n^d (det(A) a unit). Therefore the map u ↦ Au is a bijection, so {Au : u ∈ Z_n^d} = Z_n^d. Every d-tuple appears exactly once. OA strength = d = maximum possible for n^d runs. □
+**Proof.** A is bijective on Z_n^d (det(A) a unit). Therefore the map u ↦ Au is a bijection, so:
+
+    {Au : u ∈ Z_n^d} = Z_n^d.
+
+Thus every d-tuple appears exactly once.
+
+For any projection onto t coordinates (t ≤ d), each t-tuple appears exactly n^(d−t) times, since the full set Z_n^d is covered uniformly.
+
+Hence the construction is:
+
+    OA(n^d, d, n, d),
+
+with maximum possible strength d. □
 
 **Corollary.** Both A_odd (det=4, odd n) and A_even (det=1, all n≥2) give OA(n⁴,4,n,4). The DN1 Lo Shu and snake generators are not the *only* optimal generators — any A ∈ GL(4, Z_n) achieves this. DN1's distinction is the **explicit, O(1)-per-cell construction** with natural Graeco-Latin structure, not algebraic exclusivity. (Verified: 200 randomly sampled GL(4,Z_3) matrices all produce OA(81,4,3,4).)
 
@@ -679,31 +699,83 @@ constant (B/√n)^{4k} better than classical. DN2 suppresses the truncation-domi
 **Theorem DNO-SPECTRAL (PROVEN).** The Walsh spectrum of DN1-REC + DN2 satisfies:
 
 ```
-|P_hat_N(h)| = 1                           if h = 0           [normalisation]
-|P_hat_N(h)| = 0                           if μ(h) = 0, h ≠ 0  [DN1: hard cutoff]
-|P_hat_N(h)| ≤ (B/sqrt(n))^{μ(h)}         if μ(h) ≥ 1          [DN2: exponential decay]
+|P_hat_N(h)| = 1                           if h = 0                          [normalisation]
+|P_hat_N(h)| = 0                           if ν(h) = 0 and h ≠ 0             [DN1: exact cutoff]
+|P_hat_N(h)| ≤ (B/sqrt(n))^{ν(h)}         if ν(h) ≥ 1                        [DN2: exponential decay]
 ```
+
+where ν(h) is the Walsh digit depth, defined as the highest index of a non-zero base-n digit of h.
 
 **Proof.**
+*Case h = 0:* P_hat_N(0) = 1 by definition (constant function integrates to 1).
+*Case ν(h) = 0, h ≠ 0:* The condition ν(h) = 0 corresponds to Walsh frequencies supported entirely in the base digit layer (all higher digits are zero).
 
-*Case h = 0:* P_hat(0) = 1 by definition (constant function integrates to 1).
-
-*Case μ(h) = 0, h ≠ 0:* The condition μ(h) = 0 means all digit positions of h are zero, i.e. h ≡ 0 (mod n) componentwise yet h ≠ 0 as an integer. However, for x = Au/n with u ∈ Z_n^4, the Walsh function wal_h(x) depends on h only through h mod n. Thus P_hat(h) with h ≡ 0 (mod n) equals P_hat(0) = 1. **Correction:** The condition μ(h) = 0 means h is in the zero-frequency Walsh layer; for the base block, all h ≠ 0 in Z^d that are not n-ary multiples give P_hat(h) = 0 by character orthogonality (§5.1). For h that are nonzero n-ary multiples, the net sees them as h' = h/n in the next digit layer; these are handled by the recursion. The full argument shows all non-trivial Walsh modes are annihilated: D* = {0} (DNO-DUAL), so P_hat_N(h) = 0 for all h ≠ 0.
-
-*Case μ(h) ≥ 1:* After FLU-Owen scrambling, each APN permutation A_{m,i} contributes a factor (B/√n) per digit level per coordinate (DN2-WALSH). The Walsh coefficient bound (B/√n)^{μ(h)} follows from the character sum mechanism of DN2-C (PROOF_DN2_APN_SCRAMBLING.md §4). □
-
-**Spectral geometry.** Walsh space layered by μ(h):
+For the DN1 construction:
+```
+x = A u / n,   u ∈ Z_n^d,
+```
+the Walsh coefficient reduces to a character sum over Z_n^d:
+```
+P_hat_N(h) = (1/N) Σ_{u ∈ Z_n^d} exp(2πi (A^T h)·u / n).
+```
+By character orthogonality:
+```
+Σ_{u ∈ Z_n^d} exp(2πi k·u / n)
+= n^d    if k ≡ 0
+= 0      otherwise,
+```
+this sum vanishes unless:
+```
+A^T h ≡ 0 (mod n).
 
 ```
-μ=0 layer:  exact zero (deterministic, DN1 structural annihilation)
-μ=1 layer:  |P_hat| ≤ B/√n  ≈ 0.45 (n=5)
-μ=2 layer:  |P_hat| ≤ (B/√n)²  ≈ 0.20
-μ=k layer:  |P_hat| ≤ (B/√n)^k  (exponentially small)
+Since A ∈ GL(d, Z_n), the only solution is:
+```
+h ≡ 0 (mod n),
+```
+which corresponds to the trivial frequency.
+
+Therefore:
+```
+P_hat_N(h) = 0   for all h ≠ 0 with ν(h) = 0,
+```
+and the dual net satisfies:
+```
+D* = {0}.
+```
+
+*Case ν(h) ≥ 1:* After FLU-Owen scrambling (DN2), each APN permutation A_{m,i} contributes a factor:
+```
+(B / √n)
+```
+per active digit level and per coordinate.
+
+Thus, for a Walsh frequency with digit depth ν(h), the coefficient satisfies:
+```
+|P_hat_N(h)| ≤ (B / √n)^{ν(h)},
+```
+by the multiplicative structure of digit-wise scrambling and the APN character sum bound (DN2-WALSH, PROOF_DN2_APN_SCRAMBLING.md §4).
+
+**Mechanism separation.**
+- The ν(h)=0 annihilation is a deterministic consequence of DN1:
+  invertibility of A ∈ GL(d, Z_n) implies a trivial dual net D* = {0}.
+- The exponential decay for ν(h) ≥ 1 is a stochastic consequence of DN2:
+  APN Owen scrambling enforces multiplicative Walsh decay.
+These two mechanisms act independently and combine multiplicatively
+in the Walsh spectrum. □
+
+**Spectral geometry.** Walsh space layered by ν(h):
+```
+ν=0 layer:  exact zero (deterministic, DN1 structural annihilation)
+ν=1 layer:  |P_hat| ≤ B/√n
+ν=2 layer:  |P_hat| ≤ (B/√n)²
+ν=k layer:  |P_hat| ≤ (B/√n)^k   (exponentially small)
 ```
 
 This two-phase structure — deterministic spectral hole plus exponential decay — is strictly stronger than:
-- Classical Owen alone: no structural zero at μ=0; only stochastic decay
-- Sobol alone: nontrivial dual lattice D*≠{0}; only structured decay
+
+- Classical Owen alone: no structural zero at ν=0; only stochastic decay  
+- Sobol alone: nontrivial dual lattice D* ≠ {0}; only structured decay  
 - Either alone: combined DN1+DN2 achieves both annihilation and decay simultaneously
 
 ### 8.2  Walsh-Space Pareto Optimality (DNO-OPT-WALSH)
