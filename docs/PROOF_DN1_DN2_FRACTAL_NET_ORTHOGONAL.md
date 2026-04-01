@@ -194,8 +194,39 @@ else:                  # even n: snake, det=1
     a1=b_r;  a2=(b_r+r_r)%n;  a3=(r_r+b_c)%n;  a4=(b_c+r_c)%n
 coords = [a1-half, a2-half, a3-half, a4-half]  # center to {-(n-1)/2,...,(n-1)/2}
 ```
+### 2.3  Algebraic Foundations
 
-### 2.3  Inverse Oracle (DNO-INV)
+**Definition.** Invertibility over ℤ_n:
+
+A matrix A ∈ M_d(ℤ_n) is invertible (i.e. A ∈ GL(d, ℤ_n)) if and only if:
+
+    gcd(det(A), n) = 1.
+
+Equivalently, det(A) is a unit in ℤ_n.
+
+**Definition.** Dual Net:
+
+Let A ∈ GL(d, ℤ_n) define a digital construction:
+
+    x = A u / n  (mod 1),   u ∈ ℤ_n^d.
+
+The dual net is defined as:
+
+    D* = { h ∈ ℤ^d : A^T h ≡ 0 (mod n) }.
+
+This characterizes all frequencies that survive in exponential sums.
+
+**Lemma.** Character Orthogonality over ℤ_n:
+
+For k ∈ ℤ_n^d:
+
+    Σ_{u ∈ ℤ_n^d} exp(2πi k·u / n)
+        = n^d    if k ≡ 0
+        = 0      otherwise.
+
+This identity is the basis of all spectral results below.
+
+### 2.4  Inverse Oracle (DNO-INV)
 
 Since both A_odd and A_even are invertible over Z_n, the inverse mapping — coordinates → rank — is O(d) via k independent 4-block back-substitutions.
 
@@ -222,7 +253,7 @@ Rank reconstruction: chunk = b_r·n³ + r_r·n² + b_c·n + r_c; k += chunk · (
 
 **Theorem DNO-INV (PROVEN).** Both inverses are exact (modular arithmetic, no floating point) and O(d) time. *Computational certificate:* 0 inverse errors for n ∈ {2,3,4,5,6,7} across all n⁴ round-trips ✓.
 
-### 2.4  The Tensor Power: DN1-REC as A^(k) (DNO-REC-MATRIX)
+### 2.5  The Tensor Power: DN1-REC as A^(k) (DNO-REC-MATRIX)
 
 **Theorem DNO-REC-MATRIX (PROVEN).** For k ≥ 1, the block-diagonal direct sum
 
@@ -254,44 +285,13 @@ executes A^⊕M: extracts each base-n⁴ chunk via digit decomposition, applies 
 | Scalable to any k  | no (matrix size grows) | yes (same A reused)    |
 | Explicit formula   | rarely                 | always (§2.1–2.2)      |
 
-### 2.5  Centering and the Balanced Base-n Address
+### 2.6  Centering and the Balanced Base-n Address
 
 The signed output x_tilde = (Au mod n) - (n-1)/2 lies in {-(n-1)/2,...,(n-1)/2}^4, centered at 0 with mean 0. The net point coordinate is x_i = (x_tilde_i + (n-1)/2) / n ∈ {0, 1/n,...,(n-1)/n}.
 
 This centering separates the algebra (OA bijectivity, dual net, Walsh analysis — all on unsigned Z_n^4) from the geometry (points in [0,1)^d). Proof arguments in subsequent sections operate on unsigned representatives; centering is applied only at the final normalisation step.
 
-### 2.6  Algebraic Foundations
-
-**Invertibility over ℤ_n:**
-
-A matrix A ∈ M_d(ℤ_n) is invertible (i.e. A ∈ GL(d, ℤ_n)) if and only if:
-
-    gcd(det(A), n) = 1.
-
-Equivalently, det(A) is a unit in ℤ_n.
-
-**Dual Net:**
-
-Let A ∈ GL(d, ℤ_n) define a digital construction:
-
-    x = A u / n  (mod 1),   u ∈ ℤ_n^d.
-
-The dual net is defined as:
-
-    D* = { h ∈ ℤ^d : A^T h ≡ 0 (mod n) }.
-
-This characterizes all frequencies that survive in exponential sums.
-
-**Character Orthogonality over ℤ_n:**
-
-For k ∈ ℤ_n^d:
-
-    Σ_{u ∈ ℤ_n^d} exp(2πi k·u / n)
-        = n^d    if k ≡ 0
-        = 0      otherwise.
-
-This identity is the basis of all spectral results below.
-
+---
 
 ## 3  Orthogonal Array Theory
 
