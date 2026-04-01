@@ -700,15 +700,15 @@ constant (B/√n)^{4k} better than classical. DN2 suppresses the truncation-domi
 
 ```
 |P_hat_N(h)| = 1                           if h = 0                          [normalisation]
-|P_hat_N(h)| = 0                           if ν(h) = 0 and h ≠ 0             [DN1: exact cutoff]
-|P_hat_N(h)| ≤ (B/sqrt(n))^{ν(h)}         if ν(h) ≥ 1                        [DN2: exponential decay]
+|P_hat_N(h)| = 0                           if μ(h) = 0 and h ≠ 0             [DN1: exact cutoff]
+|P_hat_N(h)| ≤ (B/sqrt(n))^{μ(h)}         if μ(h) ≥ 1                        [DN2: exponential decay]
 ```
 
-where ν(h) is the Walsh digit depth, defined as the highest index of a non-zero base-n digit of h.
+where μ(h) is the Walsh digit depth, defined as the highest index of a non-zero base-n digit of h.
 
 **Proof.**
 *Case h = 0:* P_hat_N(0) = 1 by definition (constant function integrates to 1).
-*Case ν(h) = 0, h ≠ 0:* The condition ν(h) = 0 corresponds to Walsh frequencies supported entirely in the base digit layer (all higher digits are zero).
+*Case μ(h) = 0, h ≠ 0:* The condition μ(h) = 0 corresponds to Walsh frequencies supported entirely in the base digit layer (all higher digits are zero).
 
 For the DN1 construction:
 ```
@@ -737,34 +737,34 @@ which corresponds to the trivial frequency.
 
 Therefore:
 ```
-P_hat_N(h) = 0   for all h ≠ 0 with ν(h) = 0,
+P_hat_N(h) = 0   for all h ≠ 0 with μ(h) = 0,
 ```
 and the dual net satisfies:
 ```
 D* = {0}.
 ```
 
-*Case ν(h) ≥ 1:* After FLU-Owen scrambling (DN2), each APN permutation A_{m,i} contributes a factor:
+*Case μ(h) ≥ 1:* After FLU-Owen scrambling (DN2), each APN permutation A_{m,i} contributes a factor:
 ```
 (B / √n)
 ```
 per active digit level and per coordinate.
 
-Thus, for a Walsh frequency with digit depth ν(h), the coefficient satisfies:
+Thus, for a Walsh frequency with digit depth μ(h), the coefficient satisfies:
 ```
-|P_hat_N(h)| ≤ (B / √n)^{ν(h)},
+|P_hat_N(h)| ≤ (B / √n)^{μ(h)},
 ```
 by the multiplicative structure of digit-wise scrambling and the APN character sum bound (DN2-WALSH, PROOF_DN2_APN_SCRAMBLING.md §4).
 
 **Mechanism separation.**
-- The ν(h)=0 annihilation is a deterministic consequence of DN1:
+- The μ(h)=0 annihilation is a deterministic consequence of DN1:
   invertibility of A ∈ GL(d, Z_n) implies a trivial dual net D* = {0}.
-- The exponential decay for ν(h) ≥ 1 is a stochastic consequence of DN2:
+- The exponential decay for μ(h) ≥ 1 is a stochastic consequence of DN2:
   APN Owen scrambling enforces multiplicative Walsh decay.
 These two mechanisms act independently and combine multiplicatively
 in the Walsh spectrum. □
 
-**Spectral geometry.** Walsh space layered by ν(h):
+**Spectral geometry.** Walsh space layered by μ(h):
 ```
 ν=0 layer:  exact zero (deterministic, DN1 structural annihilation)
 ν=1 layer:  |P_hat| ≤ B/√n
@@ -788,11 +788,11 @@ supp(h) = { i : h_i ≠ 0 }.
 ```
 For a subset u ⊆ {1,...,d}, Walsh modes supported on u correspond to functions depending only on coordinates in u.
 
-The condition ν(h) = 0 restricts all active digits of h to the base digit layer. Thus, Walsh modes with ν(h)=0 and supp(h) ⊆ u probe exactly the base-n structure of the projection onto coordinates u.
+The condition μ(h) = 0 restricts all active digits of h to the base digit layer. Thus, Walsh modes with μ(h)=0 and supp(h) ⊆ u probe exactly the base-n structure of the projection onto coordinates u.
 
 If all such Walsh modes are annihilated, then:
 ```
-P_hat_N(h) = 0   for all h ≠ 0 with supp(h) ⊆ u and ν(h)=0,
+P_hat_N(h) = 0   for all h ≠ 0 with supp(h) ⊆ u and μ(h)=0,
 ```
 which implies exact uniformity of the marginal distribution on u.
 
@@ -800,19 +800,19 @@ This is equivalent to requiring:
 ```
 OA(N, |u|, n, |u|).
 ```
-Conversely, if OA strength < |u|, then some marginal on u is non-uniform, so there exists at least one Walsh mode supported on u with ν(h)=0 that survives.
+Conversely, if OA strength < |u|, then some marginal on u is non-uniform, so there exists at least one Walsh mode supported on u with μ(h)=0 that survives.
 
 Thus, annihilation of all Walsh modes on u is equivalent to OA strength ≥ |u|. □
 
 **Theorem DNO-OPT-WALSH (PROVEN).** Among all Z_n-linear digital nets with APN Owen scrambling in dimension d = 4k:
 
 1. **Maximal annihilation:**  
-   DN1-REC annihilates all Walsh frequencies with ν(h)=0 and h ≠ 0 — the maximal possible set (by OA–Walsh equivalence, bounded by OA strength = 4k = d).
+   DN1-REC annihilates all Walsh frequencies with μ(h)=0 and h ≠ 0 — the maximal possible set (by OA–Walsh equivalence, bounded by OA strength = 4k = d).
 
 2. **Optimal decay:**  
    The bound:
 ```
-|P_hat_N(h)| ≤ (B/√n)^{ν(h)}
+|P_hat_N(h)| ≤ (B/√n)^{μ(h)}
 ```
    is the tightest achievable exponential decay rate under APN scrambling (Weil 1948 bound is tight for power-map seeds, giving B = 1 exactly).
 
@@ -822,14 +822,14 @@ Thus, annihilation of all Walsh modes on u is equivalent to OA strength ≥ |u|.
    - achieves the same annihilation set and the same decay rate.
 
 **Proof.**  
-(1) follows from DNO-SPECTRAL (trivial dual net D* = {0}) together with the OA–Walsh equivalence lemma: OA strength = d implies annihilation of all ν(h)=0 modes.
+(1) follows from DNO-SPECTRAL (trivial dual net D* = {0}) together with the OA–Walsh equivalence lemma: OA strength = d implies annihilation of all μ(h)=0 modes.
 (2) The APN character sum bound:
 ```
 |χ_f(h,Δ)| / √n ≤ B
 ```
-is tight for optimal constructions (e.g. power maps over prime fields), so the decay rate (B/√n)^{ν(h)} cannot be improved in general.
+is tight for optimal constructions (e.g. power maps over prime fields), so the decay rate (B/√n)^{μ(h)} cannot be improved in general.
 
-(3) If an alternative net has OA strength < 4k, then by the lemma it cannot annihilate all ν(h)=0 modes. If it has OA strength = 4k, then it achieves the same annihilation set. The decay rate is bounded by the same APN/Weil limit, so no strict improvement is possible in both objectives simultaneously. □
+(3) If an alternative net has OA strength < 4k, then by the lemma it cannot annihilate all μ(h)=0 modes. If it has OA strength = 4k, then it achieves the same annihilation set. The decay rate is bounded by the same APN/Weil limit, so no strict improvement is possible in both objectives simultaneously. □
 
 
 ### 8.3  Minimax Optimality (DNO-MINIMAX)
