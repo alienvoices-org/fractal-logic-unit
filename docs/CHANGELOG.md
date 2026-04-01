@@ -4,8 +4,20 @@ All notable changes to the FLU library are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
-
+  
 ## [15.3.2] — 2026-03-28 — DN1 Complete Proof: Lo Shu Sudoku Fractal Digital Net
+
+## V15.3.2 – DN1-REC Orthogonal Manifold (Major Theoretical Upgrade)
+
+- Introduced SparseOrthogonalManifold (O(D), memory-free)
+- Unified OA generator for all n ≥ 2
+- Added GL(d, Z_n)-based construction
+- Added inverse rank mapping (bijective coordinate system)
+- Formalized DN1 → DN1-REC recursion
+- Added parity-dependent generators:
+  - Lo Shu (odd n)
+  - Snake (even n)
+- Established OA(n^d, d, n, d) for all d = 4k
 
 ### Summary
 The DN1 conjecture and its natural generalisations are now fully proven. The core result is that the **Lo Shu Sudoku Hypercell** — an n²×n² Graeco‑Latin square built from an n×n Siamese magic square — forms an orthogonal array of maximum possible strength: **OA(n⁴, 4, n, 4)**. Every 4‑tuple from the n‑ary digit alphabet appears exactly once, achieving the theoretical ceiling for n⁴ runs in 4 factors. This result scales to all odd orders and extends recursively: the k‑th recursive application yields **OA(n^(2^k), 2^k, n, 2^k)** — a perfect orthogonal array at every depth.
