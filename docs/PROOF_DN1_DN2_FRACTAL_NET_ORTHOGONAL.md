@@ -199,7 +199,7 @@ Remark on Universal Applicability vs. Dual-Engine Design:
 Because det(A_even)=1, the Snake map is a universal bijection valid for all integers n≥2, including odd n. 
 While a minimal implementation could rely exclusively on A_even for all geometries, the dual-engine architecture is intentionally preserved.
 The Lo Shu matrix (A_odd) is dense and cross-coupled (det=4), providing rich diagonal diffusion and preserving the historical Graeco-Latin magic square symmetries.
-The lower-triangular Snake matrix (A_even) is utilized specifically where parity breakdown prevents the Lo Shu application, acting as the structural safety net that natively bridges to binary (n=2) topologies.
+The lower-triangular Snake matrix (A_even) is utilized specifically where parity breakdown prevents the Lo Shu application, acting as the structural safety net that natively bridges to even topologies.
 
 ### 2.3  Algebraic Foundations
 
