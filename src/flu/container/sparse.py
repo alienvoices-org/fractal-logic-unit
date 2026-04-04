@@ -989,6 +989,25 @@ class SparseOrthogonalManifold(ArithmeticMixin):
             out[idx] = self._signed_to_value(coords)
         return out
 
+    def __add__(self, other: "SparseOrthogonalManifold") -> "SparseOrthogonalManifold":
+        """
+        Dimension communion: concatenate two orthogonal manifolds of the same n.
+
+        Returns a new SparseOrthogonalManifold with d = self.d + other.d,
+        following DNO-REC-MATRIX (block-diagonal A^(k1+k2)).
+        Overrides ArithmeticMixin.__add__ to give dimension-concatenation semantics.
+
+        Raises ValueError if n differs.
+        """
+        if not isinstance(other, SparseOrthogonalManifold):
+            from flu.container.communion import CommunionEngine
+            return CommunionEngine.simplify(self, other, np.add, "⊕")
+        if other.n != self.n:
+            raise ValueError(
+                f"Dimension communion requires matching n; got {self.n} and {other.n}."
+            )
+        return SparseOrthogonalManifold(n=self.n, d=self.d + other.d)
+
     def __repr__(self) -> str:
         return (
             f"SparseOrthogonalManifold(n={self.n}, d={self.d}, "
