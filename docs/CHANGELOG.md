@@ -8,6 +8,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [15.3.2] — 2026-03-28 — DN1 Complete Proof: Lo Shu Sudoku Fractal Digital Net
 
 ## V15.3.2 – DN1-REC Orthogonal Manifold (Major Theoretical Upgrade)
+**DNO Orthogonal Digital Net Family (28 new theorems).** FractalNetOrthogonal and SparseOrthogonalManifold added. Even-n snake map (OA for all n≥2). Inverse oracle O(d). Five simultaneous optimalities (DNO-FULL). Registry: 99 PROVEN / 103 total. 854 tests passing.
+
+**New theorems (PROVEN):** DNO-GEN, DNO-COEFF-EVEN, DNO-INV, DNO-REC-MATRIX, DNO-OPT, DNO-P1, DNO-P2, DNO-OPT-FACT, DNO-TVAL-BAL, DNO-TVAL-REC, DNO-TVAL-STABLE, DNO-WALSH-REC, DNO-DUAL, DNO-ANOVA, DNO-COEFF, DNO-VAR, DNO-VAR-REC, DNO-ETK, DNO-WALSH, DNO-ASYM, DNO-SPECTRAL, DNO-OPT-WALSH, DNO-MINIMAX, DNO-RKHS, DNO-FUNC, DNO-SUPERIORITY, DNO-FULL, DNO-PREFIX
+
+**New files:**
+- `src/flu/core/fractal_net.py` (FractalNetOrthogonal added)
+- `src/flu/container/sparse.py` (SparseOrthogonalManifold added)
+- `tests/test_core/test_fractal_net_orthogonal.py`
+- `tests/test_core/test_sparse_orthogonal.py`
+- `docs/PROOF_DN1_DN2_FRACTAL_NET_ORTHOGONAL.md`
 
 - Introduced SparseOrthogonalManifold (O(D), memory-free)
 - Unified OA generator for all n ≥ 2
