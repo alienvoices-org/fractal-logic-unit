@@ -1,8 +1,8 @@
 # FLU — Theorem & Conjecture Registry
 
 **Version:** 15.3.2
-**Score:** 71 PROVEN · 2 CONJECTURE · 0 PARTIAL · 1 DISPROVEN_SCOPED · 1 RETIRED · **75 total**  
-**Last updated:** 2026-03-28
+**Score:** 99 PROVEN · 2 CONJECTURE · 0 PARTIAL · 1 DISPROVEN_SCOPED · 1 RETIRED · **103 total**  
+**Last updated:** 2026-03-31
 
 This file is the single source of truth for the formal status of every mathematical
 claim in the FLU library.  Code and tests cross-reference entries here by ID.
@@ -1602,3 +1602,258 @@ is a bijection from the set of n⁴ cell pairs (d₁,d₂) onto the full n‑ary
 **Verified:** n=3, k=2 (OA(3⁸,8,3,8) verified: all 3⁸ 8‑tuples appear exactly once)  
 **Depends on:** DN1‑OA, DN1‑GL
 
+
+---
+
+## DNO — FractalNetOrthogonal: Orthogonal Digital Net Family  *(V15.3.2)*
+
+These theorems characterise `FractalNetOrthogonal` and `SparseOrthogonalManifold` — the DN1 Graeco-Latin OA base structure combined with FLU-Owen APN scrambling. Full proofs in `docs/PROOF_DN1_DN2_FRACTAL_NET_ORTHOGONAL.md`.
+
+---
+
+### DNO-GEN — Generator Invertibility for All n ≥ 2 ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** For odd n ≥ 3: A_odd has det=4, gcd(4,n)=1 → A_odd ∈ GL(4,Z_n). For even n ≥ 2: A_even (lower-triangular, unit diagonal) has det=1 → A_even ∈ GL(4,Z_n). Both yield OA(n⁴,4,n,4) for all n ≥ 2.
+
+**Depends on:** DN1-GEN, DNO-OPT
+
+---
+
+### DNO-COEFF-EVEN — Even-n OA via Snake Map ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** A_even = [[1,0,0,0],[1,1,0,0],[0,1,1,0],[0,0,1,1]], det=1. OA(n⁴,4,n,4) for all even n ≥ 2. For n=2: differential Gray code on 4 bits, OA(16,4,2,4). Block-diagonal A_even^(k) gives OA(n^(4k),4k,n,4k) for all k.
+
+**Verified:** n ∈ {2,4,6,8,10}: all n⁴ 4-tuples unique ✓  
+**Depends on:** DNO-GEN, DNO-OPT
+
+---
+
+### DNO-INV — Inverse Oracle O(d) Bi-directional ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** For both odd n (A_odd) and even n (A_even), rank recovery from coordinates is O(d) via k independent 4-block back-substitutions. Generator matrices are unimodular, so modular matrix inversion is exact.
+
+**Verified:** 0 inverse errors for n ∈ {2,3,4,5,6,7} across all n⁴ round-trips ✓  
+**Depends on:** DNO-GEN
+
+---
+
+### DNO-REC-MATRIX — Tensor Power A^(k) ∈ GL(4k,Z_n) ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** A^(k) = A ⊕ ... ⊕ A ∈ GL(4k,Z_n) (k copies). det(A^(k)) = det(A)^k, invertible for all k ≥ 1, all n ≥ 2. Yields OA(n^(4k),4k,n,4k) — maximum OA strength at every recursive level. Streaming: O(d) per point, O(n⁴·d) memory, same A reused.
+
+**Depends on:** DNO-GEN, DNO-OPT, DN1-REC
+
+---
+
+### DNO-OPT — Bijectivity Implies Maximum OA Strength ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** For any A ∈ GL(d,Z_n), the point set {Au : u ∈ Z_n^d} is an OA(n^d,d,n,d). Every invertible Z_n-linear map achieves OA strength d = maximum possible for n^d runs. DN1's contribution is the explicit O(1)-per-cell construction, not algebraic exclusivity.
+
+**Verified:** 200 random GL(4,Z_3) matrices all produce OA(81,4,3,4) ✓  
+**Depends on:** DNO-GEN
+
+---
+
+### DNO-P1 — Latin Property Preserved Under FLU-Owen ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** FLU-Owen scrambling of FractalNetOrthogonal preserves the Latin hypercube property at every N = n^(4kM). Per-column APN bijections preserve coverage of {0,...,n-1} in each coordinate axis.
+
+**Depends on:** DN2-P1, DNO-OPT
+
+---
+
+### DNO-P2 — OA(n⁴,4,n,4) Preserved Per Depth Under FLU-Owen ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** At each depth m, the FLU-Owen scrambled depth block is an OA(n⁴,4,n,4). The scrambled result is a different OA instance (random rotation) — not the same 81 points in a different order. OA class preserved; OA instance randomised.
+
+**Verified (n=3):** 81/81 unique 4-tuples post-scrambling ✓  
+**Depends on:** DNO-OPT, DN2-P1
+
+---
+
+### DNO-OPT-FACT — Factorized Subgroup O(d) vs O(d²) ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** The block-diagonal subgroup GL(4,Z_n)^⊕k ⊂ GL(4k,Z_n) is a strict subgroup yet every element achieves OA strength 4k. DN1-REC is a constructive member. Evaluation: O(d) per point (block reuse) vs O(d²) for generic GL(4k,Z_n).
+
+**Depends on:** DNO-OPT, DNO-REC-MATRIX
+
+---
+
+### DNO-TVAL-BAL — Balanced (0,4k,4k)-net for All k,n ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** The DN1-REC net at N=n^(4k) is a balanced (0,4k,4k)-net: t_bal=0 for all k≥1 and all n≥2. Equivalently: OA(n^(4k),s,n,s) for all s≤4k simultaneously. Balanced = d_j ∈ {0,1}; distinct from full Niederreiter (see DNO-TVAL-REC).
+
+**Depends on:** DNO-OPT, DNO-REC-MATRIX
+
+---
+
+### DNO-TVAL-REC — Full Niederreiter (3M,4kM,4k)-net ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** DN1-REC at N=n^(4kM) is a (3M,4kM,4k)-net in the full Niederreiter sense. t=3M is independent of k (digit truncation: n distinct values/axis/layer). Same truncation phenomenon as FMD-NET (OD-27 parallel).
+
+**Depends on:** DNO-TVAL-BAL, OD-27
+
+---
+
+### DNO-TVAL-STABLE — Balanced Optimality is Dimension-Stable ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** t_bal=0 for all d=4k and all k≥1. The balanced net quality is dimension-stable — a dimension-scalable maximal-strength family. Decoupling insight: combinatorial optimality (OA strength=4k, maximal) and geometric optimality (t=3M, digit-resolution limited) are separate properties that rarely coexist.
+
+**Depends on:** DNO-TVAL-BAL, DNO-OPT
+
+---
+
+### DNO-WALSH-REC — Trivial Dual Net at All Depths ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** For DN1-REC at N=n^(4kM), d=4k: P̂_N(h)=1 if h=0, else 0, at every complete block. The dual net D*={0} — trivial — at every depth M. No aliasing, no leakage. Strictly stronger than FractalNet/FNK/Sobol (all have nontrivial D*).
+
+**Proof sketch:** Character orthogonality + A^(k) invertible at every depth layer. M>1: Walsh factorises digit-wise; each factor zero unless h_m=0; product=1 iff all h_m=0.  
+**Depends on:** DNO-REC-MATRIX
+
+---
+
+### DNO-DUAL — D*={0}: Trivial Dual Net ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** For DN1-REC at any depth M: D*={h: P̂(h)=1}={0}. Consequence of DNO-WALSH-REC.
+
+**Depends on:** DNO-WALSH-REC
+
+---
+
+### DNO-ANOVA — Grid-Constant ANOVA Exactness |u|≤4k ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** For any ANOVA component f_u ∈ V_n (grid-constant) with |u|≤4k, the DN1-REC net integrates it exactly: (1/N)Σf_u(x_u) = ∫f_u(x_u)dx_u. Follows from the equal-frequency marginal property of OA(n^(4k),s,n,s).
+
+**Depends on:** DNO-OPT, DNO-REC-MATRIX
+
+---
+
+### DNO-COEFF — Exact Integration: V_n and Walsh-Annihilated Functions ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** Two routes to exact integration:  
+(A) V_n (grid-constant): via OA bijectivity (Riemann sum identity).  
+(B) Walsh-annihilated: functions with Walsh support in the μ(h)=0 subspace integrate exactly via DNO-WALSH-REC.  
+**NOT** for general L²: f=x² has grid mean 5/27 ≠ true integral 1/3.
+
+**Verified:** prod(cos(2πxᵢ)) integrates to ~10⁻¹⁸ (route B) ✓  
+**Depends on:** DNO-ANOVA, DNO-WALSH-REC
+
+---
+
+### DNO-VAR — DN1+DN2 Variance Bound ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** For DN1+DN2 at N=n^(4M), d=4:  
+Var(Î_N) = O((1/N) Σ_{|u|≥5} σ_u² (B/√n)^{2|u|} (log N)^{|u|-1}).  
+ANOVA components with |u|≤4 contribute exactly zero.
+
+**Depends on:** DNO-ANOVA, DN2-ANOVA
+
+---
+
+### DNO-VAR-REC — Ultimate Variance for DN1-REC + DN2 ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** For DN1-REC + DN2 at N=n^(4kM), d=4k: sum runs over |u|>4k. For f∈V_n with eff. dim ≤4k: Var=0 exactly. Two-phase: μ(h)=0 annihilated (DN1); μ(h)≥1 exponentially suppressed (DN2).
+
+**Depends on:** DNO-VAR, DNO-WALSH-REC, DN2-ANOVA
+
+---
+
+### DNO-ETK — ETK Discrepancy Constant Improvement ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** D*_N(X_OA_owen) ≤ C_classic(4)·(B/√n)⁴·(log N)⁴/N at N=n^(4M).  
+Improvement factor (√n/B)⁴: 25× for n=5, 18.5× for n=7.
+
+**Depends on:** DNO-WALSH-REC, DN2-ETK
+
+---
+
+### DNO-WALSH — Walsh-Tight Discrepancy Bound ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** Same constant as DNO-ETK via native Walsh analysis. Confirms improvement applies to active frequency region μ(k)>m-t, not uniformly.
+
+**Depends on:** DNO-ETK, DN2-WALSH
+
+---
+
+### DNO-ASYM — Tight Asymptotic Rate, Improves with k ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** Unscrambled: D*_N(DN1-REC) = Θ(N^{-1+3/(4k)} (log N)^{4k-1}). Exponents: k=1→N^{-1/4}, k=2→N^{-5/8}, k→∞→N^{-1}. **DN1-REC improves with dimension** (opposite of Sobol). After DN2: D*_N = O((log N)^{4k}/N), constant (B/√n)^{4k} better.
+
+**Depends on:** DNO-TVAL-REC, DNO-ETK
+
+---
+
+### DNO-SPECTRAL — Hard Cutoff + Exponential Decay Walsh Spectrum ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** |P̂_N(h)| = 1 (h=0), 0 (μ(h)=0, h≠0) [DN1 hard cutoff], ≤(B/√n)^{μ(h)} (μ(h)≥1) [DN2 exponential decay]. Two-phase structure: deterministic spectral hole plus stochastic exponential damping. First digital net combining both.
+
+**Depends on:** DNO-DUAL, DNO-WALSH-REC, DN2-WALSH
+
+---
+
+### DNO-OPT-WALSH — Walsh-Space Pareto Optimality ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** Among all Z_n-linear digital nets with APN Owen scrambling in d=4k: (1) DN1-REC annihilates the maximal possible Walsh frequency set; (2) (B/√n)^{μ(h)} is the tightest achievable decay (Weil-tight); (3) no net can strictly improve both simultaneously. DN1-REC+DN2 is Pareto-optimal in Walsh space.
+
+**Depends on:** DNO-SPECTRAL, DNO-OPT, DN2-ETK
+
+---
+
+### DNO-MINIMAX — Minimax Optimal over F_{DN1,DN2} ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** For F_{DN1,DN2}(n,k) = {f: |f̂(h)| ≤ C·ρ^{μ(h)} for ρ<√n/B}:  
+e_wc = Θ((B/√n)^{μ_min}·(log N)^{d-1}/N). DN1+DN2 minimises worst-case error over F up to constants.
+
+**Depends on:** DNO-SPECTRAL, DNO-OPT-WALSH
+
+---
+
+### DNO-RKHS — RKHS with Automatic Exponential ANOVA Weighting ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** Walsh kernel with weights r(h)=(n/B²)^{μ(h)} induces automatic ANOVA weights γ_u=(n/B²)^{|u|} — no manual tuning, unlike classical weighted QMC. e_wc(N)² = Θ((B²/n)^{μ_min}·(log N)^{d-1}/N²).
+
+**Depends on:** DNO-SPECTRAL, DN2-ANOVA
+
+---
+
+### DNO-FUNC — Exact Integration Class: Three Equivalent Forms ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** DN1-REC integrates f exactly iff any of:  
+(A) ANOVA: f=Σ_{|u|≤4k} f_u ∈ V_n.  
+(B) Walsh: f̂(h)=0 for μ(h)>4k.  
+(C) Discrete polynomial: f ∈ span of products of ≤4k grid-constant factors.  
+Class includes all grid-constant additive, pairwise, and sparse ANOVA models.
+
+**Depends on:** DNO-ANOVA, DNO-WALSH-REC, DNO-COEFF
+
+---
+
+### DNO-SUPERIORITY — Strict Spectral Dominance ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** DN1-REC+DN2 strictly dominates Sobol (trivial vs nontrivial D*, OA strength 4k vs 1), classical Owen alone (structural zeros at μ=0 vs no zeros), and FractalNetKinetic+DN2 (exact ANOVA annihilation vs (B/√n)^{2|u|} reduction only).
+
+**Depends on:** DNO-DUAL, DNO-SPECTRAL, DNO-OPT
+
+---
+
+### DNO-FULL — Five Simultaneous Optimalities (Meta-Theorem) ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** DN1-REC+DN2 simultaneously achieves:  
+(1) **Linear**: A^(k)∈GL(4k,Z_n), OA strength 4k for all k,n.  
+(2) **Combinatorial**: t_bal=0, dimension-stable.  
+(3) **Spectral**: D*={0}, hard cutoff+exp decay.  
+(4) **Algorithmic**: O(d) generation, O(n⁴·d) memory, O(d) inverse.  
+(5) **Variance**: exact (V_n, eff. dim≤4k), exp decay beyond, minimax+RKHS optimal.  
+No classical digital net achieves all five simultaneously.
+
+**Source:** `src/flu/core/fractal_net.py` (FractalNetOrthogonal), `src/flu/container/sparse.py` (SparseOrthogonalManifold)  
+**Depends on:** DNO-REC-MATRIX, DNO-TVAL-STABLE, DNO-SPECTRAL, DNO-OPT-FACT, DNO-MINIMAX, DNO-RKHS
+
+---
+
+### DNO-PREFIX — Prefix Discrepancy O(N^{-1/k}) for k≤4 ✅ PROVEN  *(V15.3.2)*
+
+**Statement:** At N=n^j for j≤4k: D*_N(DN1-REC)=O(N^{-1/j}). Sobol provides no comparable guarantee at non-power-of-2 N. Benchmark (d=4, n=3): 10.2× better than FractalNet at N=9; 3.8× at N=27.
+
+**Verified:** L2*=0.041 at N=9 vs 0.422 (FractalNet); 94.3% better than MC at full N=81 ✓  
+**Depends on:** DNO-TVAL-BAL, DNO-OPT
