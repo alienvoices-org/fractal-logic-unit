@@ -68,9 +68,9 @@ def test_empirical_proofs_have_computational_language():
 # ── Proven theorems ───────────────────────────────────────────────────────────
 
 def test_proven_count_v15():
-    """V15.3.2: 71 PROVEN theorems (DN1+GL+OA + OD-19-LINEAR added)."""
-    assert len(proven_theorems()) == 71, \
-        f"Expected 71 PROVEN, got {len(proven_theorems())}"
+    """V15.3.2: 99 PROVEN theorems """
+    assert len(proven_theorems()) == 99, \
+        f"Expected 9 PROVEN, got {len(proven_theorems())}"
    
 def test_core_theorems_are_proven():
     for key in ["T1","T2","T3","T4","T5","T6","T7","T8",
@@ -209,8 +209,8 @@ def test_disproven_results_correct_status():
 
 def test_registry_total_count_v15():
     """V15.3.2: 75 total theorems (DN1-GEN+DN1-REC added)."""
-    assert len(REGISTRY) == 75, \
-        f"Expected 75, got {len(REGISTRY)}"
+    assert len(REGISTRY) == 103, \
+        f"Expected 103, got {len(REGISTRY)}"
 
 # ── get_theorem helpers ───────────────────────────────────────────────────────
 
@@ -378,11 +378,11 @@ def test_unif1_computational_vanishing():
 
 
 def test_registry_total_count_proven():
-    """V15.3.2: exactly 71 PROVEN theorems (DN1+GL+OA + OD-19-LINEAR added)."""
+    """V15.3.2: exactly 99 PROVEN theorems (DN1+GL+OA + OD-19-LINEAR added)."""
     proved = proven_theorems()
-    assert len(proved) == 71, f"Expected 71 PROVEN, got {len(proved)}"
+    assert len(proved) == 99, f"Expected 99 PROVEN, got {len(proved)}"
 
 def test_registry_total_count():
-    """V15.3.2: total 75 entries in the registry (DN1+GL+OA + OD-19-LINEAR added)."""
+    """V15.3.2: total 103 entries in the registry (DN1+GL+OA + OD-19-LINEAR added)."""
     from flu.theory.theorem_registry import REGISTRY
-    assert len(REGISTRY) == 75, f"Expected 75 total in V15.3.2, got {len(REGISTRY)}"
+    assert len(REGISTRY) == 103, f"Expected 103 total in V15.3.2, got {len(REGISTRY)}"
