@@ -103,7 +103,7 @@ from flu.applications.design     import ExperimentalDesign, DesignResult
 from flu.applications.neural     import FLUInitializer, DynamicFLUNetwork
 from flu.applications.quantum    import TensorNetworkSimulator
 from flu.applications.lighthouse import LighthouseBeacon, BeaconKey, cli_main
-from flu.core.vhdl_gen         import generate_vhdl, export_vhdl
+from flu.core.vhdl_gen         import generate_vhdl, export_vhdl, generate_vhdl_dno, export_vhdl_dno
 from flu.core.fractal_net      import FractalNet, FractalNetKinetic, FractalNetOrthogonal   # OD-27 / T9 / DN1: identity / T-matrix / OA(n⁴,4,n,4) digital nets
 from flu.interfaces.digital_net import (
     FractalNetCorputFacet,    # FMD-NET PROVEN — van der Corput facet (researcher interface)
