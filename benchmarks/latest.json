@@ -136,7 +136,10 @@
         "apn_scrambled": 0.01067,
         "monte_carlo": 0.188033,
         "sobol": 0.185575,
-        "halton": 0.186763
+        "halton": 0.186763,
+        "oa_plain": 0.36722,
+        "oa_scrambled": 0.55979,
+        "oa_note": "full OA block"
       },
       {
         "N": 243,
@@ -145,7 +148,10 @@
         "apn_scrambled": 0.116098,
         "monte_carlo": 0.187895,
         "sobol": 0.18834,
-        "halton": 0.188122
+        "halton": 0.188122,
+        "oa_plain": 0.36722,
+        "oa_scrambled": 0.55979,
+        "oa_note": "prefix only (N>81; full OA at N=81)"
       },
       {
         "N": 729,
@@ -154,7 +160,10 @@
         "apn_scrambled": 0.15066,
         "monte_carlo": 0.187634,
         "sobol": 0.188437,
-        "halton": 0.188729
+        "halton": 0.188729,
+        "oa_plain": 0.36722,
+        "oa_scrambled": 0.55979,
+        "oa_note": "prefix only (N>81; full OA at N=81)"
       },
       {
         "N": 2187,
@@ -163,7 +172,10 @@
         "apn_scrambled": 0.169817,
         "monte_carlo": 0.189311,
         "sobol": 0.188624,
-        "halton": 0.18864
+        "halton": 0.18864,
+        "oa_plain": 0.36722,
+        "oa_scrambled": 0.55979,
+        "oa_note": "prefix only (N>81; full OA at N=81)"
       },
       {
         "N": 6561,
@@ -172,8 +184,21 @@
         "apn_scrambled": 0.187282,
         "monte_carlo": 0.188704,
         "sobol": 0.188632,
-        "halton": 0.188636
+        "halton": 0.188636,
+        "oa_plain": 0.36722,
+        "oa_scrambled": 0.55979,
+        "oa_note": "prefix only (N>81; full OA at N=81)"
       }
+    ],
+    "methods": [
+      "fractalnet",
+      "fractalnet_kinetic",
+      "apn_scrambled",
+      "monte_carlo",
+      "sobol",
+      "halton",
+      "oa_plain",
+      "oa_scrambled"
     ]
   },
   "dn2_benchmark": [
