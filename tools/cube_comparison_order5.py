@@ -269,11 +269,9 @@ def run():
     # ── 12. Analytical conclusions ────────────────────────────────────────────
     ps("12. ANALYTICAL CONCLUSIONS")
     print("""
-  MAGIC EQUIVALENCE — THE CORRECTED FINDING:
-    Both cubes are now confirmed MAGIC in the strict sense: all orthogonal
-    line sums and all 4 space diagonals equal M = 315. The prior analysis
-    incorrectly used the FM-Dance *addressing bijection* (trivial digit map,
-    NOT a magic cube) instead of the Siamese step construction.
+  MAGIC EQUIVALENCE:
+    Both cubes are confirmed MAGIC in the strict sense: all orthogonal
+    line sums and all 4 space diagonals equal M = 315.
 
   WHAT "PERFECT" ADDS OVER "MAGIC":
     Trump/Boyer achieves all 30 PLANAR diagonals = 315 (both diagonals of
