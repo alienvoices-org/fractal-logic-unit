@@ -150,7 +150,7 @@ MAGIC_SUM_5: int = 315
 #
 # PROPERTIES (all verified, see tools/cube_comparison_order5.py):
 #   ✓ Values 1..125 each exactly once
-#   ✓ ALL axis-aligned line sums = 315 = 5·(125+1)/2   ← CORRECTED vs. prior version
+#   ✓ ALL axis-aligned line sums = 315 = 5·(125+1)/2
 #   ✓ All 4 space diagonals = 315
 #   ✓ Each axis-slice contains exactly 5 values from each spectral block
 #     {1-25}, {26-50}, {51-75}, {76-100}, {101-125}
@@ -158,13 +158,7 @@ MAGIC_SUM_5: int = 315
 #   ✓ Per-slice digit balance along all axis directions (LHS property)
 #
 # AXIS ORDER: FM_DANCE_5_NP[x, y, z]  — axis-0=X (finest digit), axis-2=Z (coarsest).
-#
-# CORRECTION NOTE (prior version):
-#   The previous FM_DANCE_5_NP used the ADDRESSING bijection:
-#     cube[z,y,x] = 1 + x + 5y + 25z   (trivial digit → position identity)
-#   That is a valid Latin hypercube but NOT a magic cube. Axis-0 sums ranged
-#   from 15 to 615. All code comparing FM_DANCE_5_NP against Trump/Boyer for
-#   magic properties has been updated accordingly.
+
 def _build_fm_dance_5() -> np.ndarray:
     """Build the FM-Dance n=5, d=3 MAGIC cube via generate_magic (1-indexed)."""
     from flu.core.fm_dance import generate_magic
