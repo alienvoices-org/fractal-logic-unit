@@ -150,15 +150,30 @@ MAGIC_SUM_5: int = 315
 #
 # PROPERTIES (all verified, see tools/cube_comparison_order5.py):
 #   ✓ Values 1..125 each exactly once
-#   ✓ ALL axis-aligned line sums = 315 = 5·(125+1)/2
+#   ✓ ALL axis-aligned line sums = 315 = 5·(125+1)/2   ← CORRECTED vs. prior version
 #   ✓ All 4 space diagonals = 315
 #   ✓ Each axis-slice contains exactly 5 values from each spectral block
 #     {1-25}, {26-50}, {51-75}, {76-100}, {101-125}
 #   ✓ Global 5-ary digit balance: each residue 0..4 appears 25× per digit pos
 #   ✓ Per-slice digit balance along all axis directions (LHS property)
 #
-# AXIS ORDER: FM_DANCE_5_NP[x, y, z]  — axis-0=X (finest digit), axis-2=Z (coarsest).
-
+# AXIS ORDER: FM_DANCE_5_NP[axis-0, axis-1, axis-2] where
+#   axis-0 = finest digit direction (S1/S2 coupled, manuscript X-axis)
+#   axis-1 = middle digit direction (manuscript Y-axis)
+#   axis-2 = coarsest digit direction (S3 backstep, manuscript Z-axis)
+#
+#   The formula coordinates from magic_coord(k,5,3) map directly:
+#     coords[0] → axis-0,  coords[1] → axis-1,  coords[2] → axis-2
+#
+#   For display and comparison with TRUMP_BOYER_5_NP (stored as [z,y,x]):
+#   both cubes are displayed with axis-0 fixed per layer. TB's axis-0 = z
+#   (source notation); FM's axis-0 = manuscript X (finest/primary step axis).
+#   The geometric centre (mean = 63) is at FM[2,2,2] = TB[2,2,2] = 63 for both.
+#   The previous FM_DANCE_5_NP used the ADDRESSING bijection:
+#     cube[z,y,x] = 1 + x + 5y + 25z   (trivial digit → position identity)
+#   That is a valid Latin hypercube but NOT a magic cube. Axis-0 sums ranged
+#   from 15 to 615. All code comparing FM_DANCE_5_NP against Trump/Boyer for
+#   magic properties has been updated accordingly.
 def _build_fm_dance_5() -> np.ndarray:
     """Build the FM-Dance n=5, d=3 MAGIC cube via generate_magic (1-indexed)."""
     from flu.core.fm_dance import generate_magic
