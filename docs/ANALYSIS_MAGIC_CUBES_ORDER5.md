@@ -43,12 +43,24 @@ The mean value is (1 + 125) / 2 = **63**.
 
 ## Axis Convention
 
-Both cubes have shape **(5, 5, 5)** with axes **[z, y, x]**.  
-Layers are displayed with **z fixed**, rows y=4 (top) to y=0 (bottom), columns x=0 to x=4.
+Both cubes have shape **(5, 5, 5)**.
 
-The 5-ary digits (a₂, a₁, a₀) correspond to coarsest→finest:
-- a₂ = (v−1) // 25 ∈ {0,1,2,3,4} — the "twenty-fives" digit
-- a₁ = ((v−1) // 5) % 5         — the "fives" digit
+**TRUMP_BOYER_5_NP** is stored as `[z, y, x]` matching the source notation (Trump/Boyer
+original, z=layer). Layers are displayed with z fixed, rows y=4 (top) to y=0 (bottom),
+columns x=0..4.
+
+**FM_DANCE_5_NP** is stored as `[axis-0, axis-1, axis-2]` where:
+- `axis-0` = manuscript X (finest digit a₀, S1 primary step direction)
+- `axis-1` = manuscript Y (middle digit a₁)
+- `axis-2` = manuscript Z (coarsest digit a₂, S3 backstep direction)
+
+For display uniformity, **both cubes use axis-0 as the layer index**. In TB this is the
+source z-layer; in FM-Dance this is the finest-digit slice (not the backstep axis).
+Both cubes have their geometric centre (value 63 = mean) at index `[2,2,2]`.
+
+The 5-ary digits (a₂, a₁, a₀) are defined coarsest→finest for both cubes:
+- a₂ = (v−1) // 25 ∈ {0,1,2,3,4} — the "twenty-fives" digit  
+- a₁ = ((v−1) // 5) % 5         — the "fives" digit  
 - a₀ = (v−1) % 5                — the "units" digit
 
 ---
@@ -138,8 +150,11 @@ y\x  0    1    2    3    4  y\x  0    1    2    3    4
 | All 4 space diagonals | 315 ✓ |
 | Planar diagonals = 315 | **30/30** (PERFECT) |
 | Broken diagonals per direction | 10/50 |
+| Spectral block per LINE | ✗ (only 5/25 axis-0 lines; 2/25 on y and x) |
+| Spectral block per SLICE | ✗ (layers not block-balanced) |
 | Global digit balance (all 3 positions) | ✓ (25 of each) |
 | Per-slice digit balance | ✗ |
+| Point symmetry (v + antipodal = 126) | ✗ (exhaustive-search construction) |
 | Classification | **PERFECT MAGIC CUBE** |
 
 ---
@@ -245,8 +260,11 @@ construction.
 | All 4 space diagonals | 315 ✓ |
 | Planar diagonals = 315 | 18/30 |
 | Broken diagonals per direction | **30/50** |
+| Spectral block per LINE | **✓ (25/25 on every axis)** |
+| Spectral block per SLICE | **✓** |
 | Global digit balance (all 3 positions) | ✓ (25 of each) |
-| Per-slice digit balance | **✓ (5 of each in every slice)** |
+| Per-slice digit balance (LHS) | **✓ (5 of each in every slice)** |
+| Point symmetry (v + antipodal = 126) | **✓** |
 | Classification | **MAGIC CUBE + LATIN HYPERCUBE** |
 
 ---
@@ -347,12 +365,23 @@ layers.
 
 ### 4.2 Spectral Block Structure
 
-Both cubes satisfy the **spectral block per-line** property:
-every axis-aligned line contains exactly one value from each block:
-{1–25}, {26–50}, {51–75}, {76–100}, {101–125}.
+The cubes differ fundamentally in spectral block distribution:
 
-This is a necessary condition for magic line sums (see Section 3.2) and is shared
-by both cubes despite their different constructions.
+**FM-Dance** satisfies the **spectral block per-line** property: every axis-aligned
+line (5 cells sharing 4 fixed coordinates) contains exactly one value from each block
+{1–25}, {26–50}, {51–75}, {76–100}, {101–125}. This is verified for all 75 lines
+(25 per axis direction). It is a necessary condition for magic line sums via the
+digit-balance argument in Section 3.2.
+
+**Trump/Boyer** does NOT satisfy spectral block per-line. Along axis-0, only 5 of 25
+lines are block-balanced; along axes 1 and 2, only 2 of 25 each. Yet every line sums
+to 315 — Trump/Boyer achieves magic via a different mechanism than digit balance,
+exploiting fine-grained value cancellations found by exhaustive search.
+
+Both cubes DO satisfy **spectral block per-slice**: each 25-cell axis-aligned
+cross-section contains exactly 5 values from each block. Wait — the measurements show
+this is also FALSE for Trump/Boyer (see property tables above). Only FM-Dance satisfies
+both the per-slice and per-line spectral block properties.
 
 ### 4.3 Layer Means and Value Scrambling
 
@@ -381,11 +410,14 @@ notably lower std (~24.7), reflecting the balanced Bones centre layer.
 
 ### 5.1 Point Symmetry (Antipodal Balance)
 
-All normal magic hypercubes from 1..n^d satisfy: for every value v, the antipodal
-value (n^d + 1 − v = 126 − v for n=5,d=3) is at the geometrically opposite cell.
-Both cubes satisfy this exactly.
+**FM-Dance** satisfies point symmetry: for every value v at position (z,y,x),
+the antipodal value (n³+1−v = 126−v) sits at (4−z, 4−y, 4−x). This is a direct
+consequence of the closed-form formula — replacing all digits aᵢ → (n−1−aᵢ)
+sends value k+1 to value (n^d−k) = 126−(k+1), and reverses all coordinate signs.
 
-In bones, this means: for every cell with value b, the antipodal cell has value −b.
+**Trump/Boyer** does NOT have point symmetry. Being constructed by exhaustive
+computer search rather than a symmetric formula, it has no reason to preserve the
+antipodal pairing. Verified: 32 of 125 cells violate v + antipodal ≠ 126.
 
 ### 5.2 Layer Antisymmetry of FM-Dance
 
@@ -449,8 +481,9 @@ structure naturally creates many toroidal symmetries.
 | **Toroidal diagonals** | | | |
 | Broken diagonals per direction | **30/50** | 10/50 | FM wins |
 | **Spectral / LHS structure** | | | |
-| Spectral block per line | ✓ | ✓ | Both necessary for magic |
-| Global digit balance | ✓ | ✓ | 25 of each over all 125 cells |
+| Spectral block per LINE | **✓ 25/25 all axes** | ✗ (5/25, 2/25, 2/25) | FM only |
+| Spectral block per SLICE | **✓** | ✗ | FM only |
+| Global digit balance | ✓ | ✓ | 25 of each over 125 cells |
 | Per-slice digit balance (LHS) | **✓** | ✗ | FM only — FLU LHS framework |
 | Layer std deviation equal | **✓** (37.5 all) | ✗ (varies) | FM formula regularity |
 | **Spectral (DFT)** | | | |
