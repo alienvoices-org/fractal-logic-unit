@@ -1,7 +1,7 @@
-# FLU — Five Perspectives on the FM-Dance Path
+# FLU — Six Perspectives on the FM-Dance Path
 
-**Version:** 15.2.0 (V15 audit integration — T9 PROVEN, QMC/Pascal perspectives added)  
-**Status:** All five perspectives PROVEN or rigorously grounded; equivalences PROVEN
+**Version:** 15.4.0 (Perspective 6 added — Siamese Magic Construction)  
+**Status:** All six perspectives PROVEN or rigorously grounded; equivalences PROVEN
 
 This document shows that the FM-Dance traversal can be understood from five
 distinct but mathematically equivalent perspectives. Each perspective illuminates
@@ -10,7 +10,7 @@ complementary lenses on the same object.
 
 ---
 
-## The Five Perspectives at a Glance
+## The Six Perspectives at a Glance
 
 ```
         ┌───────────────────────────────────────────────────────────────────┐
@@ -35,6 +35,7 @@ complementary lenses on the same object.
 | Group-Algebraic | Product formula in (Z_n^D, +) | T7, CGW, SRM | `cayley_generators`, `fractal_fault_lines` |
 | QMC / Digital Net | Generator matrix C_m=T, Faure conjugacy | T9, DISC-1, OD-33 | `FractalNetKinetic`, `generate`, `generate_scrambled` |
 | Pascal / Discrete Calculus | T = Δ^{-1}, carry cascade = Pascal flow | DISC-1, T8 | `step_vector`, `FMDanceIterator` |
+| **Siamese Magic Construction** | **Adjacent-pair steps S_j, spectral block balance** | **MH, MH-COMPARE, T5** | **`magic_coord`, `generate_magic`** |
 
 ---
 
@@ -621,3 +622,119 @@ The V15 audit (`FLUAudit.txt`) established Perspectives 4 and 5 through:
 **T9 was promoted from CONJECTURE to PROVEN** as a direct result of finding and fixing the
 diagnostic bug. The theorem was algebraically inevitable once the construction was clarified —
 the Gnostic Scar (the 0/27 dissonance) forced the deeper inspection that revealed the truth.
+
+---
+
+## Perspective 6: The Siamese Magic Construction View
+
+*Origin: Mönnich 2017 manuscript "Symmetrische Tanzschritte für magische Universen".
+Formalised as Theorem MH (V15.4). This perspective predates all others — it is the
+Genesis Seed (GEN-0) from which the FLU library grew.*
+
+### The Two FM-Dance Objects
+
+The FM-Dance traversal has two distinct implementations. Understanding the difference
+is essential for correct use:
+
+```
+rank k ──┬── T-matrix path  (path_coord)    → Hamiltonian, Latin, T·a(k), NOT magic
+         │   [CGW/BPT/KIB]  "How does FM-Dance WALK through the torus?"
+         │
+         └── Magic hypercube (magic_coord)  → adjacent-pair Siamese, ALL sums = M
+             [MH theorem]   "What MAGIC CUBE does FM-Dance produce?"
+```
+
+Both are bijections over Z_nᵈ. Only the Siamese construction produces magic line sums.
+
+### The Adjacent-Pair Step Vectors
+
+For D=3, the manuscript step vectors are:
+
+```
+S1 = (+1, +1,  0)   steps axes 0,1 together     (primary, every rank)
+S2 = ( 0, +1, +1)   steps axes 1,2 together     (fallback every n ranks)
+S3 = ( 0,  0, −1)   backstep on axis 2 only     (fallback every n² ranks)
+```
+
+Compare with the T-matrix primary step σ₀ = (−1,+1,+1,…) which couples axis-0
+*against* all others simultaneously — a fundamentally different coupling geometry.
+
+**Why adjacent coupling produces magic:**
+For any axis-p line, the free digit a_p appears in exactly two coordinate formulas
+(i_{p-1} and i_p). The adjacent-pair structure forces each line to sample one element
+from every spectral block {1..n^{d-1}}, {n^{d-1}+1..2n^{d-1}}, …, ensuring equal
+block contributions. The T-matrix σ₀ = (−1,+1,…) breaks this for axis-0 by coupling
+it simultaneously to all d axes, so axis-0 slices fall entirely within one block.
+
+### Closed-Form Position Formula (MH PROVEN)
+
+Derived algebraically from the cumulative effect of adjacent-pair steps:
+
+```
+digits: a_i = ⌊k/nⁱ⌋ mod n,   half = ⌊n/2⌋
+
+i_0      = (half + a_0 − a_1)           mod n
+i_j      = (half + a_{j−1} − a_{j+1})   mod n    [1 ≤ j ≤ d−2]
+i_{d−1}  = (n−1  + a_{d−2} − 2·a_{d−1}) mod n
+```
+
+Verified exact against the iterative step algorithm for all (n,d) with n^d ≤ 10⁶.
+
+### Three-Way Distinction
+
+| Object | Construction | Magic? | Latin/LHS? | Hamiltonian? |
+|--------|-------------|--------|-----------|--------------|
+| `generate_fast` | identity digit map | ✗ | ✓ (global) | trivial |
+| `path_coord` / T-matrix | σ₀=(−1,+1,…) | ✗ | ✓ (per-slice) | ✓ (T-bound) |
+| `magic_coord` / Siamese | Sⱼ adjacent-pair | ✓ | ✓ (per-slice) | ✓ (simple) |
+
+The Siamese magic cube is the ONLY one of the three with all axis line sums = M.
+
+### FM-Dance vs Trump/Boyer Perfect Cube
+
+The Trump/Boyer order-5 perfect cube (Trump & Boyer, 2003-11-13) achieves 30/30
+planar diagonals = 315 at the cost of per-slice LHS digit balance. FM-Dance achieves
+per-slice LHS balance at the cost of 18/30 planar diagonals. Both achieve all line
+sums = 315. They occupy structurally orthogonal corners of the design space:
+
+```
+                  planar diagonals
+                  (0 → 30 possible)
+                        30 ┤ Trump/Boyer
+                           │   (PERFECT)
+                        18 ┤ FM-Dance
+                           │   (MAGIC+LHS)
+                         0 ┤ generate_fast / path_coord
+                           └────────────────────────
+                            no LHS   LHS per-slice
+                             global    (FLU-native)
+```
+
+A cube achieving all 30 planar diagonals AND per-slice LHS balance would be a new
+mathematical result. None is currently known at order 5.
+
+```python
+from flu.core.fm_dance import generate_magic
+from flu.constants import FM_DANCE_5_NP, TRUMP_BOYER_5_NP, MAGIC_SUM_5
+import numpy as np
+
+cube = generate_magic(n=5, d=3)
+M    = MAGIC_SUM_5   # 315
+assert all(np.unique(cube.sum(axis=a)).tolist() == [M] for a in range(3))
+```
+
+---
+
+## Notes on V15.4 (April 2026)
+
+Perspective 6 was added based on formalisation of the original Mönnich 2017 manuscript
+construction. Key contributions in V15.4:
+
+1. Closed-form `magic_coord` formula derived algebraically from step vectors S1/S2/…/Sd.
+2. Root-cause of the `generate_fast` bug documented: identity-map addressing ≠ magic cube.
+3. `FM_DANCE_5_NP` corrected in `constants.py` to use `generate_magic(5,3)`.
+4. Three-way distinction (addressing / magic / T-matrix) documented across `fm_dance.py`,
+   `constants.py`, `THEOREMS.md`, `PERSPECTIVES.md`, and `BENCHMARKS.md`.
+5. Trump/Boyer structural comparison formalised as theorem MH-COMPARE.
+6. New document `docs/ANALYSIS_MAGIC_CUBES_ORDER5.md` created with full multi-representation
+   in-depth analysis of both cubes.
