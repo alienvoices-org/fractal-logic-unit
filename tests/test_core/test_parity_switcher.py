@@ -42,9 +42,7 @@ def test_dispatch_parity_flag():
 @pytest.mark.parametrize("n,d", [(3, 2), (4, 2), (5, 3), (6, 2)])
 def test_generate_latin_property(n, d):
     """Verify Latin property holds for both branches (T3/PROVEN)."""
-    M = generate(n, d, signed=False)
-    # verify_latin(arr, n, signed=False) verifies Latin-square slices
-    r = verify_latin(M, n, signed=False)
+    r = verify_latin(n, d, signed=False)
     assert r["latin_ok"], f"Latin property FAILED for n={n}, d={d}"
 
 def test_generate_shape():
