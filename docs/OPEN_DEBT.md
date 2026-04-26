@@ -1,7 +1,7 @@
 # FLU — Open Debt Registry
 
-**Status as of V15.3.2 (2026-03-31). DN1+DNO PROVEN. Registry: 99 PROVEN · 103 total · 2 open conjectures.**
-**Implementation debt: DNO-OQ1 (FractalNetOrthogonal depth parameter for k>1).**
+**Status as of V15.4.0 (2026-04-25). MH+MH-INV+MH-COMPARE PROVEN. Registry: 102 PROVEN · 106 total · 2 open conjectures.**
+**Implementation debt: DNO-OQ1 (FractalNetOrthogonal depth parameter for k>1), OPER-3 (sparse forward differences).**
 
 ---
 
@@ -26,6 +26,20 @@
 | OD-35 | Distributive Law: (M₁⊕M₂)⊗M₃ = (M₁⊗M₃)⊕(M₂⊗M₃) | 🔵 RESEARCH |
 | OD-36 | APN Asymptotics: sparsity of APN bijections as n→∞ | 🔵 RESEARCH |
 | OPER-3 | Sparse Forward Differences — O(D) derivative operator on manifolds | 🟡 PARTIAL |
+| OD-37 | Perfect+LHS Magic Cube at order 5 — any cube with 30/30 planar diags AND per-slice digit balance? | 🔵 RESEARCH |
+
+---
+
+## Recently Closed (V15.4)
+
+| ID | Claim | Closed in | How |
+|----|-------|-----------|-----|
+| ✅ MH | FM-Dance Magic Hypercube — nD Siamese generalisation, all axis sums = M | **V15.4** | Closed-form formula + algebraic proof + 0 violations across n∈{3..11}, d∈{2..6} |
+| ✅ MH-INV | Inverse magic_coord — O(d²) sparse random access without materialising cube | **V15.4** | det(A)=(−1)^(d-1), integer A⁻¹ precomputed; round-trip 0 errors all (n,d) tested |
+| ✅ MH-COMPARE | FM-Dance vs Trump/Boyer structural comparison | **V15.4** | 51 regression tests, exhaustive 125-cell enumeration, 12-property table |
+| ✅ GEN-FAST-BUG | generate_fast incorrectly used as FM_DANCE_5_NP (identity map ≠ magic cube) | **V15.4** | FM_DANCE_5_NP rebuilt via generate_magic(5,3); correction note in constants.py |
+| ✅ ARITH-FIXTURE | test_arithmetic.py: wrong seed length (3 vs n=5) and 2-tuple coords (vs d=3) | **V15.4** | Fixture + coord fixes; 9/9 tests green |
+| ✅ SPARSE-MAGIC | sparse.py had cell_at_rank but no magic-path equivalent | **V15.4** | cell_at_magic_rank + magic_rank_of added to SparseCommunionManifold |
 
 ---
 
