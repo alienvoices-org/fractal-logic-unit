@@ -1,13 +1,13 @@
 {
   "$schema": "srp-package-contract/v2.0#unified-manifest",
-  "$comment": "CLEAN MANIFEST: V15.3.2 / DNO Orthogonal Net Family (2026-03-31).",
-  "generated": "2026-03-27",
-  "version": "15.3.2",
+  "$comment": "CLEAN MANIFEST: V15.4.0",
+  "generated": "2026-04-26",
+  "version": "15.4.0",
   "last_updated": "2026-03-31",
   "package": {
     "name": "flu-math",
-    "full_name": "Fractal Logic Unit — Phased Fractal Number Theory",
-    "version": "15.3.2",
+    "full_name": "Fractal Logic Unit \u2014 Phased Fractal Number Theory",
+    "version": "15.4.0",
     "language": "Python 3.10+",
     "license": "MIT (Sovereign Peerage)",
     "install": "pip install -e .",
@@ -24,9 +24,9 @@
     "formula": "x_k = Permute( Integrate( Digits(k) ) )",
     "summary": "Every coordinate in the manifold is a discrete signal processed via integration and permutation.",
     "components": {
-      "Digits(k)": "Base-n mixed-radix expansion — The 'Derivative' digit stream.",
-      "Integrate": "FM-Dance Prefix-Sum T-matrix (det=-1) — The 'Discrete Integral' Δ⁻¹.",
-      "Permute": "APN / Golden Seed per-depth rotation — The 'Diffusion' layer."
+      "Digits(k)": "Base-n mixed-radix expansion \u2014 The 'Derivative' digit stream.",
+      "Integrate": "FM-Dance Prefix-Sum T-matrix (det=-1) \u2014 The 'Discrete Integral' \u0394\u207b\u00b9.",
+      "Permute": "APN / Golden Seed per-depth rotation \u2014 The 'Diffusion' layer."
     },
     "complexity": "O(D) addressing, O(1) amortized traversal, O(D) memory footprint."
   },
@@ -35,51 +35,51 @@
     "core_invariants": [
       "Latin Property (T3): Each axis-aligned slice is a permutation of digits (Incompressibility).",
       "Hamiltonian Path (T2): Visits every lattice point exactly once without repetition.",
-      "Step Bound (T4): Local displacement is bounded by the torus diameter ⌊n/2⌋.",
+      "Step Bound (T4): Local displacement is bounded by the torus diameter \u230an/2\u230b.",
       "Spectral Vanishing (UNIF-1): Mixed-frequency DFT components are identically zero for all seeds."
     ],
     "key_property": "Self-Referential Manifold (SRM): The coordinate x_k uniquely determines its predecessor x_{k-1} in O(D). No external state needed.",
     "core_object": "A Latin hyperprism M of shape (n,)*d where every 1D axis projection is a permutation of Z_n. Mean-centred (mean = 0 for odd n). Proven bijective.",
     "three_perspectives": {
-      "matrix": "Φ(k) = T·a(k) where T is lower-triangular with det(T) = −1 mod n. Gives O(d) rank→coordinate map.",
-      "kinetic": "Φ(k+1) = Φ(k) + σ_{j(k)} where σ_j are step vectors indexed by carry level j. Each step lands on a 'Fractal Fault Line' B_j.",
-      "algebraic": "Φ(k) = Φ(0) + Σ_{i<k} σ_{j(i)} — a Hamiltonian walk on the Cayley graph Cay(Z_n^D, S). Invertible by S^{-1}."
+      "matrix": "\u03a6(k) = T\u00b7a(k) where T is lower-triangular with det(T) = \u22121 mod n. Gives O(d) rank\u2192coordinate map.",
+      "kinetic": "\u03a6(k+1) = \u03a6(k) + \u03c3_{j(k)} where \u03c3_j are step vectors indexed by carry level j. Each step lands on a 'Fractal Fault Line' B_j.",
+      "algebraic": "\u03a6(k) = \u03a6(0) + \u03a3_{i<k} \u03c3_{j(i)} \u2014 a Hamiltonian walk on the Cayley graph Cay(Z_n^D, S). Invertible by S^{-1}."
     },
     "what_it_is_not": [
-      "Not a random or probabilistic generator — fully deterministic.",
-      "Not a compression algorithm — though structured state compression is an application.",
-      "Not a quantum system — 'qubit' language in early versions was metaphorical, now removed.",
+      "Not a random or probabilistic generator \u2014 fully deterministic.",
+      "Not a compression algorithm \u2014 though structured state compression is an application.",
+      "Not a quantum system \u2014 'qubit' language in early versions was metaphorical, now removed.",
       "Not magic: every claim is either proven or explicitly marked CONJECTURE."
     ]
   },
   "version_highlights": {
     "v14": {
-      "fractal_net": "FractalNet(n, d) — FM-Dance radical inverse, OD-27 quasi-Monte Carlo digital net. ~20% lower L2-star discrepancy vs Monte Carlo at N=729.",
-      "scar_store": "ScarStore(n, d) — Holographic sparse memory over SparseCommunionManifold. Prototype, SIMULATION_ONLY.",
-      "apn_zero_compute": "unrank_optimal_seed now has zero-compute O(n) path for primes n ≡ 2 mod 3 via proven APN power map x^3.",
-      "power_map_obstruction": "Algebraic proof that no bijective power map x^d (mod p) is APN for p ≡ 1 mod 3. Closes OD-16-PM / OD-17-PM.",
+      "fractal_net": "FractalNet(n, d) \u2014 FM-Dance radical inverse, OD-27 quasi-Monte Carlo digital net. ~20% lower L2-star discrepancy vs Monte Carlo at N=729.",
+      "scar_store": "ScarStore(n, d) \u2014 Holographic sparse memory over SparseCommunionManifold. Prototype, SIMULATION_ONLY.",
+      "apn_zero_compute": "unrank_optimal_seed now has zero-compute O(n) path for primes n \u2261 2 mod 3 via proven APN power map x^3.",
+      "power_map_obstruction": "Algebraic proof that no bijective power map x^d (mod p) is APN for p \u2261 1 mod 3. Closes OD-16-PM / OD-17-PM.",
       "t8b_corrected": "T8b statement now cleanly separates PROVEN Gray-1 property from OPEN uniqueness conjecture (OD-19)."
     },
     "v15": {
-      "interfaces_package": "flu.interfaces — 6 facets: LexiconFacet, IntegrityFacet, GeneticFacet, InvarianceFacet, HilbertFacet, CohomologyFacet",
-      "had1_theorem": "HAD-1 PROVEN: Communion ⊗_XOR generates Sylvester-Hadamard matrices of order 2^D",
+      "interfaces_package": "flu.interfaces \u2014 6 facets: LexiconFacet, IntegrityFacet, GeneticFacet, InvarianceFacet, HilbertFacet, CohomologyFacet",
+      "had1_theorem": "HAD-1 PROVEN: Communion \u2297_XOR generates Sylvester-Hadamard matrices of order 2^D",
       "tsp1_theorem": "TSP-1 PROVEN: FM-Dance = optimal TSP + O(D) routing oracle on uniform Cayley graphs",
       "crypto1_theorem": "CRYPTO-1 PROVEN: APN seeds over Z_p provide structural immunity to binary differential cryptanalysis",
-      "lexicon_facet": "LEX-1 PROVEN: Bijective n-ary alphanumeric mapping Λ: Z_n^D → Σ* preserving T1 bijection",
+      "lexicon_facet": "LEX-1 PROVEN: Bijective n-ary alphanumeric mapping \u039b: Z_n^D \u2192 \u03a3* preserving T1 bijection",
       "integrity_facet": "INT-1 PROVEN: O(1) L1 conservative-law sonde for Byzantine fault detection",
       "genetic_facet": "GEN-1 PROVEN: SHA-256 hashed APN seed reservoirs for cross-substrate algebraic parity",
-      "invariance_facet": "INV-1 PROVEN: Structural isomorphism regression — P_odd ≅ P_even under {T3,L1,L2,S1}",
-      "hilbert_facet": "HIL-1 RETIRED: FM-Dance + RotationHub Hilbert locality — RETIRED V15.1.3 (n=2 self-contradiction)",
-      "cohomology_facet": "DEC-1 PROVEN: ScarStore = coset decomposition C⁰(Z_n^D;Z_n) / SCM (Künneth + HM-1)"
+      "invariance_facet": "INV-1 PROVEN: Structural isomorphism regression \u2014 P_odd \u2245 P_even under {T3,L1,L2,S1}",
+      "hilbert_facet": "HIL-1 RETIRED: FM-Dance + RotationHub Hilbert locality \u2014 RETIRED V15.1.3 (n=2 self-contradiction)",
+      "cohomology_facet": "DEC-1 PROVEN: ScarStore = coset decomposition C\u2070(Z_n^D;Z_n) / SCM (K\u00fcnneth + HM-1)"
     },
     "v15_2": {
-      "oper_1_arithmetic_stack": "Functional Calculus for lattices: lazy pointwise algebra (+, -, *, /) with O(D·depth) resolution.",
+      "oper_1_arithmetic_stack": "Functional Calculus for lattices: lazy pointwise algebra (+, -, *, /) with O(D\u00b7depth) resolution.",
       "lattice_convergence": "T10 PROVEN: Identity (Corput) and Kinetic (T-matrix) nets converge to the same point set at N = n^{2d}.",
       "recursive_embedding": "C5 PROVEN: Latin property invariant under arbitrary tensor-product nesting (Hyper-Torus).",
       "lineage_anchoring": "GEN-0 (2017 Siamese Origin) and YM-1 (Danielic Ten 6+4 Orbit Sum) seated as proven roots.",
       "spectral_unification": "UNIF-1 PROVEN: Unified proof of spectral vanishing for all sum-separable arrays via character orthogonality.",
       "od27_conjecture": "OD-27 formal conjecture entry: (t,2k,2k)-net classification of FractalNet. Proof sketch in 4 steps following Niederreiter 1992. Conjectured t=0 for kinetic variant.",
-      "benchmark_suite": "tests/benchmarks/run_benchmark_suite.py — 13-section automated pipeline covering all modules, interfaces, applications, and OD-27 specific QMC measurements. CI-compatible (exit 0 = clean).",
+      "benchmark_suite": "tests/benchmarks/run_benchmark_suite.py \u2014 13-section automated pipeline covering all modules, interfaces, applications, and OD-27 specific QMC measurements. CI-compatible (exit 0 = clean).",
       "even_n_hyperprism": "EVEN-1 PROVEN: Gray-coded XOR micro-block (Z_{2^k}) x sum-mod macro-block (Z_m, m odd) via Kronecker product. SparseEvenManifold O(D) parameter-free oracle; manifold() factory updated. parity_switcher branch: even_kronecker."
     },
     "v15_3": {
@@ -87,12 +87,12 @@
       "dn1_fully_proven": "DN1 PROVEN: Proofs and Digital Net Classification (/src/core/lo_shu_sudoku.py)",
       "dn2_fully_proven": "DN2 PROVEN: all 8 sub-parts closed. FLU-Owen scrambling (mode='owen') is default. (/docs/PROOF_DN2_APN_SCRAMBLING.md)",
       "od27_fully_proven": "OD-27 PROVEN: Proofs and Digital Net Classification for fractalNet and fractalNetKinetic. (/docs/PROOF_OD27_DIGITAL_NET.md)",
-      "dn2_etk": "DN2-ETK: D*_N ≤ C_classic(D)·(B/√n)^D·(log N)^D/N. Improvement (√n/B)^D: e.g. 11.2× at n=5,D=3.",
-      "dn2_walsh": "DN2-WALSH: |ŵ(k)| ≤ (B/√n)^{μ(k)} — Walsh-native, same constant as ETK.",
-      "dn2_var": "DN2-VAR: Var[I_N] ≤ C·(B/√n)^{2D}·(log N)^{D-1}/N^3. Gain independent of smoothness.",
-      "dn2_anova": "DN2-ANOVA: subset u suppressed by (B/√n)^{2|u|}. Effective dimension halved.",
+      "dn2_etk": "DN2-ETK: D*_N \u2264 C_classic(D)\u00b7(B/\u221an)^D\u00b7(log N)^D/N. Improvement (\u221an/B)^D: e.g. 11.2\u00d7 at n=5,D=3.",
+      "dn2_walsh": "DN2-WALSH: |\u0175(k)| \u2264 (B/\u221an)^{\u03bc(k)} \u2014 Walsh-native, same constant as ETK.",
+      "dn2_var": "DN2-VAR: Var[I_N] \u2264 C\u00b7(B/\u221an)^{2D}\u00b7(log N)^{D-1}/N^3. Gain independent of smoothness.",
+      "dn2_anova": "DN2-ANOVA: subset u suppressed by (B/\u221an)^{2|u|}. Effective dimension halved.",
       "api_bug_fix": "All scrambling methods fixed: factoradic_unrank(rank,n) used directly, not unrank_optimal_seed(rank,n).",
-      "golden_seeds_cleanup": "GOLDEN_SEEDS[13] cleaned: 16→10 valid APN seeds. APN/δ=3 regime explicitly separated."
+      "golden_seeds_cleanup": "GOLDEN_SEEDS[13] cleaned: 16\u219210 valid APN seeds. APN/\u03b4=3 regime explicitly separated."
     },
     "v15_3_1": {
       "dn1_fully_proven": "DN1 PROVEN: LoShu Sudoku Graeco-Latin embedding yields OA(81, 4, 3, 4) and (0,4,4)-net.",
@@ -100,12 +100,12 @@
       "t8b_uniqueness_closed": "T8b UPDATED: The OD-19 open part is now formally CLOSED by OD-19-LINEAR. FM-Dance is proven as the unique H_D-orbit."
     },
     "v15_3_2": {
-      "fractal_net_orthogonal": "FractalNetOrthogonal added to flu.core.fractal_net. OA(n⁴,4,n,4) base for all n≥3 odd. FLU-Owen APN scrambling preserves OA per depth. 28 new DNO sub-theorems (DNO-GEN through DNO-PREFIX), all PROVEN.",
-      "sparse_orthogonal_manifold": "SparseOrthogonalManifold added to flu.container.sparse. O(d) memory-free oracle for DN1-REC OA(n^(4k),4k,n,4k). Works for all n≥2 (odd: Lo Shu det=4; even: snake det=1). Dimension communion via __add__.",
-      "even_n_oa": "DNO-COEFF-EVEN PROVEN: snake map A_even (det=1) extends DN1 construction to all even n≥2 including n=2 (differential Gray code on 4 bits, OA(16,4,2,4)).",
-      "inverse_oracle": "DNO-INV PROVEN: O(d) bi-directional rank ↔ coordinates mapping for all n≥2. 0 errors for n∈{2,3,4,5,6,7}.",
-      "dno_spectral": "DNO-SPECTRAL PROVEN: hard cutoff at μ(h)=0 (DN1) + exponential decay at μ(h)≥1 (DN2). First digital net with deterministic spectral hole + stochastic exponential damping.",
-      "dno_asym": "DNO-ASYM PROVEN: tight rate Θ(N^{-1+3/(4k)}·(log N)^{4k-1}). DN1-REC IMPROVES with dimension k (opposite of Sobol). After DN2: O((log N)^{4k}/N), constant (B/√n)^{4k} better.",
+      "fractal_net_orthogonal": "FractalNetOrthogonal added to flu.core.fractal_net. OA(n\u2074,4,n,4) base for all n\u22653 odd. FLU-Owen APN scrambling preserves OA per depth. 28 new DNO sub-theorems (DNO-GEN through DNO-PREFIX), all PROVEN.",
+      "sparse_orthogonal_manifold": "SparseOrthogonalManifold added to flu.container.sparse. O(d) memory-free oracle for DN1-REC OA(n^(4k),4k,n,4k). Works for all n\u22652 (odd: Lo Shu det=4; even: snake det=1). Dimension communion via __add__.",
+      "even_n_oa": "DNO-COEFF-EVEN PROVEN: snake map A_even (det=1) extends DN1 construction to all even n\u22652 including n=2 (differential Gray code on 4 bits, OA(16,4,2,4)).",
+      "inverse_oracle": "DNO-INV PROVEN: O(d) bi-directional rank \u2194 coordinates mapping for all n\u22652. 0 errors for n\u2208{2,3,4,5,6,7}.",
+      "dno_spectral": "DNO-SPECTRAL PROVEN: hard cutoff at \u03bc(h)=0 (DN1) + exponential decay at \u03bc(h)\u22651 (DN2). First digital net with deterministic spectral hole + stochastic exponential damping.",
+      "dno_asym": "DNO-ASYM PROVEN: tight rate \u0398(N^{-1+3/(4k)}\u00b7(log N)^{4k-1}). DN1-REC IMPROVES with dimension k (opposite of Sobol). After DN2: O((log N)^{4k}/N), constant (B/\u221an)^{4k} better.",
       "dno_full": "DNO-FULL PROVEN: five simultaneous optimalities (linear, combinatorial, spectral, algorithmic, variance). No classical net achieves all five.",
       "registry": "Registry grows from 75 to 103 entries (99 PROVEN). 28 new DNO theorems.",
       "tests": "891 PASSED / 0 FAILED (37 new DNO VHDL + facet tests in test_nary_vhdl.py)",
@@ -117,12 +117,12 @@
         "docs/PROOF_DN1_DN2_FRACTAL_NET_ORTHOGONAL.md"
       ],
       "facet_orthogonal": "FractalNetOrthogonalFacet added to flu.interfaces. Full researcher API: generate, generate_scrambled, audit_dno, integration_error, reconstruct_A_matrix, dno_summary. DNO-FULL PROVEN.",
-      "vhdl_dno": "generate_vhdl_dno / export_vhdl_dno added to flu.core.vhdl_gen. Snake generator for ALL n≥2: sequential (k cycles/pt) and parallel (1 cycle/pt). No BRAM, no LUTs beyond modular adders. DNO-COEFF-EVEN PROVEN.",
-      "bench_dno": "bench_dno_orthogonal.py: rigorous DNO benchmark. Section A: integration error machine-epsilon (4/4 cases, DNO-COEFF). Section B: prefix discrepancy 40.1× advantage at N=9 (DNO-PREFIX). Section C: asymptotic exponent by k (DNO-ASYM). Section D: latest.json extended with oa_plain/oa_scrambled columns."
+      "vhdl_dno": "generate_vhdl_dno / export_vhdl_dno added to flu.core.vhdl_gen. Snake generator for ALL n\u22652: sequential (k cycles/pt) and parallel (1 cycle/pt). No BRAM, no LUTs beyond modular adders. DNO-COEFF-EVEN PROVEN.",
+      "bench_dno": "bench_dno_orthogonal.py: rigorous DNO benchmark. Section A: integration error machine-epsilon (4/4 cases, DNO-COEFF). Section B: prefix discrepancy 40.1\u00d7 advantage at N=9 (DNO-PREFIX). Section C: asymptotic exponent by k (DNO-ASYM). Section D: latest.json extended with oa_plain/oa_scrambled columns."
     }
   },
   "theorem_registry": {
-    "summary": "99 PROVEN · 0 PARTIAL · 2 CONJECTURE · 1 DISPROVEN_SCOPED · 1 RETIRED",
+    "summary": "99 PROVEN \u00b7 0 PARTIAL \u00b7 2 CONJECTURE \u00b7 1 DISPROVEN_SCOPED \u00b7 1 RETIRED",
     "total_entries": 103,
     "proven_count": 99,
     "partial_count": 0,
@@ -304,7 +304,7 @@
         },
         {
           "id": "INV-1",
-          "name": "Cross-Branch Structural Isomorphism (P_odd ≅ P_even)",
+          "name": "Cross-Branch Structural Isomorphism (P_odd \u2245 P_even)",
           "status": "PROVEN"
         },
         {
@@ -368,7 +368,7 @@
         },
         {
           "id": "DN2-ETK",
-          "name": "Discrepancy Constant via Erdős–Turán–Koksma",
+          "name": "Discrepancy Constant via Erd\u0151s\u2013Tur\u00e1n\u2013Koksma",
           "status": "PROVEN"
         },
         {
@@ -414,24 +414,24 @@
   "public_api": {
     "addressing_and_kinetics": {
       "manifold(n, d, sparse=True)": "Unified factory returning dense arrays or sparse O(D) oracles.",
-      "path_coord(k, n, d)": "Core Bijection (Rank ↔ Coordinate).",
-      "path_coord_to_rank(coord, n, d)": "Coordinate → rank k. O(d). Inverse of path_coord.",
+      "path_coord(k, n, d)": "Core Bijection (Rank \u2194 Coordinate).",
+      "path_coord_to_rank(coord, n, d)": "Coordinate \u2192 rank k. O(d). Inverse of path_coord.",
       "FMDanceIterator(n, d)": "O(1) amortized Hamiltonian Odometer.",
       "traverse(n, d, start_k=0)": "Lazy generator yielding all n^d coordinates in FM-Dance order.",
       "traverse_reverse(n, d, start_k=None)": "Lazy reverse generator using S^{-1} step vectors."
     },
     "fractal_algebra": {
-      "CommunionEngine": "⊗_φ Structural Fusion (Dimension Expansion).",
-      "SparseArithmeticManifold": "⊕, ⊖, ⊗, ⊘ Field Interaction (Value Transformation).",
+      "CommunionEngine": "\u2297_\u03c6 Structural Fusion (Dimension Expansion).",
+      "SparseArithmeticManifold": "\u2295, \u2296, \u2297, \u2298 Field Interaction (Value Transformation).",
       "ForeignField": "Bridge for external non-FLU data into the arithmetic stack.",
-      "LoShuSudokuHyperCell": "3^4 Graeco-Latin hypercell — OA(81,4,3,4) macro addresses. DN1 PROVEN. Use make_hypercell() or LoShuSudokuHyperCell() directly.",
+      "LoShuSudokuHyperCell": "3^4 Graeco-Latin hypercell \u2014 OA(81,4,3,4) macro addresses. DN1 PROVEN. Use make_hypercell() or LoShuSudokuHyperCell() directly.",
       "SudokuMacroAdapter": "Adapter giving LoShuSudokuHyperCell the FLUHyperCell interface for use as macro layer in FractalHyperCell_3_6(generator='sudoku').",
       "FractalHyperCell_3_6": "3^6 Recursive Fractal Embedding: macro(3^4) x Lo Shu micro(3^2). generator='sudoku' (default, V15.3.1+, OA(81,4,3,4)) or generator='product' (legacy FM-Dance). Factory: make_sudoku() / make_product()."
     },
     "interface_facets": {
       "GeneticFacet": "SHA-256 verified APN seed management.",
       "IntegrityFacet": "Stateless O(1) L1-invariant sonde (Byzantine Fault Detection).",
-      "LexiconFacet": "Bijective alphanumeric address naming: Z_n^D ↔ Σ*.",
+      "LexiconFacet": "Bijective alphanumeric address naming: Z_n^D \u2194 \u03a3*.",
       "GrayCodeFacet": "n-ary Gray code generator (T8 PROVEN).",
       "InvarianceFacet": "Branch isomorphism. .compare_branches(), .check_t3(M), .check_l1(M)",
       "HilbertFacet": "[RETIRED] Hilbert-tuned traversal. .get_point(k), .locality_score()",
@@ -442,16 +442,16 @@
       "FractalNet(n, d)": "OD-27 quasi-Monte Carlo digital net via FM-Dance radical inverse. (T9, DN2 PROVEN)",
       "FractalNet.generate(num_points)": "Points in [0,1)^d with Latin balance at every power-of-n prefix.",
       "FractalNet.generate_scrambled(num_points, seed_rank=0)": "APN digit-scrambled net (DN2 PROVEN).",
-      "FractalNetOrthogonal(n)": "DN1 OA(n⁴,4,n,4) orthogonal digital net. generate(N): Graeco-Latin prefix ordering (10.2× better L2* at N=n² vs FractalNet). generate_scrambled(N): FLU-Owen APN scrambling. All odd n≥3. (DNO-FULL PROVEN)"
+      "FractalNetOrthogonal(n)": "DN1 OA(n\u2074,4,n,4) orthogonal digital net. generate(N): Graeco-Latin prefix ordering (10.2\u00d7 better L2* at N=n\u00b2 vs FractalNet). generate_scrambled(N): FLU-Owen APN scrambling. All odd n\u22653. (DNO-FULL PROVEN)"
     },
     "holographic": {
       "ScarStore(n, d)": "Holographic sparse memory. (HM-1 PROVEN)",
       "SparseCommunionManifold(n, seeds)": "O(D)-memory infinite-scale oracle. [L2, L3]",
-      "SparseOrthogonalManifold(n, d)": "O(D) memory-free oracle for DN1-REC OA(n^(4k),4k,n,4k). Works for all n≥2, d=4k. Odd n: Lo Shu map. Even n: snake map. cell_at_oa_rank(k), verify_oa(), dimension communion via +. (DNO-REC-MATRIX PROVEN)"
+      "SparseOrthogonalManifold(n, d)": "O(D) memory-free oracle for DN1-REC OA(n^(4k),4k,n,4k). Works for all n\u22652, d=4k. Odd n: Lo Shu map. Even n: snake map. cell_at_oa_rank(k), verify_oa(), dimension communion via +. (DNO-REC-MATRIX PROVEN)"
     },
     "seeds": {
-      "unrank_optimal_seed(k, n, signed=True)": "Returns k-th APN/PN seed. Zero-compute for n ≡ 2 mod 3. [PFNT-4, OD-16-PM, OD-17-PM]",
-      "GOLDEN_SEEDS": "Pre-computed APN/PN seeds for n ∈ {3,5,7,11,13,17,19,23,29,31}."
+      "unrank_optimal_seed(k, n, signed=True)": "Returns k-th APN/PN seed. Zero-compute for n \u2261 2 mod 3. [PFNT-4, OD-16-PM, OD-17-PM]",
+      "GOLDEN_SEEDS": "Pre-computed APN/PN seeds for n \u2208 {3,5,7,11,13,17,19,23,29,31}."
     },
     "theory": {
       "get_theorem(key)": "Returns TheoremRecord by ID.",
@@ -461,7 +461,7 @@
     },
     "hardware": {
       "export_vhdl(n, d, filepath)": "Generates synthesisable VHDL for FM-Dance addressing logic.",
-      "generate_vhdl_dno(n, k, mode)": "Generate synthesisable VHDL for DN1-REC OA(n^(4k),4k,n,4k) oracle. Snake generator (det=1) works for ALL n≥2. mode='sequential' (k cycles/point, ~25+k LUTs, 0 BRAM) or mode='parallel' (1 cycle/point, k×25 LUTs, 0 BRAM). Entities: snake_block_N + dno_rec_<mode>. (DNO-COEFF-EVEN PROVEN)",
+      "generate_vhdl_dno(n, k, mode)": "Generate synthesisable VHDL for DN1-REC OA(n^(4k),4k,n,4k) oracle. Snake generator (det=1) works for ALL n\u22652. mode='sequential' (k cycles/point, ~25+k LUTs, 0 BRAM) or mode='parallel' (1 cycle/point, k\u00d725 LUTs, 0 BRAM). Entities: snake_block_N + dno_rec_<mode>. (DNO-COEFF-EVEN PROVEN)",
       "export_vhdl_dno(n, k, filepath, mode)": "Write DN1-REC VHDL to .vhd file. See generate_vhdl_dno."
     }
   },
@@ -513,12 +513,12 @@
     },
     {
       "id": "DNO-OQ4",
-      "item": "Walsh dual net structure — D*={0} at all depths (DNO-DUAL)",
+      "item": "Walsh dual net structure \u2014 D*={0} at all depths (DNO-DUAL)",
       "closed_in": "V15.3.2"
     },
     {
       "id": "DNO-OQ5",
-      "item": "Even-n OA — snake map for all n≥2 (DNO-COEFF-EVEN)",
+      "item": "Even-n OA \u2014 snake map for all n\u22652 (DNO-COEFF-EVEN)",
       "closed_in": "V15.3.2"
     },
     {
@@ -528,7 +528,7 @@
     },
     {
       "id": "DN1-REC",
-      "item": "DN1-REC PROVEN for n=3, k=2: OA(3⁸,8,3,8) verified",
+      "item": "DN1-REC PROVEN for n=3, k=2: OA(3\u2078,8,3,8) verified",
       "closed_in": "V15.3.2"
     }
   ],
@@ -542,52 +542,52 @@
     {
       "id": "OD-16",
       "class": "PROOF",
-      "item": "δ_min(Z_19) algebraic lower bound (all bijections)",
+      "item": "\u03b4_min(Z_19) algebraic lower bound (all bijections)",
       "status": "OPEN"
     },
     {
       "id": "OD-17",
       "class": "PROOF",
-      "item": "δ_min(Z_31) algebraic lower bound (all bijections)",
+      "item": "\u03b4_min(Z_31) algebraic lower bound (all bijections)",
       "status": "OPEN"
     },
     {
       "id": "OD-34",
       "class": "PROOF",
-      "item": "Kinship Curve — Hamiltonian continuity under RotationHub",
+      "item": "Kinship Curve \u2014 Hamiltonian continuity under RotationHub",
       "status": "OPEN"
     },
     {
       "id": "OPER-3",
       "class": "IMPL",
-      "item": "Sparse Forward Differences — O(D) derivative operator",
+      "item": "Sparse Forward Differences \u2014 O(D) derivative operator",
       "status": "PARTIAL"
     },
     {
       "id": "OD-35",
       "class": "RESEARCH",
-      "item": "Distributive Law: (M₁⊕M₂)⊗M₃ = (M₁⊗M₃)⊕(M₂⊗M₃)",
+      "item": "Distributive Law: (M\u2081\u2295M\u2082)\u2297M\u2083 = (M\u2081\u2297M\u2083)\u2295(M\u2082\u2297M\u2083)",
       "status": "RESEARCH"
     },
     {
       "id": "OD-36",
       "class": "RESEARCH",
-      "item": "APN Asymptotics: sparsity of APN bijections as n→∞",
+      "item": "APN Asymptotics: sparsity of APN bijections as n\u2192\u221e",
       "status": "RESEARCH"
     }
   ],
   "mathematical_lineage": {
-    "2017_genesis": "Symmetrische Tanzschritte — Siamese nD generalisation (GEN-0).",
-    "2026_symmetry": "Danielic Ten — Octahedral 6+4 Orbit Invariant (YM-1).",
-    "qmc_duality": "Van der Corput Duality — FM-Dance as Discrete Integral (DISC-1).",
+    "2017_genesis": "Symmetrische Tanzschritte \u2014 Siamese nD generalisation (GEN-0).",
+    "2026_symmetry": "Danielic Ten \u2014 Octahedral 6+4 Orbit Invariant (YM-1).",
+    "qmc_duality": "Van der Corput Duality \u2014 FM-Dance as Discrete Integral (DISC-1).",
     "spectral_law": "Character Orthogonality on Abelian Groups (UNIF-1).",
     "de_la_loubere_1693": "D=2 case is exactly the Siamese magic square method (T5 PROVEN).",
     "latin_hypercubes_mckay_1979": "FLU generates deterministic Latin hypercubes where standard methods use random permutations.",
-    "p_adic_odometer": "Time variable k evolves as an m-adic odometer; carry cascade is the p-adic valuation ν_n(k).",
+    "p_adic_odometer": "Time variable k evolves as an m-adic odometer; carry cascade is the p-adic valuation \u03bd_n(k).",
     "cayley_graphs": "FM-Dance path is a Hamiltonian walk on Cay(Z_n^D, S) (CGW PROVEN).",
     "digital_nets": "FractalNet (OD-27) is a quasi-Monte Carlo digital net (T9 PROVEN). Beats random by ~20% in L2-star discrepancy.",
     "apn_permutations": "APN (Almost Perfect Nonlinear) permutations from cryptography used as optimal seeds.",
-    "hasse_weil": "Algebraic curve argument (Hasse-Weil) proves APN power-map obstruction for p ≡ 1 mod 3 (OD-16-PM, OD-17-PM PROVEN)."
+    "hasse_weil": "Algebraic curve argument (Hasse-Weil) proves APN power-map obstruction for p \u2261 1 mod 3 (OD-16-PM, OD-17-PM PROVEN)."
   },
   "benchmarks": {
     "$ref": "benchmarks/latest.json",
@@ -612,14 +612,14 @@
     "epistemic_record": "docs/THEOREMS.md (The Proofs)",
     "scientific_receipt": "docs/BENCHMARKS.md (The Measurements)",
     "for_llm_auditors": [
-      "1. Read this file (FLU_MANIFEST.json) — all proven/conjectured claims are here.",
-      "2. Read docs/THEOREMS.md — full proof sketches (V14+V15 sections at bottom).",
-      "3. Read docs/PERSPECTIVES.md — the three equivalent mathematical views.",
-      "4. Read docs/AUDIT_NOTES.md — V14/V15 audit findings in detail.",
-      "5. Read docs/PROOF_APN_OBSTRUCTION.md — algebraic proof of OD-16-PM / OD-17-PM.",
+      "1. Read this file (FLU_MANIFEST.json) \u2014 all proven/conjectured claims are here.",
+      "2. Read docs/THEOREMS.md \u2014 full proof sketches (V14+V15 sections at bottom).",
+      "3. Read docs/PERSPECTIVES.md \u2014 the three equivalent mathematical views.",
+      "4. Read docs/AUDIT_NOTES.md \u2014 V14/V15 audit findings in detail.",
+      "5. Read docs/PROOF_APN_OBSTRUCTION.md \u2014 algebraic proof of OD-16-PM / OD-17-PM.",
       "6. Run: python -c 'import sys; sys.path.insert(0, \"src\"); import flu; print(flu.status_report())'",
       "7. Query: flu.get_theorem('KIB') for any theorem record.",
-      "8. Audit: src/flu/theory/THEOREM_REGISTRY.json — machine-readable with 66 entries."
+      "8. Audit: src/flu/theory/THEOREM_REGISTRY.json \u2014 machine-readable with 66 entries."
     ],
     "for_researchers": [
       "Core algorithm: src/flu/core/fm_dance_path.py",
@@ -634,7 +634,7 @@
       "V14 new: FractalNet, ScarStore",
       "APN seeds: unrank_optimal_seed(), GOLDEN_SEEDS",
       "Theorem verification: verify_latin(), verify_holographic_repair()",
-      "Do NOT import from src/flu/core/ directly — use flu.__init__ exports only."
+      "Do NOT import from src/flu/core/ directly \u2014 use flu.__init__ exports only."
     ]
   },
   "v16_vision": "Crystalline Closure: Zero Mathematical Debt. 100% Proven Registry. Boxed 500kb binary-pure runtime.",
@@ -695,7 +695,7 @@
       "date": "2026-03-26",
       "summary": "DN1 PROVEN: LoShu Sudoku Graeco-Latin embedding yields OA(81, 4, 3, 4). OD-19-LINEAR PROVEN: Linear digit uniqueness proved for 246 orbits (D=3). Registry updated: 69 PROVEN / 73 total / 2 open.",
       "theorems_changed": [
-        "DN1 CONJECTURE→PROVEN",
+        "DN1 CONJECTURE\u2192PROVEN",
         "DN1-GL NEW PROVEN",
         "DN1-OA NEW PROVEN",
         "OD-19-LINEAR NEW PROVEN"
@@ -706,7 +706,7 @@
       "date": "2026-03-20",
       "summary": "DN2 FULLY PROVEN: FLU-Owen scrambling architecture + character sum audit + ETK discrepancy constant + Walsh-tight bound + Owen-class variance + ANOVA interaction suppression. 4 new sub-theorems (DN2-ETK/WALSH/VAR/ANOVA). GOLDEN_SEEDS[13] cleaned; API bug (unrank_optimal_seed misuse) fixed. Registry: 65 PROVEN / 70 total / 3 open.",
       "theorems_changed": [
-        "DN2 PARTIAL→PROVEN",
+        "DN2 PARTIAL\u2192PROVEN",
         "DN2-ETK NEW PROVEN",
         "DN2-WALSH NEW PROVEN",
         "DN2-VAR NEW PROVEN",
@@ -729,9 +729,9 @@
     {
       "version": "15.1.2",
       "date": "2026-03-11",
-      "summary": "DEC-1 promoted CONJECTURE→PROVEN. Original (L2=Delta^{-1}) corrected. ScarStore = coset decomposition C^0/SCM, proved from HM-1+Kunneth. 673 tests passing.",
+      "summary": "DEC-1 promoted CONJECTURE\u2192PROVEN. Original (L2=Delta^{-1}) corrected. ScarStore = coset decomposition C^0/SCM, proved from HM-1+Kunneth. 673 tests passing.",
       "theorems_changed": [
-        "DEC-1 CONJECTURE→PROVEN"
+        "DEC-1 CONJECTURE\u2192PROVEN"
       ],
       "new_findings": [
         "L2 (Holographic Repair) is NOT Delta^{-1}: different operators (projection vs potential)",
@@ -743,13 +743,13 @@
     {
       "version": "15.1.1",
       "date": "2026-03-11",
-      "summary": "DN2 promoted CONJECTURE→PARTIAL. FFT spectral reduction confirmed 26-50% for n≥5. n=3 APN-free finding documented. PAPER.md §3.8+§4.6+§6 updated. All tests passing (673/673).",
+      "summary": "DN2 promoted CONJECTURE\u2192PARTIAL. FFT spectral reduction confirmed 26-50% for n\u22655. n=3 APN-free finding documented. PAPER.md \u00a73.8+\u00a74.6+\u00a76 updated. All tests passing (673/673).",
       "theorems_changed": [
-        "DN2 CONJECTURE→PARTIAL"
+        "DN2 CONJECTURE\u2192PARTIAL"
       ],
       "new_findings": [
         "Z_3 has no APN bijection (delta_min=3); GOLDEN_SEEDS[3] are all delta=3",
-        "FFT reduction by APN scrambling: n=5→26.5%, n=7→39.3%, n=11→50.1%",
+        "FFT reduction by APN scrambling: n=5\u219226.5%, n=7\u219239.3%, n=11\u219250.1%",
         "L2 discrepancy not improved by APN scrambling at any n tested"
       ]
     },
