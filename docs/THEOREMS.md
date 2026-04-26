@@ -319,11 +319,6 @@ are globally balanced (25 of each over all 125 cells) but NOT per-slice balanced
 FM-Dance cube has all three digit positions balanced within every individual axis-aligned
 cross-section — a strictly stronger structural property required by the FLU LHS framework.
 
-**Root cause of generate_fast bug (CORRECTION NOTE, V15.4):**
-The prior `FM_DANCE_5_NP` was built from `generate_fast(n=5,d=3)+1`, which stores rank k
-at position (a_0, a_1, a_2) — the trivial identity. Axis-0 line sums ranged from 15 to 615,
-far from magic. All analysis comparing FM-Dance to Trump/Boyer has been corrected.
-
 **Source:** `tools/cube_comparison_order5.py`, `src/flu/constants.py`  
 **See also:** `docs/ANALYSIS_MAGIC_CUBES_ORDER5.md` (full in-depth analysis document)
 
