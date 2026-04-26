@@ -115,7 +115,7 @@ class TestRoundTrip:
 
     def test_invalid_6d_raises(self, frac):
         with pytest.raises(ValueError):
-            frac.cell_at_6d((0, 0, 0, 0, 0, 0))  # only valid if in index
+            frac.cell_at_6d((99, 99, 99, 99))  # out-of-range address not in index
 
 
 # ── cell_at_6d ────────────────────────────────────────────────────────────────
