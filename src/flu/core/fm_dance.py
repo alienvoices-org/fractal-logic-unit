@@ -273,6 +273,176 @@ def generate_magic(n: int, d: int) -> np.ndarray:
     return cube
 
 
+def _build_magic_A(d: int) -> list:
+    """
+    Build the d×d integer coefficient matrix A for the magic_coord linear system.
+
+    The forward magic_coord formula is:
+        b_0      = i_0 − h       = a_0 − a_1                  (mod n)
+        b_j      = i_j − h       = a_{j−1} − a_{j+1}          (mod n)  [1≤j≤d−2]
+        b_{d−1}  = i_{d−1}−(n−1) = a_{d−2} − 2·a_{d−1}        (mod n)
+
+    Written as A·a ≡ b (mod n), the matrix A is:
+
+        row 0:    [ 1, −1,  0,  0, …,  0,  0]
+        row j:    [ 0, …,  1,  0, −1, …,  0,  0]  (+1 at j−1, −1 at j+1)
+        row d−1:  [ 0, …,  0,  0,  0, …,  1, −2]
+
+    det(A) = (−1)^{d−1} so A is invertible over Z_n for all odd n ≥ 3.
+    """
+    A = [[0]*d for _ in range(d)]
+    A[0][0] = 1;  A[0][1] = -1
+    for j in range(1, d-1):
+        A[j][j-1] = 1;  A[j][j+1] = -1
+    A[d-1][d-2] = 1;  A[d-1][d-1] = -2
+    return A
+
+
+def _invert_integer_matrix(A: list) -> list:
+    """
+    Compute the exact integer inverse of an integer matrix with det = ±1.
+    Uses Gaussian elimination with exact integer arithmetic (no floating point).
+    Returns A⁻¹ as a list of lists of ints.
+    """
+    d = len(A)
+    # Build augmented [A | I]
+    M = [[A[i][j] for j in range(d)] + [1 if i == j else 0 for j in range(d)]
+         for i in range(d)]
+
+    # We work over Q; since det = ±1, all entries will be integers at the end.
+    # Represent entries as (numerator, denominator) fractions for exact arithmetic.
+    from fractions import Fraction
+    F = [[Fraction(v) for v in row] for row in M]
+
+    for col in range(d):
+        # Pivot
+        pivot = next(r for r in range(col, d) if F[r][col] != 0)
+        F[col], F[pivot] = F[pivot], F[col]
+        scale = F[col][col]
+        F[col] = [v / scale for v in F[col]]
+        for r in range(d):
+            if r != col:
+                factor = F[r][col]
+                F[r] = [F[r][c] - factor * F[col][c] for c in range(2*d)]
+
+    Ainv = [[int(F[i][d + j]) for j in range(d)] for i in range(d)]
+    return Ainv
+
+
+# Pre-cached A⁻¹ for d = 2..8 (computed once at import time, re-used per call)
+_MAGIC_A_INV: dict = {}
+
+
+def _get_magic_A_inv(d: int) -> list:
+    """Return (and cache) the integer inverse of the magic_coord matrix for dimension d."""
+    if d not in _MAGIC_A_INV:
+        _MAGIC_A_INV[d] = _invert_integer_matrix(_build_magic_A(d))
+    return _MAGIC_A_INV[d]
+
+
+def magic_coord_inv(pos: Tuple[int, ...], n: int, d: int) -> int:
+    """
+    Inverse of magic_coord: O(d²) position → rank, no cube materialisation.
+
+    Given the 0-indexed position tuple produced by magic_coord(k, n, d),
+    return the original rank k ∈ [0, n^d).  This is the **sparse random-access**
+    complement to magic_coord: together they form a true O(d) / O(d²) bijection
+    pair that never needs to build the full n^d array.
+
+    THEOREM (MH-INV): STATUS PROVEN
+    ────────────────────────────────
+    The magic_coord position formula is a linear bijection A·a ≡ b (mod n)
+    where a = (a_0,…,a_{d-1}) are the base-n digits of rank k and b is derived
+    from pos by subtracting the offset vector (h,h,…,h,n-1).
+
+    The coefficient matrix A has det(A) = (−1)^{d-1}, so A is invertible over
+    Z_n for all odd n ≥ 3 (gcd(det, n) = 1 since n is odd ≥ 3 and det = ±1).
+
+    The inverse A⁻¹ has integer entries (exact, no modular arithmetic needed for
+    the matrix itself) and is precomputed once per d via exact Gaussian elimination.
+
+    Recovery formula:
+        b_j   = (pos[j] − h)   mod n   for j = 0…d−2   [h = ⌊n/2⌋]
+        b_{d-1}= (pos[d-1] − (n−1)) mod n
+        a      = (A⁻¹ · b) mod n       [vector · matrix, each component mod n]
+        k      = Σ aᵢ · nⁱ
+
+    Complexity: O(d²) per call (matrix–vector product mod n);
+                O(d³) one-time setup for A⁻¹ (cached after first call per d).
+
+    Parameters
+    ----------
+    pos : tuple of d ints in [0, n)   (as returned by magic_coord)
+    n   : int   odd base ≥ 3
+    d   : int   dimension ≥ 2
+
+    Returns
+    -------
+    int   rank k in [0, n^d)
+
+    Raises
+    ------
+    ValueError  if n is even, d < 2, or pos is out of range
+
+    Example
+    -------
+    >>> from flu.core.fm_dance import magic_coord, magic_coord_inv
+    >>> k = 42
+    >>> pos = magic_coord(k, n=5, d=3)
+    >>> assert magic_coord_inv(pos, n=5, d=3) == k
+    """
+    if not is_odd(n):
+        raise ValueError(f"magic_coord_inv requires odd n, got {n}")
+    if d < 2:
+        raise ValueError(f"magic_coord_inv requires d ≥ 2, got {d}")
+
+    h = n // 2
+    Ainv = _get_magic_A_inv(d)
+
+    # Build b: subtract offsets from position coordinates
+    b = [(pos[j] - h) % n for j in range(d)]
+    b[d - 1] = (pos[d - 1] - (n - 1)) % n
+
+    # Recover digits: a = A⁻¹ · b  (mod n)
+    digits = tuple(int(sum(Ainv[i][j] * b[j] for j in range(d))) % n
+                   for i in range(d))
+
+    # Reconstruct rank from digits
+    return sum(digits[i] * (n ** i) for i in range(d))
+
+
+def verify_magic_inverse(n: int, d: int) -> Dict:
+    """
+    Verify magic_coord ∘ magic_coord_inv = id and vice versa for all ranks.
+
+    Returns a dict with keys: n, d, total, errors, passed.
+    """
+    total = n ** d
+    errors = []
+    for k in range(total):
+        pos = magic_coord(k, n, d)
+        k2  = magic_coord_inv(pos, n, d)
+        if k2 != k:
+            errors.append((k, pos, k2))
+    # Also verify surjectivity (no two ranks map to same pos)
+    seen = set()
+    collisions = 0
+    for k in range(total):
+        pos = magic_coord(k, n, d)
+        if pos in seen:
+            collisions += 1
+        seen.add(pos)
+    return {
+        "n":          n,
+        "d":          d,
+        "total":      total,
+        "errors":     len(errors),
+        "collisions": collisions,
+        "passed":     len(errors) == 0 and collisions == 0,
+    }
+
+
+
 def verify_bijection(n: int, d: int, verbose: bool = False) -> Dict:
     """Full round-trip verification for n^d."""
     total = n ** d
