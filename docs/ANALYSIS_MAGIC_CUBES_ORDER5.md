@@ -378,10 +378,10 @@ lines are block-balanced; along axes 1 and 2, only 2 of 25 each. Yet every line 
 to 315 — Trump/Boyer achieves magic via a different mechanism than digit balance,
 exploiting fine-grained value cancellations found by exhaustive search.
 
-Both cubes DO satisfy **spectral block per-slice**: each 25-cell axis-aligned
-cross-section contains exactly 5 values from each block. Wait — the measurements show
-this is also FALSE for Trump/Boyer (see property tables above). Only FM-Dance satisfies
-both the per-slice and per-line spectral block properties.
+**spectral block per-slice**: each 25-cell axis-aligned cross-section contains exactly
+5 values from each block. The measurements show this is also FALSE for Trump/Boyer
+(see property tables above). FM-Dance satisfies both the per-slice and per-line
+spectral block properties.
 
 ### 4.3 Layer Means and Value Scrambling
 
@@ -469,7 +469,7 @@ structure naturally creates many toroidal symmetries.
 |----------|----------|-------------|-------|
 | **Magic completeness** | | | |
 | Values 1..125, each once | ✓ | ✓ | Both bijections |
-| All row sums = 315 | ✓ | ✓ | Corrected in V15.4 |
+| All row sums = 315 | ✓ | ✓ | |
 | All column sums = 315 | ✓ | ✓ | |
 | All pillar sums = 315 | ✓ | ✓ | |
 | All 4 space diagonals = 315 | ✓ | ✓ | |
