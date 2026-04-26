@@ -4,7 +4,51 @@ All notable changes to the FLU library are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
-  
+
+## [15.4.0] — 2026-04-25
+
+FM-Dance Siamese Magic Hypercube formalised. True `generate_magic` bijection derived from the Mönnich 2017 manuscript step vectors. Sparse inverse `magic_coord_inv` implemented. `FM_DANCE_5_NP` corrected. Trump/Boyer perfect cube integrated and fully compared. 3 new PROVEN theorems. 102 PROVEN / 106 total. 60 new tests (51 magic-cube + 9 arithmetic fixture fixes). Full suite: 1299 passed.
+
+**Theorems:**
+- MH NEW PROVEN — FM-Dance Magic Hypercube: `generate_magic(n,d)` all axis sums = M for all odd n≥3, d≥2
+- MH-INV NEW PROVEN — Inverse `magic_coord_inv`: O(d²) sparse random access, det(A)=(−1)^(d-1), integer A⁻¹
+- MH-COMPARE NEW PROVEN — FM-Dance vs Trump/Boyer: structural 12-property comparison, 51 regression tests
+- T5 EXPANDED — now covers nD Siamese generalisation (not just D=2)
+
+**New functions (`flu.core.fm_dance`):**
+- `magic_coord(k, n, d)` — closed-form Siamese position, O(d)
+- `magic_coord_inv(pos, n, d)` — exact inverse, O(d²), no cube needed
+- `generate_magic(n, d)` — materialise full magic hypercube
+- `verify_magic_inverse(n, d)` — round-trip verification utility
+- `_build_magic_A`, `_invert_integer_matrix`, `_get_magic_A_inv` — internal helpers
+
+**New constants (`flu.constants`):**
+- `TRUMP_BOYER_5_NP` — perfect magic cube order 5, credit Walter Trump & Christian Boyer (2003)
+- `FM_DANCE_5_NP` — corrected: now built from `generate_magic(5,3)` (was identity map)
+- `MAGIC_SUM_5` = 315
+
+**New methods (`flu.container.sparse.SparseCommunionManifold`):**
+- `cell_at_magic_rank(k)` — evaluate manifold at Siamese magic position of rank k
+- `magic_rank_of(coords)` — inverse: coords → magic rank
+
+**Bug fixes:**
+- `FM_DANCE_5_NP` was the trivial addressing bijection (axis-0 sums 15–615); now correctly the Siamese magic cube (all sums 315)
+- `tests/test_container/test_arithmetic.py` fixture seeds had wrong length (3 vs n=5) and 2-tuple coords (vs d=3)
+
+**Docs (new/updated):**
+- `docs/ANALYSIS_MAGIC_CUBES_ORDER5.md` NEW — full 3-representation layer-by-layer analysis
+- `docs/THEOREMS.md` — MH, MH-INV, MH-COMPARE added; T5 expanded; score 99→102 PROVEN
+- `docs/PERSPECTIVES.md` — Perspective 6 (Siamese Magic Construction) added
+- `docs/BENCHMARKS.md` — Part VI (Benchmarks 17–20) added with real timing data
+- `docs/OPEN_DEBT.md` — V15.4 closed items; OD-37 (perfect+LHS cube) added as RESEARCH
+
+**Registry:**
+- `src/flu/theory/theorem_registry.py` — MH, MH-INV, MH-COMPARE added with full records
+- `src/flu/theory/THEOREM_REGISTRY.json` — regenerated v15.4.0, 102 PROVEN / 106 total
+- `src/flu/theory/theory_fm_dance.py` — T5 record updated; MH_MAGIC_HYPERCUBE, MH_INV added to ALL_THEOREMS
+
+---
+
 ## [15.3.2] — 2026-03-31
 
 DNO orthogonal net family complete. FractalNetOrthogonalFacet, generate_vhdl_dno/export_vhdl_dno, bench_dno_orthogonal.py. 28 DNO theorems PROVEN. 891 tests passing.
