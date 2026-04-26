@@ -355,13 +355,13 @@ class TestV15BridgeTheorems(unittest.TestCase):
     def test_proven_count_is_59(self):
         from flu.theory.theorem_registry import proven_theorems
         pt = proven_theorems()
-        self.assertEqual(len(pt), 99,
-            f"Expected 99 PROVEN in V15.3.2 (28 DNO theorems added), got {len(pt)}")
+        self.assertEqual(len(pt), 102,
+            f"Expected 102 PROVEN in V15.4.0, got {len(pt)}")
 
     def test_total_count_is_65(self):
         from flu.theory.theorem_registry import REGISTRY
-        self.assertEqual(len(REGISTRY), 103,
-            f"Expected 103 total in V15.3.2 (28 DNO theorems added), got {len(REGISTRY)}")
+        self.assertEqual(len(REGISTRY), 106,
+            f"Expected 106 total in V15.4.0, got {len(REGISTRY)}")
 
     def test_conjecture_count_unchanged(self):
         from flu.theory.theorem_registry import open_conjectures
