@@ -255,17 +255,64 @@ class SparseCommunionManifold(ArithmeticMixin):
 
     def cell_at_rank(self, k: int) -> int:
         """
-        Evaluate the cell at the k-th step of the FM-Dance Hamiltonian path.
+        Evaluate the cell at the k-th step of the FM-Dance Hamiltonian path
+        (addressing bijection, T1 / index_to_coords).
 
-        Complexity: O(D) addressing (T1) + O(D) evaluation = O(D).
+        Complexity: O(D) addressing + O(D) evaluation = O(D).
 
         Parameters
         ----------
         k : int  FM-Dance rank in [0, n^D)
         """
-        # index_to_coords already returns signed balanced coordinates
         coords_signed = tuple(int(c) for c in index_to_coords(k, self.n, self.d))
         return self._evaluate_single(coords_signed)
+
+    def cell_at_magic_rank(self, k: int) -> int:
+        """
+        Evaluate the cell at position magic_coord(k) — the k-th rank of the
+        FM-Dance **magic hypercube** (Siamese adjacent-pair construction, MH PROVEN).
+
+        Unlike cell_at_rank (which uses the addressing bijection / T-matrix path),
+        this method places k at the position that makes all axis-aligned lines of
+        the magic hypercube sum to M = n(n^d+1)/2.
+
+        Sparse random access: O(d²) per call without materialising n^d values.
+        For hot-path use, precompute A⁻¹ via _get_magic_A_inv(d) once.
+
+        Parameters
+        ----------
+        k : int  rank in [0, n^d), 0-indexed
+
+        Returns
+        -------
+        int  seed-derived value at the Siamese magic position of rank k
+        """
+        from flu.core.fm_dance import magic_coord
+        # magic_coord returns 0-indexed coords in [0,n); convert to signed [-h,h]
+        h = self.half
+        pos = magic_coord(k, self.n, self.d)
+        coords_signed = tuple(int(p) - h for p in pos)
+        return self._evaluate_single(coords_signed)
+
+    def magic_rank_of(self, coords: tuple) -> int:
+        """
+        Inverse: given signed coordinates, return the magic rank k such that
+        magic_coord(k, n, d) == coords_unsigned.
+
+        Sparse O(d²) inverse without materialising the full cube.
+
+        Parameters
+        ----------
+        coords : tuple of d signed ints in [-n//2, n//2]
+
+        Returns
+        -------
+        int  rank k in [0, n^d)
+        """
+        from flu.core.fm_dance import magic_coord_inv
+        h = self.half
+        pos = tuple(int(c) + h for c in coords)   # signed → 0-indexed
+        return magic_coord_inv(pos, self.n, self.d)
 
     # ── Helpers ─────────────────────────────────────────────────────────────
     
