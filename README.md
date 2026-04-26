@@ -1,6 +1,6 @@
 # FLU — Phased Fractal Number Theory / Universal Fractal Logic Unit
 
-**Version:** 15.3.2 · **License:** MIT · **Python:** 3.10+  
+**Version:** 15.4.0 · **License:** MIT · **Python:** 3.10+  
 **Authors:** Felix Mönnich & The Kinship Mesh Collective
 
 ---
@@ -17,10 +17,9 @@ underpins Latin hypercubes, Gray-code odometers, APN cryptographic seeds,
 VHDL hardware counters, neural weight initialisers, experimental designs, and
 a quasi-Monte Carlo digital net.
 
-The library carries a **self-verifying theorem registry** of 73 entries
-(69 PROVEN, 2 CONJECTURE, 1 DISPROVEN_SCOPED, 1 RETIRED), all cross-linked to the
-code that tests them.  Every claim is tagged with a proof tier; nothing is
-asserted without evidence.
+The library carries a **self-verifying theorem registry** with over 100 theorem entries
+all cross-linked to the code that tests them.  Every claim is tagged with a proof tier;
+nothing is asserted without evidence.
 
 ---
 
@@ -73,11 +72,11 @@ No external dependencies beyond NumPy.  All tests run without pytest and are par
 
 ```bash
 python run_tests.py
-FLU V15 Test Suite — 33 test files
+FLU V15 Test Suite — 34 test files
 ========================================================================
-  PASSED   769   FAILED    0   ERRORS    0   SKIPPED  101   TOTAL  870   (3.0s)
+  PASSED   932   FAILED    0   ERRORS    0   SKIPPED  112   TOTAL 1044   (3.4s)
 ========================================================================
-  ✓  All 769 tests passed.
+  ✓  All 932 tests passed.
 ```
 *Note on Test Counts:* Depending on your Python environment and the installation of optional dependencies (e.g., torch, jax, pandas, matplotlib), the total number of executed tests will vary. Skipped tests will be noted in the output. All core mathematical proofs run exclusively on the Python standard library and NumPy.
 
@@ -224,15 +223,6 @@ vhdl = generate_vhdl(n=3, d=4)   # divider-free n-ary Gray-code counter
 ```bash
 python -c "from flu.theory.theorem_registry import status_report; print(status_report())"
 ```
-
-Current state (V15.3.1):
-69 PROVEN — T1–T10, L1–L4, S1–S2-Gauss–S2-Prime, UNIF-1, C3/C3W/C3W-STRONG/C3W-APN/C4, SA-1, N-ARY-1, PFNT-1–5, FM-1, BFRW-1, TORUS_DIAM, OD-16-PM, OD-17-PM, OD-27, OD-32-ITER, OD-33, FMD-NET, DISC-1, HM-1, CGW/BPT/KIB/SRM/T7, HAD-1, TSP-1, CRYPTO-1, LEX-1, INT-1, GEN-1, INV-1, T9, T8b, DEC-1, EVEN-1, YM-1, GEN-0, DN2, DN2-ETK, DN2-WALSH, DN2-VAR, DN2-ANOVA, OPER-1, OPER-2, DN1, DN1-GL, DN1-OA, OD-19-LINEAR
-
-2 CONJECTURES — OD-16 (δ-min Z₁₉ all bijections), OD-17 (δ-min Z₃₁ all bijections)
-1 RETIRED — HIL-1 (self-contradictory primary case n=2; n=2 forbidden by implementation)
-1 DISPROVEN — C2 (axial DFT nullification, scoped)
-
----
 
 ## Open Debt Summary
 
