@@ -72,7 +72,10 @@ from flu.theory.theory_container import (
 from flu.core.operators import (
     FLUOperator, TMatrixOperator, APNPermuteOperator, RotationHubOperator, ExternalPhysics,
 )
-from flu.core.fm_dance         import index_to_coords, coords_to_index, generate_fast, verify_bijection
+from flu.core.fm_dance         import (
+    index_to_coords, coords_to_index, generate_fast, verify_bijection,
+    magic_coord, magic_coord_inv, generate_magic, verify_magic_inverse,
+)
 from flu.core.fm_dance_path    import (
     path_coord, path_coord_to_rank, traverse, traverse_reverse,
     generate_path_array, verify_all as verify_path,
