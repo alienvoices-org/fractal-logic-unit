@@ -21,7 +21,8 @@ from flu.container.sparse import SparseCommunionManifold
 @pytest.fixture
 def manifold():
     n, d = 5, 3
-    seeds = [np.array([0, 1, 2]), np.array([2, 0, 1])]
+    rng = np.random.default_rng(42)
+    seeds = [rng.integers(0, n, size=n) for _ in range(d)]
     return SparseCommunionManifold(n=n, seeds=seeds)
 
 # ── 1. Lazy Evaluation (O(1) construction) ───────────────────────────────────
@@ -48,23 +49,21 @@ def test_addition_associativity(manifold):
     M1, M2, M3 = manifold, manifold, manifold
     lhs = (M1 + M2) + M3
     rhs = M1 + (M2 + M3)
-    
-    # Check on a sample coordinate
-    coord = (0, 0)
+    coord = (0, 0, 0)
     assert abs(lhs[coord] - rhs[coord]) < 1e-12
 
 def test_add_identity(manifold):
     """M + 0 == M"""
     M = manifold
     M_plus = M + 0
-    coord = (1, -1)
+    coord = (1, -1, 0)
     assert abs(M_plus[coord] - M[coord]) < 1e-12
 
 def test_mul_identity(manifold):
     """M * 1 == M"""
     M = manifold
     M_mul = M * 1.0
-    coord = (-1, 0)
+    coord = (-1, 0, 1)
     assert abs(M_mul[coord] - M[coord]) < 1e-12
 
 # ── 3. Scalar Broadcasting ───────────────────────────────────────────────────
@@ -73,14 +72,14 @@ def test_scalar_add_broadcast(manifold):
     """M + 5.0 applied to every cell."""
     M = manifold
     M_plus = M + 5.0
-    coord = (0, 1)
+    coord = (0, 1, -1)
     assert abs(M_plus[coord] - (M[coord] + 5.0)) < 1e-12
 
 def test_scalar_mul_broadcast(manifold):
     """M * 2.0 applied to every cell."""
     M = manifold
     M_mul = M * 2.0
-    coord = (-1, -1)
+    coord = (-1, -1, 0)
     assert abs(M_mul[coord] - (M[coord] * 2.0)) < 1e-12
 
 # ── 4. Compositional Correctness ─────────────────────────────────────────────
@@ -88,11 +87,8 @@ def test_scalar_mul_broadcast(manifold):
 def test_multi_layer_operator_tree(manifold):
     """Verify evaluation of (M + M) * 2.0 - M."""
     M = manifold
-    # Tree: ( (M+M) * 2 ) - M
     expr = ((M + M) * 2.0) - M
-    
-    # Eval M + M = 2M; 2M * 2 = 4M; 4M - M = 3M
-    coord = (1, 1)
+    coord = (1, 1, -1)
     expected = 3 * M[coord]
     assert abs(expr[coord] - expected) < 1e-12
 
@@ -111,5 +107,5 @@ def test_division_by_scalar(manifold):
     """M / 2.0."""
     M = manifold
     M_div = M / 2.0
-    coord = (0, 0)
+    coord = (0, 0, 0)
     assert abs(M_div[coord] - (M[coord] / 2.0)) < 1e-12
