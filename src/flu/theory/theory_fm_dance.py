@@ -264,29 +264,90 @@ T4_STEP_BOUND = TheoremRecord(
 )
 
 
-# ── Theorem T5: Siamese Generalisation ───────────────────────────────────────
+# ── Theorem T5: Siamese Generalisation (updated V15.4) ───────────────────────
 
 T5_SIAMESE = TheoremRecord(
     name="T5 -- Siamese (de la Loubere) Generalisation",
     status="PROVEN",
     statement=(
-        "For D=2, FM-Dance reduces exactly to the classical Siamese algorithm:\n"
-        "    Primary step : Delta_x = (-1, +1) mod n  (when k+1 != 0 mod n)\n"
-        "    Fallback step: Delta_x = (+1,  0) mod n  (when k+1 == 0 mod n)\n"
-        "FM-Dance for D >= 2 is the unique natural n-dimensional generalisation."
+        "For D=2, the FM-Dance T-matrix path reduces exactly to the classical "
+        "Siamese (de la Loubere) algorithm for odd n, producing a normal magic "
+        "square with equal row, column, and both main-diagonal sums M=n(n^2+1)/2.\n"
+        "For D>=2, the FM-Dance SIAMESE step construction (adjacent-pair steps "
+        "S_j coupling axes j-1 and j; backstep S_D on axis D-1) generalises "
+        "the Siamese method to produce a normal magic hypercube (Theorem MH).\n"
+        "The T-matrix path (path_coord) and the Siamese magic path (magic_coord) "
+        "are two distinct bijections; only the Siamese path is fully magic."
     ),
     proof=(
-        "For D=2: x_0 = -a_0 mod n, x_1 = (a_0+a_1) mod n.\n"
-        "No-carry: Delta(x_0) = -1, Delta(x_1) = +1. Vector = (-1,+1). []\n"
-        "Carry (a_0 wraps, a_1++): Delta(a_0) = +1 mod n (wrap = +1 carry). "
-        "Delta(x_0) = -1 (torus dist 1). Carry fires exactly at k+1 == 0 mod n, "
-        "matching Siamese row-wrap condition.  []\n"
-        "Verified for n in {3,5,7,11} via flu.core.fm_dance_path.verify_siamese_d2."
+        "D=2 T-matrix path: x_0=-a_0 mod n, x_1=(a_0+a_1) mod n. "
+        "No-carry: Delta=(-1,+1). Carry: Delta=(+1,0). Matches Siamese. []\n"
+        "D>=2 Siamese magic: adjacent-pair steps S_j=(0,...,+1,+1,...,0) at axes "
+        "(j-1,j); backstep S_D=(0,...,-1). Closed form: i_0=(h+a0-a1)%n; "
+        "i_j=(h+a_{j-1}-a_{j+1})%n [1<=j<=D-2]; i_{D-1}=(n-1+a_{D-2}-2a_{D-1})%n. "
+        "Verified for n in {3,5,7,9,11}, D in {2,3,4,5,6}. [MH PROVEN]"
     ),
-    conditions=["n is odd", "n >= 3", "D = 2 for exact step-vector match"],
+    conditions=["n is odd", "n >= 3", "D >= 2"],
     references=[
         "de la Loubere, S. (1693). Du Royaume de Siam.",
-        "V11 Audit connections_to_known_mathematics",
+        "src/flu/core/fm_dance.py::magic_coord",
+        "docs/THEOREMS.md::MH",
+        "2017-08-28_Symmetrische_Tanzschritte.pdf",
+    ],
+)
+
+
+# ── Theorem MH: FM-Dance Magic Hypercube ──────────────────────────────────────
+
+MH_MAGIC_HYPERCUBE = TheoremRecord(
+    name="MH -- FM-Dance Magic Hypercube (nD Siamese Generalisation)",
+    status="PROVEN",
+    statement=(
+        "For any odd n >= 3 and d >= 2, generate_magic(n, d) produces a normal "
+        "magic hypercube: values 1..n^d each exactly once, all n^(d-1) "
+        "axis-aligned lines summing to M = n(n^d+1)/2. "
+        "Closed form: i_0=(h+a0-a1)%n; i_j=(h+a_{j-1}-a_{j+1})%n [1<=j<=d-2]; "
+        "i_{d-1}=(n-1+a_{d-2}-2*a_{d-1})%n, where h=n//2, a_i=floor(k/n^i)%n."
+    ),
+    proof=(
+        "Bijection: coefficient matrix A has det=(-1)^(d-1), invertible over Z_n "
+        "for odd n (gcd(1,n)=1). Magic: adjacent-pair coupling ensures each "
+        "axis-p line contains one value per spectral block; within-block offsets "
+        "form complete residue systems mod n => line sum = M. "
+        "Verified: n in {3,5,7,9,11}, d in {2..6}, 0 violations."
+    ),
+    conditions=["n odd >= 3", "d >= 2"],
+    references=[
+        "src/flu/core/fm_dance.py::magic_coord",
+        "src/flu/core/fm_dance.py::generate_magic",
+        "docs/THEOREMS.md::MH",
+        "tests/test_core/test_magic_hypercube.py",
+    ],
+)
+
+
+# ── Theorem MH-INV: Inverse Magic Coordinate ──────────────────────────────────
+
+MH_INV = TheoremRecord(
+    name="MH-INV -- Inverse Magic Coordinate (Sparse Random Access)",
+    status="PROVEN",
+    statement=(
+        "magic_coord_inv(pos, n, d) inverts magic_coord in O(d^2) per call "
+        "without materialising the full n^d array. Together magic_coord / "
+        "magic_coord_inv form a bijection pair enabling sparse random access "
+        "to any cell of the magic hypercube."
+    ),
+    proof=(
+        "A is the coefficient matrix of the magic_coord linear system; "
+        "det(A)=(-1)^(d-1) => A invertible over Z_n; A^{-1} has integer entries "
+        "(det=+-1). Recovery: b=pos-offset, a=A^{-1}*b mod n, k=sum(a_i*n^i). "
+        "Round-trip verified: 0 errors, n in {3,5,7}, d in {2..6}."
+    ),
+    conditions=["n odd >= 3", "d >= 2"],
+    references=[
+        "src/flu/core/fm_dance.py::magic_coord_inv",
+        "src/flu/core/fm_dance.py::verify_magic_inverse",
+        "tests/test_core/test_magic_hypercube.py",
     ],
 )
 
@@ -751,6 +812,7 @@ ALL_THEOREMS: List[TheoremRecord] = [
     T4_STEP_BOUND, T5_SIAMESE, T6_FRACTAL,
     SA1_SEPARABILITY, NARY1_GENERALISATION,
     BFRW1_DIFFUSION, TORUS_DIAM,
+    MH_MAGIC_HYPERCUBE, MH_INV,
 ]
 
 # C1 and C2 are retired (L2 PROVEN; C2 DISPROVEN_SCOPED) — removed from active list.
