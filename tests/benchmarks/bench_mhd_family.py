@@ -1,5 +1,5 @@
 """
-flu/tests/benchmarks/benchmark_mhd_family.py
+flu/tests/benchmarks/bench_mhd_family.py
 ================================
 MHD (Magic Hypercube Digital Net) — Comprehensive Benchmark & Verification Suite
 
