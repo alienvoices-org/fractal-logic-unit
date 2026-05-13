@@ -1,4 +1,4 @@
-# PROOF_MAGIC_HYPERCUBE_FAMILY_MHD
+# PROOF_MHD_MAGIC_HYPERCUBE_FAMILY_MHD
 
 ## The Magic Hypercube Family: Complete Theory
 
