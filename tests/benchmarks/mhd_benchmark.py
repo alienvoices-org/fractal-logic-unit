@@ -1,9 +1,9 @@
 """
-flu/benchmarks/mhd_benchmark.py
+flu/tests/benchmarks/mhd_benchmark.py
 ================================
 MHD (Magic Hypercube Digital Net) — Comprehensive Benchmark & Verification Suite
 
-Validates every theorem in PROOF_MAGIC_HYPERCUBE_FAMILY_V8.md with:
+Validates every theorem in PROOF_MHD_MAGIC_HYPERCUBE_FAMILY.md with:
   - Algebraic correctness checks
   - Computational certificates
   - Generator comparison benchmarks (Addressing / Kinetic / Magic / Orthogonal)
@@ -21,7 +21,7 @@ STATUS MARKERS
   [CONJECTURE]  open item from proof document
 
 REFERENCES
-  Proof document : PROOF_MAGIC_HYPERCUBE_FAMILY_V8.md
+  Proof document : PROOF_MHD_MAGIC_HYPERCUBE_FAMILY.md
   Source         : flu/core/fm_dance.py
   Source         : flu/core/fractal_net.py
   Source         : flu/applications/neural.py
