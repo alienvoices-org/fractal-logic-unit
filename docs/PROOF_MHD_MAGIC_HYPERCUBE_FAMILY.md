@@ -305,7 +305,7 @@ The discrepancy measure has exact Fourier support on the alternating ray.
 All non-alternating Walsh modes are annihilated identically.
 
 *Proof.* Immediate from MHD-WALSH-EXACT: P̂_N(h)≠0 iff (Aᵀh)ⱼ≡0 mod n for
-all j=0,...,d−2, which has unique solution h = αv. □
+all j=0,...,d−2, which has the solution h = αv. □
 
 **Interpretation.** MHD is a rank-one spectral object. Every analytic quantity
 (discrepancy, Korobov error, ANOVA defect, RKHS error) reduces to a 1D series
@@ -476,9 +476,9 @@ numerical optimization (MHD-GLOBAL-CONCENTRATION for full characterization).
 
 ## 17.5 MHD-CLASSIFICATION: Rank-1 Walsh Support
 
-**Theorem MHD-CLASSIFICATION.** *Among FLU generators, A_magic is the unique
-sparse unimodular Hessenberg family with a 1-dimensional prefix Walsh dual
-D_prefix = ℤ·v for all d ≥ 2.*
+**Theorem MHD-CLASSIFICATION.** *Among FLU generators, A_magic is the 
+sparse unimodular Hessenberg family with a 1-dimensional prefix Walsh 
+dual D_prefix = ℤ·v for all d ≥ 2.*
 
 **Collapse measure.** Over Z_n^d (one period):
 - MHD prefix net: exactly **n** surviving Fourier modes = {αv : α ∈ Z_n}.
