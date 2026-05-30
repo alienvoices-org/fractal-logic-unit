@@ -23,63 +23,28 @@ import sys
 import numpy as np
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# 1.  MHD ORACLE  (exact A_magic, MHD-STRUCT / MHD-SPECTRAL)
+# 1.  ORACLE + INIT  — imported from mhd_dynamic.py
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def mhd_oracle(ranks: np.ndarray, n: int = 5, d: int = 10) -> np.ndarray:
-    """
-    Vectorised MHD oracle.  rank → scalar T(y) per rank.
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from mhd_dynamic import (
+    mhd_oracle_numpy as mhd_oracle,
+    init_weights     as _init_weights_base,
+    kaiming_init,
+    verify_oracle,
+)
 
-    Implements the sparse Hessenberg generator A_magic over Z_n (MHD-STRUCT)
-    then projects to the alternating phase coordinate T(y) = Σ_j (-1)^j x_j
-    (MHD-SPECTRAL, rank-1 Walsh dual).
+def init_mhd(fan_in: int, fan_out: int, n: int = 5, d: int = 10):
+    """Thin wrapper — returns (W, start_rank) matching benchmark internal API."""
+    return _init_weights_base(fan_in, fan_out, n=n, d=d)
 
-    Contiguous rank blocks (arange) preserve the OA balance (MHD-OA-MAX).
-    Random rank blocks (randint) destroy balance — confirmed empirically.
-    """
-    ranks = np.asarray(ranks, dtype=np.int64)
-    powers = n ** np.arange(d, dtype=np.int64)
-    a = (ranks[:, None] // powers[None, :]) % n          # base-n digits
-
-    x = np.zeros_like(a)                                  # apply A_magic
-    x[:, 0]     = a[:, 0] - a[:, 1]
-    if d > 2:
-        x[:, 1:d-1] = a[:, 0:d-2] - a[:, 2:d]
-    x[:, d-1]   = a[:, d-2] - 2 * a[:, d-1]
-
-    c = np.full(d, n // 2, dtype=np.int64);  c[d-1] = n - 1
-    x = (x + c) % n                                       # Z_n reduction
-
-    signed = x - (n // 2)
-    signs  = (-1.0) ** np.arange(d, dtype=np.float32)
-    return (np.sum(signed * signs, axis=1) / (n * 2.0)).astype(np.float64)
+init_kaiming = kaiming_init   # alias matching benchmark internal usage
 
 
 def _check_oracle(n: int = 5, d: int = 3) -> None:
-    """Assert T(y) mean over full cube ≈ 0 (MHD-MAGIC prerequisite)."""
     vals = mhd_oracle(np.arange(n**d, dtype=np.int64), n=n, d=d)
     assert abs(float(vals.mean())) < 1e-6, "Oracle balance FAIL (MHD-MAGIC violated)"
-
-
-# ═══════════════════════════════════════════════════════════════════════════════
-# 2.  WEIGHT INITIALISATION
-# ═══════════════════════════════════════════════════════════════════════════════
-
-def init_mhd(fan_in: int, fan_out: int, n: int = 5, d: int = 10):
-    """
-    MHD weight matrix init via contiguous oracle block.
-    Returns (W, start_rank).
-    """
-    num_w  = fan_in * fan_out
-    start  = int(np.random.randint(0, n ** (d - 1)))
-    ranks  = (start + np.arange(num_w, dtype=np.int64)) % (n ** d)
-    w      = mhd_oracle(ranks, n, d).reshape(fan_in, fan_out)
-    w      = (w - w.mean()) / (w.std() + 1e-8)
-    return w * np.sqrt(2.0 / fan_in), start
-
-
-def init_kaiming(fan_in: int, fan_out: int) -> np.ndarray:
-    return np.random.randn(fan_in, fan_out) * np.sqrt(2.0 / fan_in)
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
