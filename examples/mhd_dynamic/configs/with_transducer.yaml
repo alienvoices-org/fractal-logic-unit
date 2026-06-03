@@ -1,0 +1,10 @@
+num_blocks: 64
+dim: 128
+num_heads: 8
+res_factor: 0.012
+use_transducer: true
+transducer_mapping: "phoneme_mappings/english.json"
+window_length: 9
+oracle_n: 5
+oracle_d: 10
+num_classes: 1000

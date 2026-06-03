@@ -1,0 +1,6 @@
+num_blocks: 64
+dim: 128
+num_heads: 8
+res_factor: 0.012
+use_transducer: false
+num_classes: 1000
